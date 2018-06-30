@@ -7,7 +7,8 @@
 <p align="center"><img src="https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png" alt="v-selectpage" ></p>
 
 <p align="center">
-  A powerful selector for <strong>Vue2</strong>, list or table view of pagination, use tags for multiple selection, i18n and server side resources supports
+  A powerful selector for <strong>Vue2</strong>, list or table view of pagination, <br>
+  use tags for multiple selection, i18n and server side resources supports
 </p>
 
 <p align="center">
