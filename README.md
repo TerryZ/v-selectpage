@@ -4,7 +4,7 @@
 
 <br><br>
 
-<p align="center"><img src="https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png" alt="v-region" ></p>
+<p align="center"><img src="https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png" alt="v-selectpage" ></p>
 
 <p align="center">
   A powerful selector for <strong>Vue2</strong>, list or table view of pagination, use tags for multiple selection, i18n and server side resources supports
@@ -21,15 +21,15 @@
 
 *single selection show by list view*
 
-![single](https://terryz.github.io/image/v-seletpage/v-selectpage-single.png)
+![single](https://terryz.github.io/image/v-selectpage/v-selectpage-single.png)
 
 *multiple selection with tags show by list view*
 
-![multiple](https://terryz.github.io/image/v-seletpage/v-selectpage-multiple.png)
+![multiple](https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png)
 
 *single selection show by table view*
 
-![table](https://terryz.github.io/image/v-seletpage/v-selectpage-table.png)
+![table](https://terryz.github.io/image/v-selectpage/v-selectpage-table.png)
 
 <br><br>
 
