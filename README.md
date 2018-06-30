@@ -1,18 +1,75 @@
-# v-selectpage
+<br><br>
 
-> A powerful selector for Vue2, list or table view of pagination, use tags for multiple selection, i18n and server side resources supports
+<h3 align="center">v-selectpage</h3>
 
-## Build Setup
+<br><br>
+
+<p align="center"><img src="https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png" alt="v-region" ></p>
+
+<p align="center">
+  A powerful selector for <strong>Vue2</strong>, list or table view of pagination, use tags for multiple selection, i18n and server side resources supports
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/v-selectpage"><img src="https://img.shields.io/npm/v/v-selectpage.svg"></a>
+  <a href="https://mit-license.org/"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"></a>
+  <a href="https://www.npmjs.com/package/v-selectpage"><img src="https://img.shields.io/npm/dy/v-selectpage.svg"></a>
+</p>
+<br><br><br><br><br>
+
+## Plugin preview
+
+*single selection show by list view*
+
+![single](https://terryz.github.io/image/v-seletpage/v-selectpage-single.png)
+
+*multiple selection with tags show by list view*
+
+![multiple](https://terryz.github.io/image/v-seletpage/v-selectpage-multiple.png)
+
+*single selection show by table view*
+
+![table](https://terryz.github.io/image/v-seletpage/v-selectpage-table.png)
+
+<br><br>
+
+## Install
 
 ``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
+npm install v-selectpage --save
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Include plugin in your `main.js` file.
+
+```js
+import Vue from 'vue'
+import vSelectPage from 'v-selectpage';
+Vue.use(vSelectPage);
+```
+
+## Deploy on your component
+
+template code
+
+```html
+<template>
+    <v-selectpage :data="list" key-field="id" show-field="name" class="form-control"></v-selectpage>
+</template>
+```
+
+script code
+
+```js
+export default {
+    data(){
+        return {
+            list: [
+                {id:1 ,name:'Chicago Bulls',desc:'芝加哥公牛'},
+                {id:2 ,name:'Cleveland Cavaliers',desc:'克里夫兰骑士'},
+                {...}
+            ]
+        }
+    }
+};
+```
+<br><br>
