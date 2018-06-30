@@ -831,8 +831,10 @@ div.v-selectpage{
             }
         }
         table.sp-table {
-            td,th { padding: 5px; }
-            th{ background-color: #F5F5F5;}
+            width: 100%;
+            td,th { font-size: 14px;border: 0 !important; }
+            th{ background-color: #F5F5F5;padding: 5px 8px;}
+            td{ padding: 4px 8px; }
             tbody {
                 tr{
                     &.sp-over {
