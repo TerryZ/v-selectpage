@@ -26,6 +26,20 @@ Explorer on
 
 <br><br>
 
+## Features
+
+- show content by pagination
+- i18n support, provide Chinese, English, Japanese languages
+- server side data source support
+- tag form for multiple selection
+- keybord to quick navigate
+- quick search for autocomplete
+- list view and table view to show content
+- custom row content render
+
+
+<br><br>
+
 ## Plugin preview
 
 *single selection show by list view*
