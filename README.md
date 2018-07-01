@@ -18,6 +18,14 @@
 </p>
 <br><br><br><br><br>
 
+## Demo、Document、Changelog
+Explorer on
+
+- [English site](https://terryz.github.io/vue/#/selectpage)
+- [国内站点](https://terryz.gitee.io/vue/#/selectpage)
+
+<br><br>
+
 ## Plugin preview
 
 *single selection show by list view*
