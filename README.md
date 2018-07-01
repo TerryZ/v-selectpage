@@ -2,7 +2,7 @@
 
 <h3 align="center">v-selectpage</h3>
 
-<br><br>
+<br>
 
 <p align="center"><img src="https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png" alt="v-selectpage" ></p>
 
