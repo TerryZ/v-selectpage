@@ -7,9 +7,9 @@
             <!--<input type="text" ref="input" v-if="!multiple" readonly="readonly" :value="results">-->
             <div class="sp-base sp-input" ref="input" v-if="!multiple">
                 <span v-html="results"></span>
-                <span class="sp-base sp-placeholder" v-show="picked.length === 0">{{placeholderString}}</span>
+                <span class="sp-placeholder" v-show="picked.length === 0">{{placeholderString}}</span>
             </div>
-            <div class="sp-inputs" ref="input" v-if="multiple">
+            <div class="sp-base sp-inputs" ref="input" v-if="multiple">
                 <span class="sp-placeholder" v-show="picked.length === 0">{{placeholderString}}</span>
                 <span class="sp-selected-tag" v-for="sel,index in picked">
                     <span v-html="renderCell(sel)"></span>
@@ -607,6 +607,9 @@
 
 <style lang="scss" scoped>
 div.v-selectpage{
+    /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
+    /*font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;*/
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     div.sp-input-container {
         position: relative;
         span.sp-placeholder { color: #AAAAAA; }
@@ -687,10 +690,9 @@ div.v-selectpage{
             color: #666666;
             font-weight: 600;
             margin: 0;
-            padding: 5px 0 0 0;
+            padding: 4px 0 0 0;
             box-sizing: border-box;
             line-height: 1;
-            font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
             i { font-size: 12px; }
             &:hover { color: black;font-weight: bold; }
         }
@@ -721,7 +723,6 @@ div.v-selectpage{
                 width: 0;
                 height: 0;
                 margin-left: 2px;
-                /*vertical-align: middle;*/
                 border-top: 4px dashed;
                 /*border-top: 4px solid\9;*/
                 border-right: 4px solid transparent;
@@ -744,7 +745,6 @@ div.v-selectpage{
             font-size: 16px;
             font-weight: 500;
             white-space: nowrap;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         }
         button{
             position: absolute;
@@ -817,7 +817,6 @@ div.v-selectpage{
                 font-size: 14px;
                 color: black;
                 cursor : pointer;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
                 &.sp-message-box {
                     height: 30px;
                     line-height: 30px;
@@ -853,7 +852,8 @@ div.v-selectpage{
         border-bottom-left-radius: 2px;
         border-bottom-right-radius: 2px;
         text-align: center;
-        div.sp-page-info { height: 28px;line-height: 29px;font-weight: 500; }
+        font-size: 14px;
+        div.sp-page-info { height: 28px;line-height: 29px;font-weight: 400; }
         ul {
             position: absolute;
             top: 0;
@@ -875,7 +875,6 @@ div.v-selectpage{
                     height: 28px;
                     line-height: 100%;
                     background: transparent;
-                    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
                     &:hover { color: black;font-weight: bold; }
                 }
                 &.sp-right{ float:right; }
