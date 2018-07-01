@@ -610,6 +610,7 @@ div.v-selectpage{
     /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
     /*font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;*/
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    box-sizing: border-box;
     div.sp-input-container {
         position: relative;
         span.sp-placeholder { color: #AAAAAA; }
@@ -623,7 +624,6 @@ div.v-selectpage{
         }
         div.sp-base {
             display: block;
-            width: 100%;
             height: 34px;
             padding: 6px 12px;
             font-size: 14px;
@@ -638,6 +638,7 @@ div.v-selectpage{
             -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
             -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
             transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            box-sizing: border-box;
         }
         div.sp-input { background-color: white;cursor: pointer;color: #333333;opacity: 1; }
         div.sp-inputs {
@@ -651,7 +652,7 @@ div.v-selectpage{
             height: auto;
             min-height: 34px;
             font-size: 14px;
-            span.sp-placeholder{ margin-left: 9px;margin-top: 4px; display: inline-block; }
+            span.sp-placeholder{ margin-left: 9px;margin-top: 3px; display: inline-block; }
             span.sp-selected-tag {
                 list-style: none;
                 padding: 0 5px;
