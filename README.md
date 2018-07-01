@@ -24,6 +24,8 @@ Explorer on
 - [English site](https://terryz.github.io/vue/#/selectpage)
 - [国内站点](https://terryz.gitee.io/vue/#/selectpage)
 
+**If you think this project is helpful, please star it.**
+
 <br><br>
 
 ## Features
