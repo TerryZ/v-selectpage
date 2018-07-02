@@ -18,6 +18,8 @@
 </p>
 <br><br><br><br><br>
 
+[![NPM][npm-icon]][npm-link]
+
 ## Demo、Document、Changelog
 Explorer on
 
