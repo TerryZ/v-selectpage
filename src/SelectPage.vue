@@ -7,9 +7,9 @@
             <!--<input type="text" ref="input" v-if="!multiple" readonly="readonly" :value="results">-->
             <div class="sp-base sp-input" ref="input" v-if="!multiple">
                 <span v-html="results"></span>
-                <span class="sp-placeholder" v-show="picked.length === 0">{{placeholderString}}</span>
+                <span class="sp-base sp-placeholder" v-show="picked.length === 0">{{placeholderString}}</span>
             </div>
-            <div class="sp-base sp-inputs" ref="input" v-if="multiple">
+            <div class="sp-inputs" ref="input" v-if="multiple">
                 <span class="sp-placeholder" v-show="picked.length === 0">{{placeholderString}}</span>
                 <span class="sp-selected-tag" v-for="sel,index in picked">
                     <span v-html="renderCell(sel)"></span>
@@ -607,10 +607,6 @@
 
 <style lang="scss" scoped>
 div.v-selectpage{
-    /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
-    /*font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;*/
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    box-sizing: border-box;
     div.sp-input-container {
         position: relative;
         span.sp-placeholder { color: #AAAAAA; }
@@ -624,6 +620,7 @@ div.v-selectpage{
         }
         div.sp-base {
             display: block;
+            width: 100%;
             height: 34px;
             padding: 6px 12px;
             font-size: 14px;
@@ -638,7 +635,6 @@ div.v-selectpage{
             -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
             -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
             transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            box-sizing: border-box;
         }
         div.sp-input { background-color: white;cursor: pointer;color: #333333;opacity: 1; }
         div.sp-inputs {
@@ -652,7 +648,7 @@ div.v-selectpage{
             height: auto;
             min-height: 34px;
             font-size: 14px;
-            span.sp-placeholder{ margin-left: 9px;margin-top: 3px; display: inline-block; }
+            span.sp-placeholder{ margin-left: 9px;margin-top: 4px; display: inline-block; }
             span.sp-selected-tag {
                 list-style: none;
                 padding: 0 5px;
@@ -691,9 +687,10 @@ div.v-selectpage{
             color: #666666;
             font-weight: 600;
             margin: 0;
-            padding: 4px 0 0 0;
+            padding: 5px 0 0 0;
             box-sizing: border-box;
             line-height: 1;
+            font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
             i { font-size: 12px; }
             &:hover { color: black;font-weight: bold; }
         }
@@ -724,6 +721,7 @@ div.v-selectpage{
                 width: 0;
                 height: 0;
                 margin-left: 2px;
+                /*vertical-align: middle;*/
                 border-top: 4px dashed;
                 /*border-top: 4px solid\9;*/
                 border-right: 4px solid transparent;
@@ -733,165 +731,168 @@ div.v-selectpage{
             &.open span.sp-caret { transform: rotate(180deg); }
         }
     }
+}
 
-    div.sp-header {
-        /*border-bottom: 1px solid #E6E7E7;*/
-        background-color: white;
-        /*position: relative;*/
-        & > h3 {
-            margin: 6px 100px 0 10px;
+
+div.sp-header {
+    /*border-bottom: 1px solid #E6E7E7;*/
+    background-color: white;
+    /*position: relative;*/
+    & > h3 {
+        margin: 6px 100px 0 10px;
+        text-align: left;
+        height: 18px;
+        color: #24292e;
+        font-size: 16px;
+        font-weight: 500;
+        white-space: nowrap;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+    button{
+        position: absolute;
+        -webkit-appearance: none;
+        padding: 0;
+        cursor: pointer;
+        background: 0 0;
+        border: 0;
+        outline: none;
+        line-height: 100%;
+        color: #999999;
+        top: 3px;
+        font-size: 21px;
+        &.sp-close-btn { right: 9px; }
+        &.sp-remove-all-btn { right: 55px; }
+        &.sp-select-all-btn { right: 81px; }
+        &.sp-clear-all-btn { right: 31px; }
+        &:hover { color: black; }
+    }
+}
+
+
+
+
+.sp-search {
+    padding: 10px;
+    background-color: white;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    .sp-search-input {
+        display: block;
+        background-color: #fdfdfd;
+        margin: 0 !important;
+        width: 100%;
+
+        font-size: 14px;
+        line-height: 20px;
+        min-height: 20px;
+        padding: 4px 6px;
+        vertical-align: middle;
+        box-sizing: border-box;
+
+        outline: none !important;
+        height: 30px;
+
+        border-radius: 2px;
+        border: 1px solid #dddddd;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        &:focus { border: 1px solid #bbbbbb;box-shadow: 0 0 0 3px rgba(150,150,150, 0.2);background-color: white; }
+    }
+}
+
+div.sp-result-area{
+    background-color: white;min-width: 298px;max-height: 320px;overflow-y: auto;
+    ul.sp-results {
+        background-color: white;list-style: none;margin: 0;padding: 0;
+        li {
+            height: auto !important;
+            line-height: 1;
+            margin: 0;
+            overflow: hidden;
+            padding: 4px 8px;
+            position: relative;
             text-align: left;
-            height: 18px;
-            color: #24292e;
-            font-size: 16px;
-            font-weight: 500;
             white-space: nowrap;
-        }
-        button{
-            position: absolute;
-            -webkit-appearance: none;
-            padding: 0;
-            cursor: pointer;
-            background: 0 0;
-            border: 0;
-            outline: none;
-            line-height: 100%;
-            color: #999999;
-            top: 3px;
-            font-size: 21px;
-            &.sp-close-btn { right: 9px; }
-            &.sp-remove-all-btn { right: 55px; }
-            &.sp-select-all-btn { right: 81px; }
-            &.sp-clear-all-btn { right: 31px; }
-            &:hover { color: black; }
-        }
-    }
-
-
-
-
-    .sp-search {
-        padding: 10px;
-        background-color: white;
-        border-top-left-radius: 2px;
-        border-top-right-radius: 2px;
-        .sp-search-input {
-            display: block;
-            background-color: #fdfdfd;
-            margin: 0 !important;
-            width: 100%;
-
             font-size: 14px;
-            line-height: 20px;
-            min-height: 20px;
-            padding: 4px 6px;
-            vertical-align: middle;
-            box-sizing: border-box;
-
-            outline: none !important;
-            height: 30px;
-
-            border-radius: 2px;
-            border: 1px solid #dddddd;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-
-            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-            &:focus { border: 1px solid #bbbbbb;box-shadow: 0 0 0 3px rgba(150,150,150, 0.2);background-color: white; }
+            color: black;
+            cursor : pointer;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            &.sp-message-box {
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                box-sizing: content-box;
+                font-size: 14px;
+                cursor: default;
+            }
+            &.sp-over { background-color: #53A4EA !important;color: #fff !important;cursor: pointer; }
+            &.sp-selected { color: #cccccc;cursor: default; }
         }
     }
-
-    div.sp-result-area{
-        background-color: white;min-width: 298px;max-height: 320px;overflow-y: auto;
-        ul.sp-results {
-            background-color: white;list-style: none;margin: 0;padding: 0;
-            li {
-                height: auto !important;
-                line-height: 1;
-                margin: 0;
-                overflow: hidden;
-                padding: 4px 8px;
-                position: relative;
-                text-align: left;
-                white-space: nowrap;
-                font-size: 14px;
-                color: black;
-                cursor : pointer;
-                &.sp-message-box {
-                    height: 30px;
-                    line-height: 30px;
-                    text-align: center;
-                    box-sizing: content-box;
-                    font-size: 14px;
-                    cursor: default;
+    table.sp-table {
+        width: 100%;
+        td,th { font-size: 14px;border: 0 !important; }
+        th{ background-color: #F5F5F5;padding: 5px 8px;}
+        td{ padding: 4px 8px; }
+        tbody {
+            tr{
+                &.sp-over {
+                    td { background-color: #53A4EA !important;color: #fff !important;cursor: pointer; }
                 }
-                &.sp-over { background-color: #53A4EA !important;color: #fff !important;cursor: pointer; }
                 &.sp-selected { color: #cccccc;cursor: default; }
             }
         }
-        table.sp-table {
-            width: 100%;
-            td,th { font-size: 14px;border: 0 !important; }
-            th{ background-color: #F5F5F5;padding: 5px 8px;}
-            td{ padding: 4px 8px; }
-            tbody {
-                tr{
-                    &.sp-over {
-                        td { background-color: #53A4EA !important;color: #fff !important;cursor: pointer; }
-                    }
-                    &.sp-selected { color: #cccccc;cursor: default; }
-                }
-            }
-        }
     }
+}
 
-    div.sp-pagination {
+div.sp-pagination {
+    padding: 0;
+    background-color: white;
+    position: relative;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    text-align: center;
+    div.sp-page-info { height: 28px;line-height: 29px;font-weight: 500; }
+    ul {
+        position: absolute;
+        top: 0;
         padding: 0;
-        background-color: white;
-        position: relative;
+        margin: 0;
+        text-align: left;
         border-bottom-left-radius: 2px;
         border-bottom-right-radius: 2px;
-        text-align: center;
-        font-size: 14px;
-        div.sp-page-info { height: 28px;line-height: 29px;font-weight: 400; }
-        ul {
-            position: absolute;
-            top: 0;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-            border-bottom-left-radius: 2px;
-            border-bottom-right-radius: 2px;
-            width: 100%;
-            li {
-                display: inline-block;text-align: center;
-                a {
-                    display: inline-block;
-                    padding: 7px 7px 5px 7px;
-                    font-size: 14px;
-                    color: #6a737d;
-                    text-decoration: none;
-                    cursor: pointer;
-                    height: 28px;
-                    line-height: 100%;
-                    background: transparent;
-                    &:hover { color: black;font-weight: bold; }
-                }
-                &.sp-right{ float:right; }
-                &:first-child{ border-bottom-left-radius: 2px; }
-                &:last-child{ border-bottom-right-radius: 2px; }
-                &.sp-disabled {
-                    a { color: #DDDDDD;font-weight: normal;/*cursor: not-allowed;*/ }
-                }
+        width: 100%;
+        li {
+            display: inline-block;text-align: center;
+            a {
+                display: inline-block;
+                padding: 7px 7px 5px 7px;
+                font-size: 14px;
+                color: #6a737d;
+                text-decoration: none;
+                cursor: pointer;
+                height: 28px;
+                line-height: 100%;
+                background: transparent;
+                font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
+                &:hover { color: black;font-weight: bold; }
+            }
+            &.sp-right{ float:right; }
+            &:first-child{ border-bottom-left-radius: 2px; }
+            &:last-child{ border-bottom-right-radius: 2px; }
+            &.sp-disabled {
+                a { color: #DDDDDD;font-weight: normal;/*cursor: not-allowed;*/ }
             }
         }
     }
-    div.sp-message {
-        padding: 10px;
-        i {position: absolute;top: 3px;font-size: 22px;}
-        span{ margin-left: 30px; }
-    }
+}
+div.sp-message {
+    padding: 10px;
+    i {position: absolute;top: 3px;font-size: 22px;}
+    span{ margin-left: 30px; }
 }
 </style>
 <style lang="scss">
