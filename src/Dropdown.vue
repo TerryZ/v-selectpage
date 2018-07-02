@@ -109,8 +109,6 @@
             //console.log(this.caller)
             this.MouseEventPolyfill();
 
-            document.body.appendChild(this.$el)
-
             this.$on('show', this.visible);
             this.$on('adjust', this.adjust);
             document.addEventListener('mousedown', this.whole);
@@ -119,7 +117,6 @@
             this.$off('show', this.visible);
             this.$off('adjust', this.adjust);
             document.removeEventListener('mousedown', this.whole);
-            this.$el.remove();
         }
     }
 </script>
