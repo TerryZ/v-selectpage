@@ -16,9 +16,15 @@
   <a href="https://mit-license.org/"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"></a>
   <a href="https://www.npmjs.com/package/v-selectpage"><img src="https://img.shields.io/npm/dy/v-selectpage.svg"></a>
 </p>
+
+<p align="center">
+  <a href="https://nodei.co/npm/v-selectpage/"><img src="https://nodei.co/npm/v-selectpage.png"></a>
+    
+    [![NPM](https://nodei.co/npm/v-selectpage.png)](https://nodei.co/npm/v-selectpage/)
+</p>
 <br><br><br><br><br>
 
-[![NPM][npm-icon]][npm-link]
+
 
 ## Demo、Document、Changelog
 Explorer on
