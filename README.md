@@ -19,8 +19,6 @@
 
 <p align="center">
   <a href="https://nodei.co/npm/v-selectpage/"><img src="https://nodei.co/npm/v-selectpage.png"></a>
-    
-    [![NPM](https://nodei.co/npm/v-selectpage.png)](https://nodei.co/npm/v-selectpage/)
 </p>
 <br><br><br><br><br>
 
