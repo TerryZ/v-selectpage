@@ -606,10 +606,11 @@
 </script>
 
 <style lang="scss" scoped>
+$font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 div.v-selectpage{
     /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
     /*font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;*/
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: $font;
     box-sizing: border-box;
     div.sp-input-container {
         position: relative;
@@ -737,6 +738,7 @@ div.v-selectpage{
 div.sp-header {
     /*border-bottom: 1px solid #E6E7E7;*/
     background-color: white;
+    font-family: $font;
     /*position: relative;*/
     & > h3 {
         margin: 6px 100px 0 10px;
@@ -771,6 +773,7 @@ div.sp-header {
 
 
 .sp-search {
+    font-family: $font;
     padding: 10px;
     background-color: white;
     border-top-left-radius: 2px;
@@ -803,7 +806,7 @@ div.sp-header {
 }
 
 div.sp-result-area{
-    background-color: white;min-width: 298px;max-height: 320px;overflow-y: auto;
+    background-color: white;min-width: 298px;max-height: 320px;overflow-y: auto;font-family: $font;
     ul.sp-results {
         background-color: white;list-style: none;margin: 0;padding: 0;
         li {
@@ -847,6 +850,7 @@ div.sp-result-area{
 }
 
 div.sp-pagination {
+    font-family: $font;
     padding: 0;
     background-color: white;
     position: relative;
@@ -888,6 +892,7 @@ div.sp-pagination {
     }
 }
 div.sp-message {
+    font-family: $font;
     padding: 10px;
     i {position: absolute;top: 3px;font-size: 22px;}
     span{ margin-left: 30px; }

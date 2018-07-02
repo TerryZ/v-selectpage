@@ -50,11 +50,17 @@
                     t = top;
                 }else{
                     t = pos.top + pos.height + gap + screenScrollTop;
+                    let overDown = false, overUp = false;
                     //list over screen
-                    if((t + menuPos.height) > (screenScrollTop + viewHeight) && screenScrollTop > 0){
-                        t = (pos.top - gap - menuPos.height) + screenScrollTop ;
+                    if((t + menuPos.height) > (screenScrollTop + viewHeight)) overDown = true;
+                    if((pos.top - gap - menuPos.height) < 0) overUp = true;
+
+                    if((overDown && overUp) || (!overDown && overUp)) this.dropUp = false;
+                    else{
+                        t = (pos.top - gap - menuPos.height) + screenScrollTop;
                         this.dropUp = true;
-                    }else if(this.dropUp) this.dropUp = false;
+                    }
+
                     switch (this.position){
                         case 'left':
                             l = pos.left;
