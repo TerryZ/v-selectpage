@@ -36,7 +36,7 @@ the jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 - i18n support, provide Chinese, English, Japanese languages
 - server side data source support
 - tag form for multiple selection
-- keybord to quick navigate
+- keyboard to quick navigate
 - quick search for autocomplete
 - list view and table view to show content
 - custom row content render
