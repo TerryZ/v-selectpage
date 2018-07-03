@@ -147,7 +147,7 @@
         box-shadow: 0 3px 12px rgba(0,0,0,0.2);
         -moz-box-shadow: 0 3px 12px rgba(0,0,0,0.2);
         -webkit-box-shadow: 0 3px 12px rgba(0,0,0,0.2);
-        z-index: 100;
+        z-index: 3000;
         &.sm_regular { width: auto;min-width: 150px; }
         &.sm_embed { position: relative; }
         /* Select only */
