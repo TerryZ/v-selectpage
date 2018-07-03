@@ -38,9 +38,9 @@
                 }
             },
             adjust(caller){
-                let pos = caller.getBoundingClientRect(), gap = 5, t = 0, l = 0, up = false;
+                let pos = caller.getBoundingClientRect(), gap = 5, t = 0, l = 0;
                 let menuPos = this.$el.getBoundingClientRect();
-                let screenScrollTop = window.scrollY, viewHeight = document.body.clientHeight;
+                let screenScrollTop = window.pageYOffset, viewHeight = document.documentElement.clientHeight;
 
                 if(this.rightClick){
                     var top = this.y;
