@@ -139,6 +139,14 @@
             'v-dropdown': dropdown
         },
         props: {
+            /**
+             * Specify key to make list item selected, the must be match 'keyField' option value
+             *
+             * example:
+             * single mode: '123'
+             * multiple mode: '123, 124, 125'
+             */
+            value: String,
             data: {
                 type: Array | String,
                 required: true
@@ -169,14 +177,6 @@
                 type: String,
                 default: 'cn'
             },
-            /**
-             * Specify key to make list item selected, the must be match 'keyField' option value
-             *
-             * example:
-             * single mode: '123'
-             * multiple mode: '123, 124, 125'
-             */
-            selected:String,
             keyField: {
                 type: String,
                 default: 'id'
@@ -267,7 +267,6 @@
                     });
                 }
                 this.$emit('removed', removed);
-                this.emitValues();
             },
             pickPage(check){
                 let removed = [];
@@ -288,7 +287,6 @@
                 this.$emit('removed', removed);
                 this.$nextTick(()=>{
                     this.adjustList();
-                    this.emitValues();
                     this.inputFocus();
                 });
             },
@@ -385,7 +383,6 @@
                     this.picked = [row];
                     this.close();
                 }
-                this.emitValues();
                 this.highlight = -1;
             },
             sortList(){
@@ -438,9 +435,9 @@
                     queryParams.pageSize = this.pageSize;
                     queryParams.pageNumber = this.pageNumber;
                     if(this.sort) queryParams.orderBy = this.sort;
-                    if(init && this.selected){
+                    if(init && this.value){
                         queryParams.searchKey = this.keyField;
-                        queryParams.searchValue = this.selected;
+                        queryParams.searchValue = this.value;
                     }
                     if(this.search){
                         let field = '';
@@ -492,14 +489,13 @@
                 this.populate();
             },
             initSelection(){
-                if(this.selected) {
+                if(this.value) {
                     if(Array.isArray(this.data)){
-                        let that = this, arr = this.selected.split(',');
+                        let that = this, arr = this.value.split(',');
                         if(arr.length){
                             let matchRows = this.data.filter(val=>arr.includes(String(val[that.keyField])));
                             if(matchRows.length) {
                                 this.picked = this.multiple ? matchRows : [matchRows[0]];
-                                this.emitValues();
                             }
                         }
                         this.findSelectionPage();
@@ -512,7 +508,7 @@
             findSelectionPage(){
                 if(!this.multiple && this.pagination){
                     let list = this.sortedList?this.sortedList.concat():this.data.concat();
-                    let index = list.findIndex(val => String(val[this.keyField]) === this.selected);
+                    let index = list.findIndex(val => String(val[this.keyField]) === this.value);
                     if(index >= 0){
                         this.pageNumber = Math.ceil((index + 1) / this.pageSize);
                     }
@@ -521,9 +517,6 @@
             disabledInput(val){
                 if(typeof(val) === 'boolean') this.disabled = val;
                 if(val === true && this.show) this.close();
-            },
-            emitValues(){
-                this.$emit('values', this.picked.concat());
             }
         },
         watch: {
@@ -532,15 +525,22 @@
                     let that = this;
                     this.$refs.dropdown.$emit('show', true, this.$refs.caller);
                     this.$nextTick(()=>{
-                        that.$refs.search.focus({preventScroll:true});
+                        //fix open drop down list and set input focus, the page will scroll to top
+                        //that.$refs.search.focus({preventScroll:true}); only work on Chrome
+                        let x = window.pageXOffset, y = window.pageYOffset;
+                        that.$refs.search.focus();
+                        if(!window.pageYOffset && y) window.scrollTo(x, y);
                     });
                 }
             },
             picked(val){
                 if(this.message && this.maxSelectLimit && val.length < this.maxSelectLimit)
                     this.message = '';
+                let that = this;
+                this.$emit('input', val.map(value=>value[that.keyField]).join(','));
+                this.$emit('values', this.picked.concat());
             },
-            selected(val){
+            value(val){
                 this.initSelection();
             },
             data(val){
@@ -894,8 +894,9 @@ div.sp-pagination {
 div.sp-message {
     font-family: $font;
     padding: 10px;
-    i {position: absolute;top: 3px;font-size: 22px;}
-    span{ margin-left: 30px; }
+    position: relative;
+    i {position: absolute;top: 6px;font-size: 22px;}
+    span{ margin-left: 30px;font-size: 16px; }
 }
 </style>
 <style lang="scss">
