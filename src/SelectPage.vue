@@ -517,6 +517,13 @@
             disabledInput(val){
                 if(typeof(val) === 'boolean') this.disabled = val;
                 if(val === true && this.show) this.close();
+            },
+            scrollPolyfill(){
+                var supportPageOffset = window.pageXOffset !== undefined;
+                var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+
+                var x = supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft;
+                var y = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
             }
         },
         watch: {
@@ -524,12 +531,13 @@
                 if(val) {
                     let that = this;
                     this.$refs.dropdown.$emit('show', true, this.$refs.caller);
+
                     this.$nextTick(()=>{
                         //fix open drop down list and set input focus, the page will scroll to top
                         //that.$refs.search.focus({preventScroll:true}); only work on Chrome
                         let x = window.pageXOffset, y = window.pageYOffset;
                         that.$refs.search.focus();
-                        if(!window.pageYOffset && y) window.scrollTo(x, y);
+                        if(window.pageYOffset !== y) window.scrollTo(x, y);
                     });
                 }
             },
@@ -577,6 +585,7 @@
         },
         mounted(){
             let that = this;
+            this.scrollPolyfill();
             //switch class name
             let className = this.$el.className;
             this.$el.className = 'v-selectpage';
