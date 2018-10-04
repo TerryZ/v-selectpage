@@ -25,7 +25,7 @@
 
 
 
-## Demo、Document、Changelog
+## Demos and Documents
 Explorer on
 
 - [English site](https://terryz.github.io/vue/#/selectpage)
