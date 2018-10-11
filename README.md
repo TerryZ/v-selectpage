@@ -31,7 +31,7 @@ Explorer on
 - [English site](https://terryz.github.io/vue/#/selectpage)
 - [国内站点](https://terryz.gitee.io/vue/#/selectpage)
 
-the jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
+The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
 **If you think this project is helpful, please star it.**
 
