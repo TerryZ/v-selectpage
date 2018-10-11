@@ -96,6 +96,8 @@ Vue.use(vSelectPage);
 
 <a href="https://nodei.co/npm/v-selectpage/"><img src="https://nodei.co/npm/v-selectpage.png"></a>
 
+<br><br>
+
 ## Deploy on your component
 
 template code
