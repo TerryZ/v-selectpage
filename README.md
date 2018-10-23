@@ -104,7 +104,7 @@ template code
 
 ```html
 <template>
-    <v-selectpage :data="list" key-field="id" show-field="name" class="form-control"></v-selectpage>
+    <v-selectpage :data="list" key-field="id" show-field="name" ></v-selectpage>
 </template>
 ```
 
