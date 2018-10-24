@@ -83,7 +83,7 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 ## Install
 
 ``` bash
-npm install v-selectpage --save
+npm i v-selectpage --save
 ```
 
 Include plugin in your `main.js` file.
