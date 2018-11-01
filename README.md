@@ -91,7 +91,7 @@ Include plugin in your `main.js` file.
 ```js
 import Vue from 'vue'
 import vSelectPage from 'v-selectpage';
-Vue.use(vSelectPage);
+Vue.use(vSelectPage, { global config options });
 ```
 
 <a href="https://nodei.co/npm/v-selectpage/"><img src="https://nodei.co/npm/v-selectpage.png"></a>
