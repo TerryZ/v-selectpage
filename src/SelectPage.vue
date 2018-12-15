@@ -104,7 +104,7 @@
             <div class="sp-pagination" v-show="!message" v-if="pagination">
                 <div class="sp-page-info">{{pageInfo}}</div>
                 <ul ref="page">
-                    <li :class="{'sp-disabled':pageNumber===1}" :title="i18n.first">
+                    <li v-if="haveTotalCount" :class="{'sp-disabled':pageNumber===1}" :title="i18n.first">
                         <a href="javascript:void(0);" @click="switchPage('first')" >
                             <i class="sp-iconfont sp-icon-first"></i>
                         </a>
@@ -114,7 +114,7 @@
                             <i class="sp-iconfont sp-icon-previous"></i>
                         </a>
                     </li>
-                    <li :class="{'sp-disabled':pageNumber===totalPage}" class="sp-right" :title="i18n.last">
+                    <li v-if="haveTotalCount" :class="{'sp-disabled':pageNumber===totalPage}" class="sp-right" :title="i18n.last">
                         <a href="javascript:void(0);" @click="switchPage('last')" >
                             <i class="sp-iconfont sp-icon-last"></i>
                         </a>
@@ -217,6 +217,13 @@
                 default: 0
             },
             pagination: {
+                type: Boolean,
+                default: true
+            },
+             /**
+             * Is have total page number
+             */
+            haveTotalCount: {
                 type: Boolean,
                 default: true
             }
@@ -574,9 +581,11 @@
                 return this.placeholder?this.placeholder:this.i18n.placeholder;
             },
             pageInfo(){
-                return this.i18n.page_info.replace('page_num', this.pageNumber)
-                    .replace('page_count',this.totalPage)
-                    .replace('row_count',this.totalRows);
+                return this.haveTotalCount
+                        ? this.i18n.page_info.replace('page_num', this.pageNumber)
+                        .replace('page_count',this.totalPage)
+                        .replace('row_count',this.totalRows)
+                        : this.i18n.page_info.replace('page_num', this.pageNumber);
             }
         },
         beforeMount(){
