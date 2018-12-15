@@ -226,7 +226,21 @@
             haveTotalCount: {
                 type: Boolean,
                 default: true
-            }
+            },
+             /**
+             *  the field for pageSize
+             */
+            pageSizeField: {
+                type: String,
+                default: "pageSize"
+            },
+             /**
+             * the field for pageIndex
+             */
+            pageNumberField: {
+                type: String,
+                default: "pageNumber"
+            },
         },
         data(){
             return {
@@ -439,8 +453,8 @@
                 if(typeof(this.data) === 'string' && this.dataLoad && typeof(this.dataLoad === 'function')){
                     let that = this, queryParams = this.params && Object.keys(this.params).length?
                         JSON.parse(JSON.stringify(this.params)):{};
-                    queryParams.pageSize = this.pageSize;
-                    queryParams.pageNumber = this.pageNumber;
+                    queryParams[this.pageSizeField] = this.pageSize;
+                    queryParams[this.pageNumberField] = this.pageNumber;
                     if(this.sort) queryParams.orderBy = this.sort;
                     if(init && this.value){
                         queryParams.searchKey = this.keyField;
@@ -581,11 +595,11 @@
                 return this.placeholder?this.placeholder:this.i18n.placeholder;
             },
             pageInfo(){
-                return this.haveTotalCount
+                return  this.haveTotalCount
                         ? this.i18n.page_info.replace('page_num', this.pageNumber)
                         .replace('page_count',this.totalPage)
                         .replace('row_count',this.totalRows)
-                        : this.i18n.page_info.replace('page_num', this.pageNumber);
+                        : this.i18n.page_info_no_total.replace('page_num', this.pageNumber);
             }
         },
         beforeMount(){
