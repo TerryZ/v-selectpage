@@ -119,7 +119,7 @@
                             <i class="sp-iconfont sp-icon-last"></i>
                         </a>
                     </li>
-                    <li :class="{'sp-disabled':pageNumber===totalPage}" class="sp-right" :title="i18n.next">
+                    <li :class="{'sp-disabled':pageNumber===totalPage || !loadMore}" class="sp-right" :title="i18n.next">
                         <a href="javascript:void(0);" @click="switchPage('next')" >
                             <i class="sp-iconfont sp-icon-next"></i>
                         </a>
@@ -241,6 +241,13 @@
                 type: String,
                 default: "pageNumber"
             },
+            /**
+             * customClass
+             */
+            customClass: {
+                type: String,
+                default: ""
+            }
         },
         data(){
             return {
@@ -259,7 +266,8 @@
 
                 pageNumber: 1,
                 totalPage: 0,
-                totalRows: 0
+                totalRows: 0,
+                loadMore: true
             };
         },
         methods:{
@@ -476,6 +484,7 @@
                                 console.error('In server side mode, you need specified "resultFormat" function to format server side result.');
                             }else{
                                 let tmpObj = that.resultFormat(resp);
+                                tmpObj.loadMore != undefined ? this.loadMore = tmpObj.loadMore : "";
                                 if(tmpObj && Object.keys(tmpObj).length){
                                     if(!init){
                                         that.list = tmpObj.list;
@@ -495,9 +504,16 @@
                             if(this.pageNumber!==1) this.pageNumber = 1;
                             break;
                         case 'previous':
-                            if(this.pageNumber!==1) this.pageNumber--;
+                            if(this.pageNumber!==1){
+                                this.pageNumber--;
+                            }else{
+                                return;
+                            }
                             break;
                         case 'next':
+                            if(this.loadMore === false){
+                                return;
+                            }
                             if(this.pageNumber!==this.totalPage) this.pageNumber++;
                             break;
                         case 'last':
@@ -611,7 +627,7 @@
             this.scrollPolyfill();
             //switch class name
             let className = this.$el.className;
-            this.$el.className = 'v-selectpage';
+            this.$el.className = 'v-selectpage ' + this.customClass;
             this.$refs.input.className += ' ' + className;
 
             //set searchField when user not config
@@ -919,6 +935,7 @@ div.sp-pagination {
             &:last-child{ border-bottom-right-radius: 2px; }
             &.sp-disabled {
                 a { color: #DDDDDD;font-weight: normal;/*cursor: not-allowed;*/ }
+                i {cursor: not-allowed}
             }
         }
     }
