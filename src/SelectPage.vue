@@ -24,7 +24,7 @@
         </div>
 
         <!-- drop down list -->
-        <v-dropdown ref="dropdown" @show-change="dropdownVisible" >
+        <v-dropdown ref="dropdown" @show-change="dropdownVisible" :position="position">
             <!-- message bar -->
             <div class="sp-message" v-if="message">
                 <i class="sp-iconfont sp-icon-warning"></i>
@@ -219,6 +219,10 @@
             pagination: {
                 type: Boolean,
                 default: true
+            },
+            position: {
+                type: String,
+                default: 'left'
             }
         },
         data(){

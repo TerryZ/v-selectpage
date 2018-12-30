@@ -18,15 +18,15 @@
     "web",
     "vue",
     "vuejs",
-	"vue2",
+    "vue2",
     "webpack",
     "selector",
-	"tableview",
-	"i18n",
-	"server-side",
-	"pagination",
-	"tags",
-	"multiple"
+    "tableview",
+    "i18n",
+    "server-side",
+    "pagination",
+    "tags",
+    "multiple"
   ],
   "browserslist": [
     "> 1%",
