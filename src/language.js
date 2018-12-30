@@ -52,5 +52,23 @@ export default {
         max_selected: '最多で max_selected_limit のプロジェクトを選ぶことしかできません',
         placeholder: 'プロジェクトを選択してください',
         items_selected: 'selected_count アイテムが選択されました'
+    },
+  ar: {// Arabic
+        next: 'التالي',
+        prev: 'السابق',
+        first: 'الاول',
+        last: 'الأخير',
+        close_btn: 'إغلاق عند الضغط على زر (Esc)',
+        loading: 'جاري التحميل ...',
+        page_info: 'صفحة page_num/page_count ( row_count سجلات )',
+        not_found: 'لا يوجد نتائج',
+        server_error: 'لقد حدث خطأ أثناء الإتصال بالخادم.',
+        clear: 'محو المحتوى',
+        select_all: 'تحديد الصفحة الحالية',
+        unselect_all: 'إلغاء تحديد الصفحة الحالية',
+        clear_all: 'إلغاء التحديد',
+        max_selected: 'يمكنك فقط تحديد (max_selected_limit) عناصر',
+        placeholder: 'رجاء حدد الخيار',
+        items_selected: 'تم تحديد (selected_count) عناصر'
     }
 };
