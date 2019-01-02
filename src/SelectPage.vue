@@ -104,7 +104,7 @@
             <div class="sp-pagination" v-show="!message" v-if="pagination">
                 <div class="sp-page-info">{{pageInfo}}</div>
                 <ul ref="page">
-                    <li :class="{'sp-disabled':pageNumber===1}" :title="i18n.first">
+                    <li v-if="haveTotalCount" :class="{'sp-disabled':pageNumber===1}" :title="i18n.first">
                         <a href="javascript:void(0);" @click="switchPage('first')" >
                             <i class="sp-iconfont sp-icon-first"></i>
                         </a>
@@ -114,12 +114,12 @@
                             <i class="sp-iconfont sp-icon-previous"></i>
                         </a>
                     </li>
-                    <li :class="{'sp-disabled':pageNumber===totalPage}" class="sp-right" :title="i18n.last">
+                    <li v-if="haveTotalCount" :class="{'sp-disabled':pageNumber===totalPage}" class="sp-right" :title="i18n.last">
                         <a href="javascript:void(0);" @click="switchPage('last')" >
                             <i class="sp-iconfont sp-icon-last"></i>
                         </a>
                     </li>
-                    <li :class="{'sp-disabled':pageNumber===totalPage}" class="sp-right" :title="i18n.next">
+                    <li :class="{'sp-disabled':pageNumber===totalPage || !loadMore}" class="sp-right" :title="i18n.next">
                         <a href="javascript:void(0);" @click="switchPage('next')" >
                             <i class="sp-iconfont sp-icon-next"></i>
                         </a>
@@ -219,6 +219,34 @@
             pagination: {
                 type: Boolean,
                 default: true
+            },
+             /**
+             * Is have total page number
+             */
+            haveTotalCount: {
+                type: Boolean,
+                default: true
+            },
+             /**
+             *  the field for pageSize
+             */
+            pageSizeField: {
+                type: String,
+                default: "pageSize"
+            },
+             /**
+             * the field for pageIndex
+             */
+            pageNumberField: {
+                type: String,
+                default: "pageNumber"
+            },
+            /**
+             * customClass
+             */
+            customClass: {
+                type: String,
+                default: ""
             }
         },
         data(){
@@ -238,7 +266,8 @@
 
                 pageNumber: 1,
                 totalPage: 0,
-                totalRows: 0
+                totalRows: 0,
+                loadMore: true
             };
         },
         methods:{
@@ -432,8 +461,8 @@
                 if(typeof(this.data) === 'string' && this.dataLoad && typeof(this.dataLoad === 'function')){
                     let that = this, queryParams = this.params && Object.keys(this.params).length?
                         JSON.parse(JSON.stringify(this.params)):{};
-                    queryParams.pageSize = this.pageSize;
-                    queryParams.pageNumber = this.pageNumber;
+                    queryParams[this.pageSizeField] = this.pageSize;
+                    queryParams[this.pageNumberField] = this.pageNumber;
                     if(this.sort) queryParams.orderBy = this.sort;
                     if(init && this.value){
                         queryParams.searchKey = this.keyField;
@@ -455,6 +484,7 @@
                                 console.error('In server side mode, you need specified "resultFormat" function to format server side result.');
                             }else{
                                 let tmpObj = that.resultFormat(resp);
+                                tmpObj.loadMore != undefined ? this.loadMore = tmpObj.loadMore : "";
                                 if(tmpObj && Object.keys(tmpObj).length){
                                     if(!init){
                                         that.list = tmpObj.list;
@@ -474,9 +504,16 @@
                             if(this.pageNumber!==1) this.pageNumber = 1;
                             break;
                         case 'previous':
-                            if(this.pageNumber!==1) this.pageNumber--;
+                            if(this.pageNumber!==1){
+                                this.pageNumber--;
+                            }else{
+                                return;
+                            }
                             break;
                         case 'next':
+                            if(this.loadMore === false){
+                                return;
+                            }
                             if(this.pageNumber!==this.totalPage) this.pageNumber++;
                             break;
                         case 'last':
@@ -574,9 +611,11 @@
                 return this.placeholder?this.placeholder:this.i18n.placeholder;
             },
             pageInfo(){
-                return this.i18n.page_info.replace('page_num', this.pageNumber)
-                    .replace('page_count',this.totalPage)
-                    .replace('row_count',this.totalRows);
+                return  this.haveTotalCount
+                        ? this.i18n.page_info.replace('page_num', this.pageNumber)
+                        .replace('page_count',this.totalPage)
+                        .replace('row_count',this.totalRows)
+                        : this.i18n.page_info_no_total.replace('page_num', this.pageNumber);
             }
         },
         beforeMount(){
@@ -588,7 +627,7 @@
             this.scrollPolyfill();
             //switch class name
             let className = this.$el.className;
-            this.$el.className = 'v-selectpage';
+            this.$el.className = 'v-selectpage ' + this.customClass;
             this.$refs.input.className += ' ' + className;
 
             //set searchField when user not config
@@ -896,6 +935,7 @@ div.sp-pagination {
             &:last-child{ border-bottom-right-radius: 2px; }
             &.sp-disabled {
                 a { color: #DDDDDD;font-weight: normal;/*cursor: not-allowed;*/ }
+                i {cursor: not-allowed}
             }
         }
     }
