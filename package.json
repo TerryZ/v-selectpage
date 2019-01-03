@@ -1,7 +1,7 @@
 {
   "name": "v-selectpage",
   "description": "A powerful selector for Vue2, list or table view of pagination, use tags for multiple selection, i18n and server side resources supports",
-  "version": "1.0.15",
+  "version": "2.0.2",
   "author": "TerryZ <terry5@foxmail.com>",
   "license": "MIT",
   "main": "dist/v-selectpage.js",
@@ -10,6 +10,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "v-dropdown": "^1.0.7",
     "vue": "^2.5.11"
   },
   "keywords": [
@@ -18,15 +19,15 @@
     "web",
     "vue",
     "vuejs",
-	"vue2",
+    "vue2",
     "webpack",
     "selector",
-	"tableview",
-	"i18n",
-	"server-side",
-	"pagination",
-	"tags",
-	"multiple"
+    "tableview",
+    "i18n",
+    "server-side",
+    "pagination",
+    "tags",
+    "multiple"
   ],
   "browserslist": [
     "> 1%",
