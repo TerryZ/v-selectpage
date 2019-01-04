@@ -123,3 +123,7 @@ export default {
     }
 };
 ```
+
+## Dependenics
+
+- [v-dropdown](https://github.com/TerryZ/v-dropdown) - The dropdown container layer
