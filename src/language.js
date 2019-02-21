@@ -70,5 +70,23 @@ export default {
 		max_selected: 'يمكنك فقط تحديد (max_selected_limit) عناصر',
 		placeholder: 'رجاء حدد الخيار',
 		items_selected: 'تم تحديد (selected_count) عناصر'
-	}
+	},
+  es: {// Spanish
+        next: 'Siguiente página',
+        prev: 'Pagina anterior',
+        first: 'Primera página',
+        last: 'última página',
+        close_btn: 'Cerrar (tecla Esc)',
+        loading: 'Cargando ...',
+        page_info: 'Página page_num/page_count ( row_count registros )',
+        not_found: 'no encontrado',
+        server_error: 'Ocurrió un error al conectarse al servidor.',
+        clear: 'Borrar contenido',
+        select_all: 'Seleccionar página actual',
+        unselect_all: 'Borrar la página actual',
+        clear_all: 'Borrar todo lo seleccionado',
+        max_selected: 'Solo puedes seleccionar hasta max_selected_limit items',
+        placeholder: 'Seleccione una opción',
+        items_selected: 'selected_count items Seleccionado'
+    },  
 };
