@@ -1,3 +1,5 @@
+import language from "../language";
+
 export default {
     methods: {
         showChange(val){
@@ -269,6 +271,15 @@ export default {
         },
         isEdge(){
             return navigator.userAgent.indexOf("Edge") >= 0;
+        },
+        getTranslation() {
+            const locale   = this.language;
+            const fallback = this.fallbackLocale;
+            let languages  = language;
+
+            if (this.languages) languages = this.languages;
+
+            return languages[locale] ? languages[locale] : languages[fallback];
         }
     }
 };

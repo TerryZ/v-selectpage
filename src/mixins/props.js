@@ -38,6 +38,18 @@ export default {
             type: String,
             default: 'cn'
         },
+        languages: {
+          type: Object,
+          default: null
+        },
+        /**
+         * specify which language should be used
+         * when a translation is undefined
+         */
+        fallbackLocale: {
+          type: String,
+          default: 'cn'
+        },
         keyField: {
             type: String,
             default: 'id'
