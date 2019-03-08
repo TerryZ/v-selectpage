@@ -100,7 +100,8 @@
                 renderCell: this.renderCell,
                 keyField: this.keyField,
                 showField: this.showField,
-                rtl: this.rtl
+                rtl: this.rtl,
+                deselectFromList: this.deselectFromList
             };
         },
         watch: {
@@ -374,6 +375,7 @@ div.sp-result-area{
             cursor : pointer;
             &.sp-over { background-color: #2196F3 /*#53A4EA*/!important;color: #fff !important;cursor: pointer; }
             &.sp-selected { color: #ccc;cursor: default; }
+            &.sp-deselect { cursor: pointer; }
             &.sp-rtl { direction: rtl;text-align: right; }
         }
     }
@@ -388,6 +390,7 @@ div.sp-result-area{
         tbody tr {
             &.sp-over td { background-color: #53A4EA !important;color: #fff !important;cursor: pointer; }
             &.sp-selected { color: #ccc;cursor: default; }
+            &.sp-deselect { cursor: pointer; }
         }
         thead tr.sp-rtl th, tbody tr.sp-rtl td { direction: rtl;text-align: right; }
     }

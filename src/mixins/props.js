@@ -95,6 +95,10 @@ export default {
         disabled: {
             type: Boolean,
             default: false
-        }
+        },
+        deselectFromList: {
+          type: Boolean,
+          default: false
+        },
     }
 };
