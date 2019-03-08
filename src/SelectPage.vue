@@ -101,7 +101,8 @@
                 keyField: this.keyField,
                 showField: this.showField,
                 rtl: this.rtl,
-                deselectFromList: this.deselectFromList
+                deselectFromList: this.deselectFromList,
+                maxShowTags: this.maxShowTags
             };
         },
         watch: {
@@ -238,6 +239,9 @@ div.v-selectpage{
                 line-height: 24px;
                 -webkit-transition: all .5s cubic-bezier(.175,.885,.32,1);
                 transition: all .5s cubic-bezier(.175,.885,.32,1);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 &:hover{background-color: white;border: 1px solid #D0D0D0;box-shadow: 0 2px 7px rgba(0,0,0,.1);}
                 i {
                     font-size: 14px; color: #aaa;

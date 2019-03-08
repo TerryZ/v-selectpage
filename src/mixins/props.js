@@ -100,5 +100,9 @@ export default {
           type: Boolean,
           default: false
         },
+        maxShowTags: {
+          type: Number,
+          default: 50
+        }
     }
 };
