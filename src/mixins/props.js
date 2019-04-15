@@ -78,6 +78,11 @@ export default {
          */
         sort: String,
         searchField: String,
+        /**
+         * Callback params (item, search, searchColumn) => boolean
+         * A function invoked per iteration on search
+         */
+        searchFilterCallback: Function,
         pageSize:{
             type: Number,
             default: 10

@@ -173,7 +173,11 @@ export default {
                 if(Array.isArray(this.data)){
                     let list = this.sortedList?this.sortedList.concat():this.data.concat();
                     if(this.search)
-                        list = list.filter(val => val[this.searchColumn].toLowerCase().includes(this.search.toLowerCase()));
+                        list = list.filter(val => {
+                          if (!this.searchFilterCallback) return val[this.searchColumn].toLowerCase().includes(this.search.toLowerCase());
+
+                          return this.searchFilterCallback(val, this.search.toLowerCase(), this.searchColumn);
+                        });
                     this.totalRows = list.length;
 
                     if(this.pagination){
