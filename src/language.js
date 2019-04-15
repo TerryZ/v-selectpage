@@ -89,4 +89,22 @@ export default {
         placeholder: 'Seleccione una opción',
         items_selected: 'selected_count items Seleccionado'
     },  
+    de: {// German
+          next: 'Nächste Seite',
+          prev: 'Vorherige Seite',
+          first: 'Erste Seite',
+          last: 'Letzte Seite',
+          close_btn: 'Schließen (Esc)',
+          loading: 'Lädt...',
+          page_info: 'Seite page_num/page_count ( row_count Einträge )',
+          not_found: 'Nicht gefunden',
+          server_error: 'Bei der Verbindung zum Server ist ein Fehler aufgetreten.',
+          clear: 'Inhalt löschen',
+          select_all: 'Aktuelle Seite auswählen',
+          unselect_all: 'Auswahl der aktuellen Seite aufheben',
+          clear_all: 'Alle ausgewählten löschen',
+          max_selected: 'Sie können nur bis zu max_selected_limit Elemente auswählen',
+          placeholder: 'Wählen',
+          items_selected: 'selected_count Elemente ausgewählt'
+      },
 };
