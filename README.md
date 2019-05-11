@@ -110,15 +110,12 @@ Vue.use(vSelectPage, { global config options });
 
 template code
 
-```html
+```vue
 <template>
     <v-selectpage :data="list" key-field="id" show-field="name" ></v-selectpage>
 </template>
-```
 
-script code
-
-```js
+<script>
 export default {
     data(){
         return {
@@ -129,7 +126,8 @@ export default {
             ]
         }
     }
-};
+}
+</script>
 ```
 
 ## Dependenics
