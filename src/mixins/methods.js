@@ -127,7 +127,11 @@ export default {
             }
         },
         selectItem(row){
-            if(this.picked.includes(row)) return;
+            if(this.picked.includes(row)){
+                if(this.deselectFromList)
+                    this.picked.splice(this.picked.indexOf(row), 1);
+                return;
+            }
             if(this.multiple){
                 if((this.maxSelectLimit && (this.picked.length < this.maxSelectLimit)) || !this.maxSelectLimit)
                     this.picked.push(row);

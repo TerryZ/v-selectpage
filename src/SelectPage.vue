@@ -100,7 +100,9 @@
                 renderCell: this.renderCell,
                 keyField: this.keyField,
                 showField: this.showField,
-                rtl: this.rtl
+                rtl: this.rtl,
+                deselectFromList: this.deselectFromList,
+                maxShowTags: this.maxShowTags
             };
         },
         watch: {
@@ -237,6 +239,9 @@ div.v-selectpage{
                 line-height: 24px;
                 -webkit-transition: all .5s cubic-bezier(.175,.885,.32,1);
                 transition: all .5s cubic-bezier(.175,.885,.32,1);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 &:hover{background-color: white;border: 1px solid #D0D0D0;box-shadow: 0 2px 7px rgba(0,0,0,.1);}
                 i {
                     font-size: 14px; color: #aaa;
@@ -374,6 +379,7 @@ div.sp-result-area{
             cursor : pointer;
             &.sp-over { background-color: #2196F3 /*#53A4EA*/!important;color: #fff !important;cursor: pointer; }
             &.sp-selected { color: #ccc;cursor: default; }
+            &.sp-deselect { cursor: pointer; }
             &.sp-rtl { direction: rtl;text-align: right; }
         }
     }
@@ -388,6 +394,7 @@ div.sp-result-area{
         tbody tr {
             &.sp-over td { background-color: #53A4EA !important;color: #fff !important;cursor: pointer; }
             &.sp-selected { color: #ccc;cursor: default; }
+            &.sp-deselect { cursor: pointer; }
         }
         thead tr.sp-rtl th, tbody tr.sp-rtl td { direction: rtl;text-align: right; }
     }

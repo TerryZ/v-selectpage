@@ -1,5 +1,5 @@
 export default {
-    inject: ['keyField', 'showField', 'renderCell', 'rtl'],
+    inject: ['keyField', 'showField', 'renderCell', 'rtl', 'deselectFromList'],
     props: {
         list: Array,
         picked: Array,
@@ -12,7 +12,8 @@ export default {
 		rowClass(row, index){
 			return {
 				'sp-over': this.value === index,
-				'sp-selected': this.picked.findIndex(val => val[this.keyField] === row[this.keyField]) !== -1,
+        'sp-selected': this.picked.findIndex(val => val[this.keyField] === row[this.keyField]) !== -1,
+        'sp-deselect': this.picked.findIndex(val => val[this.keyField] === row[this.keyField]) !== -1 && this.deselectFromList,
 				'sp-rtl': this.rtl
 			};
 		},
