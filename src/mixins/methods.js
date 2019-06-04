@@ -1,3 +1,5 @@
+import language from "../language";
+
 export default {
     methods: {
         showChange(val){
@@ -171,7 +173,11 @@ export default {
                 if(Array.isArray(this.data)){
                     let list = this.sortedList?this.sortedList.concat():this.data.concat();
                     if(this.search)
-                        list = list.filter(val => val[this.searchColumn].toLowerCase().includes(this.search.toLowerCase()));
+                        list = list.filter(val => {
+                          if (!this.searchFilterCallback) return val[this.searchColumn].toLowerCase().includes(this.search.toLowerCase());
+
+                          return this.searchFilterCallback(val, this.search.toLowerCase(), this.searchColumn);
+                        });
                     this.totalRows = list.length;
 
                     if(this.pagination){
@@ -269,6 +275,15 @@ export default {
         },
         isEdge(){
             return navigator.userAgent.indexOf("Edge") >= 0;
+        },
+        getTranslation() {
+            const locale   = this.language;
+            const fallback = this.fallbackLocale;
+            let languages  = language;
+
+            if (this.languages) languages = this.languages;
+
+            return languages[locale] ? languages[locale] : languages[fallback];
         }
     }
 };

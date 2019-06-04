@@ -9,6 +9,7 @@ const Plugin = {
             if(typeof option.placeholder === 'string') props.placeholder.default = option.placeholder;
             if(typeof option.pageSize === 'number') props.pageSize.default = option.pageSize;
 			if(typeof option.rtl === 'boolean') props.rtl.default = option.rtl;
+			if(typeof option.languages === 'object') props.languages.default = () => option.languages;
 
             if(option.dataLoad && typeof option.dataLoad === 'function'){
                 selectPage.extends = {

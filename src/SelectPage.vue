@@ -55,7 +55,6 @@
 </template>
 
 <script>
-    import lang from './language';
     import props from './mixins/props';
     import methods from './mixins/methods';
 
@@ -82,7 +81,7 @@
                 search: '',
                 lastSearch: null,
                 searchColumn: null,
-                i18n: lang[this.language],
+                i18n: this.getTranslation(),
                 message: '',
                 highlight: -1,
 

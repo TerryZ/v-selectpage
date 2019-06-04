@@ -38,6 +38,18 @@ export default {
             type: String,
             default: 'cn'
         },
+        languages: {
+          type: Object,
+          default: null
+        },
+        /**
+         * specify which language should be used
+         * when a translation is undefined
+         */
+        fallbackLocale: {
+          type: String,
+          default: 'cn'
+        },
         keyField: {
             type: String,
             default: 'id'
@@ -66,6 +78,11 @@ export default {
          */
         sort: String,
         searchField: String,
+        /**
+         * Callback params (item, search, searchColumn) => boolean
+         * A function invoked per iteration on search
+         */
+        searchFilterCallback: Function,
         pageSize:{
             type: Number,
             default: 10
