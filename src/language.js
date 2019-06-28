@@ -125,4 +125,22 @@ export default {
         placeholder: 'Selectează o înregistrare',
         items_selected: 'selected_count înregistrări selectate'
     },
+    fr: {// French
+        next: 'Page suivante',
+        prev: 'Page précédente',
+        first: 'Première page',
+        last: 'Dernière page',
+        close_btn: 'Fermer (touche Esc)',
+        loading: 'chargement...',
+        page_info: 'Page page_num/page_count ( row_count lignes )',
+        not_found: 'Aucun résultat',
+        server_error: 'Une erreur s\'est produite lors de la connexion avec le serveur.',
+        clear: 'Effacer',
+        select_all: 'Sélectionner tous les éléments de la page',
+        unselect_all: 'Déselectionner tous les élements de la page',
+        clear_all: 'Tout déselectionner',
+        max_selected: 'Vous ne pouvez pas sélectionner plus de max_selected_limit élements',
+        placeholder: 'Sélectionnez une option',
+        items_selected: 'selected_count éléments sélectionnés'
+    },
 };
