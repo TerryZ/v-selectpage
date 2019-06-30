@@ -1,9 +1,9 @@
-import selectPage from './SelectPage.vue';
+import selectPage from './SelectPage';
 
 const Plugin = {
     install(Vue, option = {}){
         if(Object.keys(option).length){
-        	const props = selectPage.mixins[0].props;
+            const props = selectPage.mixins[0].props;
             if(typeof option.title === 'string') props.title.default = option.title;
             if(typeof option.language === 'string') props.language.default = option.language;
             if(typeof option.placeholder === 'string') props.placeholder.default = option.placeholder;

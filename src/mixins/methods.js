@@ -1,22 +1,25 @@
+const LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40, TAB = 9, ENTER = 13, ESCAPE = 27;
+
 export default {
     methods: {
+		close(){
+			if(this.show) this.$refs.drop.visible();
+		},
         showChange(val){
             this.show = val;
-            val && this.inputFocus();
-            if(!val) this.highlight = -1;
-        },
-        open(){
-            if(this.disabled) return;
-            if(!this.show) this.$refs.drop.$emit('show', this.$refs.caller);
-        },
-        close(){
-            if(this.show) this.$refs.drop.$emit('show');
+            if(val){
+                this.inputFocus();
+            }else{
+                this.highlight = -1;
+            }
         },
         inputFocus(){
+			if(!this.show) return;
             this.$nextTick(()=>{
-                if(!this.show) return;
-                //fix open drop down list and set input focus, the page will scroll to top
-                //that.$refs.search.focus({preventScroll:true}); only work on Chrome and EDGE
+				/**
+				 * fix open drop down list and set input focus, the page will scroll to top
+				 * that.$refs.search.focus({preventScroll:true}); only work on Chrome and EDGE
+				 */
                 if(this.isChrome() || this.isEdge()) this.$refs.search.focus({preventScroll:true});
                 else{
                     const x = window.pageXOffset, y = window.pageYOffset;
@@ -37,69 +40,73 @@ export default {
                 removed = [this.picked[index]];
                 this.picked.splice(index, 1);
             }
-
-            if(this.multiple && this.show){
-                this.$nextTick(()=>{
-                    this.adjustList();
-                    this.inputFocus();
-                });
-            }
             this.$emit('removed', removed);
         },
+        /**
+         * pick page items
+         * @param check
+         * true: pick
+         * false: remove
+         */
         pickPage(check){
             const removed = [];
-            for(let row of this.list){
-                if(!this.picked.includes(row) && check &&
-                    (!this.maxSelectLimit || (this.maxSelectLimit && this.picked.length < this.maxSelectLimit)))
-                    this.picked.push(row);//picked current page items
-                if(this.picked.includes(row) && !check){//removed current page items
-                    const idx = this.picked.findIndex(value => Object.is(value, row));
-                    if(idx !== -1) {
-                        removed.push(this.picked[idx]);
-                        this.picked.splice(idx, 1);
+            this.list.forEach(row=>{
+                if(check){//picked current page items
+                    if(!this.inPicked(row) && (!this.maxSelectLimit || (this.maxSelectLimit && this.picked.length < this.maxSelectLimit))){
+                        this.picked.push(row);
+                    }
+                }else{//unpicked current page items
+                    if(this.inPicked(row)){
+                        const idx = this.inPickedIndex(row);
+                        if(idx !== -1) {
+                            removed.push(this.picked[idx]);
+                            this.picked.splice(idx, 1);
+                        }
                     }
                 }
-            }
+            });
 
             if(!check) this.$emit('removed', removed);
-            this.$nextTick(()=>{
-                this.adjustList();
-                this.inputFocus();
-            });
+			this.inputFocus();
         },
-        adjustList(){
-            this.$refs.drop.$emit('adjust', this.$refs.caller);
+        adjust(){
+            this.$refs.drop.adjust();
         },
         getResults(){
             if(!this.picked.length || this.multiple) return;
-            switch (typeof this.showField){
-                case 'string': return this.picked[0][this.showField];
-                case 'function': return this.showField(this.picked[0]);
+            return this.renderCell(this.picked[0]);
+        },
+        renderCell(row){
+            if(row && Object.keys(row).length){
+                switch (typeof this.showField){
+                    case 'string': return row[this.showField];
+                    case 'function': return this.showField(row);
+                }
             }
         },
         processKey(e){
-            if (![37, 38, 39, 40, 27, 13, 9].includes(e.keyCode)) this.populate();
+            if (![LEFT, UP, RIGHT, DOWN, ESCAPE, ENTER, TAB].includes(e.keyCode)) this.populate();
         },
         processControl(e){
-            if ([37, 38, 39, 40, 27, 13, 9].includes(e.keyCode)) {
+            if ([LEFT, UP, RIGHT, DOWN, ESCAPE, ENTER, TAB].includes(e.keyCode)) {
                 switch (e.keyCode) {
-                    case 37://left
-                        this.$refs.page.$emit('go', 'previous');
+                    case LEFT:
+                        if(this.pagination) this.$refs.page.switchPage('previous');
                         break;
-                    case 38:// up
+                    case UP:
                         this.previous();
                         break;
-                    case 39://right
-                        this.$refs.page.$emit('go', 'next');
+                    case RIGHT:
+						if(this.pagination) this.$refs.page.switchPage('next');
                         break;
-                    case 40:// down
+                    case DOWN:
                         this.next();
                         break;
-                    case 9: // tab
-                    case 13:// enter
+                    case TAB:
+                    case ENTER:
                         if(this.highlight !== -1) this.selectItem(this.list[this.highlight]);
                         break;
-                    case 27:// escape
+                    case ESCAPE:
                         this.close();
                         break;
                 }
@@ -107,7 +114,7 @@ export default {
         },
         previous(){
             if(this.highlight > 0 && this.list.length){
-                const previous = this.list.filter((val, idx)=>idx < this.highlight && !this.picked.includes(val));
+                const previous = this.list.filter((val, idx)=>idx < this.highlight && !this.inPicked(val));
                 if(previous.length){
                     const preIndex = this.list.findIndex(val => Object.is(val, previous[previous.length-1]));
                     if(preIndex !== -1) this.highlight = preIndex;
@@ -116,34 +123,26 @@ export default {
         },
         next(){
             if(this.highlight < (this.list.length - 1)){
-                const nextIndex = this.list.findIndex((val, idx)=>(idx > this.highlight) && !this.picked.includes(val));
+                const nextIndex = this.list.findIndex((val, idx) => (idx > this.highlight) && !this.inPicked(val));
                 if(nextIndex !== -1) this.highlight = nextIndex;
             }
         },
-        renderCell(row){
-            if(row && Object.keys(row).length){
-                if(typeof this.showField === 'string') return row[this.showField];
-                else if(typeof this.showField === 'function') return this.showField(row);
-            }
-        },
         selectItem(row){
-            if(this.picked.includes(row)) return;
+            if(this.inPicked(row)) return;
+            // multiple selection by tag form
             if(this.multiple){
-                if((this.maxSelectLimit && (this.picked.length < this.maxSelectLimit)) || !this.maxSelectLimit)
-                    this.picked.push(row);
-                else{
+                if((this.maxSelectLimit && (this.picked.length < this.maxSelectLimit)) || !this.maxSelectLimit){
+					this.picked.push(row);
+				}else{
 					this.message = this.i18n.max_selected.replace('max_selected_limit', `<b>${this.maxSelectLimit}</b>`);
-					setTimeout(()=>{
+					setTimeout(() => {
 						this.message = '';
 					}, 3000);
 				}
-                this.$nextTick(()=>{
-                    this.adjustList();
-                    this.inputFocus();
-                });
+				this.inputFocus();
             }else{
-                this.picked = [row];
                 this.close();
+                this.picked = [row];
             }
             this.highlight = -1;
         },
@@ -153,7 +152,7 @@ export default {
                 if(sortArr.length === 2){
                     sort.field = sortArr[0];
                     sort.order = sortArr[1];
-                    this.sortedList = this.data.concat().sort((a, b)=>{
+                    this.sortedList = this.data.concat().sort((a, b) => {
                         const valA = a[sort.field],
                             valB = b[sort.field], order = sort.order ? sort.order.toLowerCase() : 'asc';
                         if(order === 'asc'){
@@ -170,8 +169,9 @@ export default {
                 if(this.search && this.search !== this.lastSearch) this.pageNumber = 1;
                 if(Array.isArray(this.data)){
                     let list = this.sortedList?this.sortedList.concat():this.data.concat();
-                    if(this.search)
+                    if(this.search){
                         list = list.filter(val => val[this.searchColumn].toLowerCase().includes(this.search.toLowerCase()));
+                    }
                     this.totalRows = list.length;
 
                     if(this.pagination){
@@ -179,6 +179,7 @@ export default {
                         this.list = list.filter((val,index)=>index >= start&&index <= end);
                     }else this.list = list;
                 }else if(typeof this.data === 'string') this.remote(false);
+
                 if(this.search) this.lastSearch = this.search;
                 this.highlight = -1;
             }
@@ -192,8 +193,8 @@ export default {
          */
         remote(init){
             if(typeof this.data === 'string' && this.dataLoad && typeof this.dataLoad === 'function'){
-                const queryParams = this.params && Object.keys(this.params).length?
-                    JSON.parse(JSON.stringify(this.params)):{};
+                const queryParams = this.params && Object.keys(this.params).length ?
+                    JSON.parse(JSON.stringify(this.params)) : {};
                 queryParams.pageSize = this.pageSize;
                 queryParams.pageNumber = this.pageNumber;
                 if(this.sort) queryParams.orderBy = this.sort;
@@ -207,7 +208,7 @@ export default {
                         // eslint-disable-next-line no-console
                         console.error('Your "showField" was a function, in server side mode, your need specified "searchField" to search content.');
                     }else{
-                        const field = this.searchField ? this.searchField : this.showField;
+                        const field = this.searchField || this.showField;
                         queryParams[field] = this.search;
                     }
                 }
@@ -226,6 +227,9 @@ export default {
                             }
                         }
                     }
+                }).catch(resp => {
+                    this.list = [];
+                    this.totalRows = 0;
                 });
             }
         },
@@ -237,8 +241,8 @@ export default {
             if(this.value) {
                 if(Array.isArray(this.data)){
                     const arr = this.value.split(',');
-                    if(arr.length){
-                        const matchRows = this.data.filter(val=>arr.includes(String(val[this.keyField])));
+                    if(arr && arr.length){
+                        const matchRows = this.data.filter(val => arr.includes(String(val[this.keyField])));
                         if(matchRows.length) this.picked = this.multiple ? matchRows : [matchRows[0]];
                     }
                     this.findSelectionPage();
@@ -250,19 +254,19 @@ export default {
         },
         findSelectionPage(){
             if(!this.multiple && this.pagination){
-                const list = this.sortedList?this.sortedList.concat():this.data.concat(),
-                    index = list.findIndex(val => String(val[this.keyField]) === this.value);
+                const list = this.sortedList?this.sortedList.concat():this.data.concat();
+                const index = list.findIndex(val => String(val[this.keyField]) === this.value);
                 if(index >= 0){
                     this.pageNumber = Math.ceil((index + 1) / this.pageSize);
                 }
             }
         },
-        scrollPolyfill(){
-            const supportPageOffset = window.pageXOffset !== undefined,
-                isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
-
-            supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft;
-            supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+        inPickedIndex(row){
+            if(!row || !Object.keys(row).length || !this.picked.length) return -1;
+            return this.picked.findIndex(val=>val[this.keyField] === row[this.keyField]);
+        },
+        inPicked(row){
+            return this.inPickedIndex(row) !== -1;
         },
         isChrome(){
             return navigator.vendor !== undefined && navigator.vendor.indexOf("Google") !== -1;
