@@ -54,7 +54,7 @@ div.v-selectpage {
 
             span.sp-selected-tag {
                 list-style: none;
-                padding: 3px 5px;
+                padding: 3px 8px;
                 margin: 0 3px 3px 0;
                 float: left;
                 position: relative;
@@ -215,12 +215,13 @@ div.sp-header {
         &:focus {
             background-color: #f5f5f5;
         }
+        &.sp-search-input--rtl{ direction: rtl; }
     }
 }
 
 div.sp-result-area {
     background-color: white;
-    min-width: 298px;
+    min-width: 300px;
     max-height: 320px;
     overflow-y: auto;
     font-family: $font;

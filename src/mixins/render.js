@@ -89,7 +89,10 @@ export default {
                         autocomplete:'off',
                         value:this.search
                     },
-                    class:'sp-search-input',
+                    class:{
+                    	'sp-search-input': true,
+						'sp-search-input--rtl': this.rtl
+					},
                     on:{
                         keyup:e=>this.processKey(e),
                         keydown:e=>{

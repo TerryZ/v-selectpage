@@ -40,12 +40,15 @@ export default {
             type: String,
             default: 'cn'
         },
+		/**
+		 * specify field to be key field, the value will return by v-model
+		 */
         keyField: {
             type: String,
             default: 'id'
         },
         /**
-         * specify field to show in row
+         * specify field to display
          */
         showField: {
             type: [String, Function],
@@ -156,7 +159,6 @@ export default {
             else this.initSelection();
         },
 		picked(val){
-        	// console.log('picked watch')
 			if(this.message && this.maxSelectLimit && val.length < this.maxSelectLimit) this.message = '';
 			this.$nextTick(()=>{
 				if(this.show){
