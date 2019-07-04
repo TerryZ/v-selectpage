@@ -2,9 +2,6 @@ const LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40, TAB = 9, ENTER = 13, ESCAPE = 2
 
 export default {
     methods: {
-		close(){
-			if(this.show) this.$refs.drop.visible();
-		},
         showChange(val){
             this.show = val;
             if(val){
@@ -13,28 +10,13 @@ export default {
                 this.highlight = -1;
             }
         },
-        inputFocus(){
-			if(!this.show) return;
-            this.$nextTick(()=>{
-				/**
-				 * fix open drop down list and set input focus, the page will scroll to top
-				 * that.$refs.search.focus({preventScroll:true}); only work on Chrome and EDGE
-				 */
-                if(this.isChrome() || this.isEdge()) this.$refs.search.focus({preventScroll:true});
-                else{
-                    const x = window.pageXOffset, y = window.pageYOffset;
-                    this.$refs.search.focus();
-                    if(window.pageYOffset !== y) setTimeout(()=>{ window.scrollTo(x, y); }, 0);
-                }
-            });
-        },
         /**
          * remove all selected item
          */
         remove(index){
             let removed = [];
             if(typeof index !== 'number'){
-                removed = this.picked.concat();
+                removed = this.picked.slice();
                 this.picked = [];
             }else{
                 removed = [this.picked[index]];
@@ -43,46 +25,55 @@ export default {
             this.$emit('removed', removed);
         },
         /**
-         * pick page items
+         * pick/remove current page items
          * @param check
          * true: pick
          * false: remove
          */
-        pickPage(check){
-            const removed = [];
-            this.list.forEach(row=>{
-                if(check){//picked current page items
-                    if(!this.inPicked(row) && (!this.maxSelectLimit || (this.maxSelectLimit && this.picked.length < this.maxSelectLimit))){
-                        this.picked.push(row);
-                    }
-                }else{//unpicked current page items
-                    if(this.inPicked(row)){
-                        const idx = this.inPickedIndex(row);
-                        if(idx !== -1) {
-                            removed.push(this.picked[idx]);
-                            this.picked.splice(idx, 1);
-                        }
-                    }
-                }
-            });
+        pickPage(check = true){
+            const toDo = [];
+            if(check){//picked current page items
+                if(this.maxSelectLimit && this.picked.length >= this.maxSelectLimit) return;
+                let available = 0;
 
-            if(!check) this.$emit('removed', removed);
+                /**
+                 * the number of current page available items
+                 */
+                if(check && this.maxSelectLimit){
+                    const outOfPage = this.picked.filter(val=>{
+                        return this.list.findIndex(value => val[this.keyField] === value[this.keyField]) === -1;
+                    }).length;
+                    available = this.maxSelectLimit - outOfPage;
+                }
+                this.list.forEach(row=>{
+                    if(!this.inPicked(row) && (!this.maxSelectLimit || (this.maxSelectLimit && toDo.length < available))){
+                        toDo.push(row);
+                    }
+                });
+                this.picked.push(...toDo);
+            }else{//unpicked current page items
+                if(!this.picked.length) return;
+                this.list.forEach(row=>{
+                    if(this.inPicked(row)){
+                        toDo.push(this.inPickedIndex(row));
+                    }
+                });
+                this.$emit('removed', this.picked.filter((val,index)=>toDo.includes(index)));
+                this.picked = this.picked.filter((val,index)=>!toDo.includes(index));
+            }
+
 			this.inputFocus();
-        },
-        adjust(){
-            this.$refs.drop.adjust();
         },
         getResults(){
             if(!this.picked.length || this.multiple) return;
             return this.renderCell(this.picked[0]);
         },
         renderCell(row){
-            if(row && Object.keys(row).length){
-                switch (typeof this.showField){
-                    case 'string': return row[this.showField];
-                    case 'function': return this.showField(row);
-                }
-            }
+            if(!row || !Object.keys(row).length) return '';
+			switch (typeof this.showField){
+				case 'string': return row[this.showField];
+				case 'function': return this.showField(row);
+			}
         },
         processKey(e){
             if (![LEFT, UP, RIGHT, DOWN, ESCAPE, ENTER, TAB].includes(e.keyCode)) this.populate();
@@ -152,7 +143,7 @@ export default {
                 if(sortArr.length === 2){
                     sort.field = sortArr[0];
                     sort.order = sortArr[1];
-                    this.sortedList = this.data.concat().sort((a, b) => {
+                    this.sortedList = this.data.slice().sort((a, b) => {
                         const valA = a[sort.field],
                             valB = b[sort.field], order = sort.order ? sort.order.toLowerCase() : 'asc';
                         if(order === 'asc'){
@@ -168,37 +159,45 @@ export default {
             if(this.data){
                 if(this.search && this.search !== this.lastSearch) this.pageNumber = 1;
                 if(Array.isArray(this.data)){
-                    let list = this.sortedList?this.sortedList.concat():this.data.concat();
-                    if(this.search){
-                        list = list.filter(val => val[this.searchColumn].toLowerCase().includes(this.search.toLowerCase()));
+                    let list = this.sortedList?this.sortedList.slice():this.data.slice();
+					/**
+					 * search content filter
+					 */
+					if(this.search){
+                        list = list.filter(val => new RegExp(this.search.toLowerCase()).test(val[this.searchColumn].toLowerCase()));
                     }
                     this.totalRows = list.length;
 
                     if(this.pagination){
-                        const start = (this.pageNumber - 1) * this.pageSize, end = start + this.pageSize -1;
-                        this.list = list.filter((val,index)=>index >= start&&index <= end);
-                    }else this.list = list;
-                }else if(typeof this.data === 'string') this.remote(false);
+                        const start = (this.pageNumber - 1) * this.pageSize;
+                        const end = start + this.pageSize -1;
+                        this.list = list.filter((val,index) => index >= start && index <= end);
+                    }else{
+						this.list = list;
+					}
+                }else if(typeof this.data === 'string'){
+					this.remote();
+				}
 
-                if(this.search) this.lastSearch = this.search;
+                this.lastSearch = this.search;
                 this.highlight = -1;
             }
             this.inputFocus();
         },
         /**
          * load remote data
-         * @param init[boolean]
+         * @param initPicked[boolean]
          * true: load selected item info
          * false: load data list
          */
-        remote(init){
+        remote(initPicked = false){
             if(typeof this.data === 'string' && this.dataLoad && typeof this.dataLoad === 'function'){
                 const queryParams = this.params && Object.keys(this.params).length ?
                     JSON.parse(JSON.stringify(this.params)) : {};
                 queryParams.pageSize = this.pageSize;
                 queryParams.pageNumber = this.pageNumber;
                 if(this.sort) queryParams.orderBy = this.sort;
-                if(init && this.value){
+                if(initPicked && this.value){
                     queryParams.searchKey = this.keyField;
                     queryParams.searchValue = this.value;
                 }
@@ -220,7 +219,7 @@ export default {
                         }else{
                             const tmpObj = this.resultFormat(resp);
                             if(tmpObj && Object.keys(tmpObj).length){
-                                if(!init){//load new page data list
+                                if(!initPicked){//load new page data list
                                     this.list = tmpObj.list;
                                     this.totalRows = tmpObj.totalRow;
                                 }else this.picked = tmpObj.list;//the selected item info
@@ -254,25 +253,12 @@ export default {
         },
         findSelectionPage(){
             if(!this.multiple && this.pagination){
-                const list = this.sortedList?this.sortedList.concat():this.data.concat();
+                const list = this.sortedList?this.sortedList.slice():this.data.slice();
                 const index = list.findIndex(val => String(val[this.keyField]) === this.value);
                 if(index >= 0){
                     this.pageNumber = Math.ceil((index + 1) / this.pageSize);
                 }
             }
-        },
-        inPickedIndex(row){
-            if(!row || !Object.keys(row).length || !this.picked.length) return -1;
-            return this.picked.findIndex(val=>val[this.keyField] === row[this.keyField]);
-        },
-        inPicked(row){
-            return this.inPickedIndex(row) !== -1;
-        },
-        isChrome(){
-            return navigator.vendor !== undefined && navigator.vendor.indexOf("Google") !== -1;
-        },
-        isEdge(){
-            return navigator.userAgent.indexOf("Edge") >= 0;
         }
     }
 };

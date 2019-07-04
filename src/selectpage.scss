@@ -8,7 +8,7 @@ div.v-selectpage {
         span.sp-placeholder { color: #aaa; }
 
         &.sp-open {
-            div.sp-input, div.sp-inputs { border: 1px solid #999;color: black;border-radius: 2px; }
+            div.sp-input, div.sp-inputs { border: 1px solid #aaa;color: black;border-radius: 2px; }
             div.sp-input { background-color: #F9F9F9; }
         }
 
@@ -26,7 +26,7 @@ div.v-selectpage {
             color: #555;
             background-color: #fff;
             background-image: none;
-            border: 1px solid #ccc;
+            border: 1px solid #CED4DA;
             border-radius: 4px;
             -webkit-box-shadow: none;
             box-shadow: none;
@@ -54,23 +54,27 @@ div.v-selectpage {
 
             span.sp-selected-tag {
                 list-style: none;
-                padding: 0 5px;
+                padding: 3px 5px;
                 margin: 0 3px 3px 0;
                 float: left;
                 position: relative;
                 box-sizing: content-box;
-                border: 1px solid #aaa;
+                //border: 1px solid #ccc;
                 border-radius: 3px;
                 background-color: #E4EAEE; /*#EFEFEF;*/
                 cursor: pointer;
                 max-width: 100%;
-                box-shadow: 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-                height: 24px;
-                line-height: 24px;
+                //box-shadow: 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+                //height: 24px;
+                line-height: 1.42;
                 -webkit-transition: all .5s cubic-bezier(.175, .885, .32, 1);
                 transition: all .5s cubic-bezier(.175, .885, .32, 1);
 
-                &:hover { background-color: white;border: 1px solid #D0D0D0;box-shadow: 0 2px 7px rgba(0, 0, 0, .1); }
+                &:hover {
+                    background-color: white;
+                    //border: 1px solid #D0D0D0;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+                }
 
                 i {
                     font-size: 14px;color: #aaa;margin-left: 3px;
@@ -191,30 +195,25 @@ div.sp-header {
     font-family: $font;
     padding: 10px;
     background-color: white;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
 
     .sp-search-input {
         display: block;
-        border: 1px solid #e6e6e6;
+        border: 0;
+        background-color: #eee;
         margin: 0 !important;
         width: 100%;
         font-size: 14px;
         line-height: 1.43;
-        min-height: 20px;
         padding: 4px 6px;
         box-sizing: border-box;
         outline: none !important;
-        height: 30px;
         border-radius: 2px;
 
         will-change: border-color, box-shadow, background-color;
         transition: border-color .3s ease-in-out, box-shadow .3s ease-in-out, background-color .3s ease-in-out;
 
         &:focus {
-            border: 1px solid #ccc;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
-            background-color: white;
+            background-color: #f5f5f5;
         }
     }
 }
@@ -241,7 +240,7 @@ div.sp-result-area {
             color: #666;
             cursor: pointer;
 
-            &.sp-over { background-color: #eee /*#53A4EA #2196F3*/!important;color: black !important;cursor: pointer; }
+            &.sp-over { background-color: #F6F8FA /*#53A4EA #2196F3*/!important;color: black !important;cursor: pointer; }
             &.sp-selected { color: #ccc;cursor: default; }
             &.sp-rtl { direction: rtl;text-align: right; }
         }
@@ -250,11 +249,12 @@ div.sp-result-area {
     div.sp-result-message { font-family: $font;padding: 10px;text-align: center; }
     table.sp-table {
         width: 100%;
-        td, th { font-size: 14px;line-height: 1.43; border: 0 !important;color: #666; }
-        th { background-color: #F5F5F5;padding: 5px 8px; }
-        td { padding: 4px 8px; }
+        border-spacing: 0;
+        td, th { font-size: 14px;line-height: 1.43; border: 0 !important; }
+        th { padding: 0 8px 5px;font-weight: 600;font-size: 15px;color: #333;text-align: left; }
+        td { padding: 4px 8px;color: #666; }
         tbody tr {
-            &.sp-over td { background-color: #eee/*2196F3*/ !important;color: black !important;cursor: pointer; }
+            &.sp-over td { background-color: #F6F8FA/*2196F3*/ !important;color: black !important;cursor: pointer; }
             &.sp-selected td { color: #ccc;cursor: default; }
         }
         thead tr.sp-rtl th, tbody tr.sp-rtl td { direction: rtl;text-align: right; }
@@ -271,7 +271,7 @@ div.sp-pagination {
     text-align: center;
     font-size: 14px;
 
-    div.sp-page-info { height: 28px;line-height: 28px;font-weight: 400; }
+    div.sp-page-info { height: 28px;line-height: 28px;font-weight: 400;color: #333; }
 
     ul {
         position: absolute;

@@ -13,6 +13,7 @@ export default {
                 'full-width': true,
                 'width': this.width,
                 'disabled': this.disabled,
+				'border': false,
                 'align': this.rtl ? 'right' : 'left'
             },
             class: 'v-selectpage',
@@ -69,7 +70,7 @@ export default {
             };
 
             if(this.multiple){
-                header.push(genBtn(this.i18n.select_all, 'sp-select-all-btn', 'sp-icon-select-all', ()=>{this.pickPage(true)}));
+                header.push(genBtn(this.i18n.select_all, 'sp-select-all-btn', 'sp-icon-select-all', ()=>{this.pickPage()}));
                 header.push(genBtn(this.i18n.unselect_all, 'sp-remove-all-btn', 'sp-icon-unselect-all', ()=>{this.pickPage(false)}));
             }
             header.push(genBtn(this.i18n.clear_all, 'sp-clear-all-btn', 'sp-icon-clear', this.remove));

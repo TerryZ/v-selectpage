@@ -122,10 +122,13 @@ export default {
     },
     computed: {
         headerTitle(){
-            const headerStr = this.i18n.items_selected,
-                replace = val => headerStr.replace('selected_count', `<b>${val}</b>`);
-            if(this.picked.length) return this.multiple?replace(this.picked.length):this.getResults();
-            else return this.title;
+            const headerStr = this.i18n.items_selected;
+            const replace = val => headerStr.replace('selected_count', `<b>${val}</b>`);
+            if(this.picked.length){
+                return this.multiple ? replace(this.picked.length) : this.getResults();
+            }else{
+                return this.title;
+            }
         },
         placeholderString(){
             return this.placeholder || this.i18n.placeholder;
@@ -138,21 +141,6 @@ export default {
         }
     },
     watch: {
-        picked(val){
-            if(this.message && this.maxSelectLimit && val.length < this.maxSelectLimit) this.message = '';
-			this.$nextTick(()=>{
-				if(this.show){
-                    this.adjust();
-                    this.inputFocus();
-                }else{
-                    if(this.multiple && !val.length){
-                        this.$refs.drop.visible();
-                    }
-                }
-			});
-            this.$emit('input', this.keys);
-            this.$emit('values', this.picked.concat());
-        },
         value(val) {
             // console.log('value:',val)
             // console.log('keys:',this.keys)
@@ -167,6 +155,22 @@ export default {
             if(this.picked.length) this.picked = [];
             else this.initSelection();
         },
+		picked(val){
+        	// console.log('picked watch')
+			if(this.message && this.maxSelectLimit && val.length < this.maxSelectLimit) this.message = '';
+			this.$nextTick(()=>{
+				if(this.show){
+					this.adjust();
+					this.inputFocus();
+				}else{
+					if(this.multiple && !val.length){
+						this.$refs.drop.visible();
+					}
+				}
+			});
+			this.$emit('input', this.keys);
+			this.$emit('values', this.picked.slice());
+		},
         pageNumber(val, oldVal){
             if(val !== oldVal) this.populate();
         },
