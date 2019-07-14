@@ -17,7 +17,7 @@ A powerful selector for <strong>Vue2</strong>, list or table view of pagination,
 
 
 
-<br><br><br><br><br>
+<br><br>
 
 
 
@@ -31,7 +31,7 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
 **If you think this project is helpful, please star it.**
 
-<br><br>
+<br>
 
 ## Features
 
@@ -44,7 +44,7 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 - list view and table view to show content
 - custom row content render
 
-<br><br>
+<br>
 
 ## Browsers support
 
@@ -52,7 +52,7 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 | --------- | --------- | --------- | --------- | --------- |
 | IE9, IE10, IE11, Edge | Firefox 18+ | Chrome 49+ | Safari 10+ | Opera 36+ |
 
-<br><br>
+<br>
 
 ## Plugin preview
 
@@ -68,7 +68,7 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
 ![table](https://terryz.github.io/image/v-selectpage/v-selectpage-table.png)
 
-<br><br>
+<br>
 
 ## Vue plugin series
 
@@ -86,7 +86,7 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 | [v-playback](https://github.com/TerryZ/v-playback) | [![npm version](https://img.shields.io/npm/v/v-playback.svg)](https://www.npmjs.com/package/v-playback) | A Vue2 plugin to make video play easier |
 | [v-selectmenu](https://github.com/TerryZ/v-selectmenu) | [![npm version](https://img.shields.io/npm/v/v-selectmenu.svg)](https://www.npmjs.com/package/v-selectmenu) | A simple, easier and highly customized menu solution |
 
-<br><br>
+<br>
 
 ## Install
 
@@ -104,7 +104,7 @@ Vue.use(vSelectPage, { global config options });
 
 <a href="https://nodei.co/npm/v-selectpage/"><img src="https://nodei.co/npm/v-selectpage.png"></a>
 
-<br><br>
+<br>
 
 ## Deploy on your component
 
