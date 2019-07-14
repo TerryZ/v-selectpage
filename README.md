@@ -29,8 +29,6 @@ Explorer on
 
 The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
-**If you think this project is helpful, please star it.**
-
 <br>
 
 ## Features
