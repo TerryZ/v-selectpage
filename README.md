@@ -1,21 +1,23 @@
 <br><br>
 
-<h3 align="center">v-selectpage</h3>
-
-<br>
-
 <p align="center"><img src="https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png" alt="v-selectpage" ></p>
-
-<p align="center">
-  A powerful selector for <strong>Vue2</strong>, list or table view of pagination, <br>
-  use tags for multiple selection, i18n and server side resources supports
-</p>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/v-selectpage"><img src="https://img.shields.io/npm/v/v-selectpage.svg"></a>
   <a href="https://mit-license.org/"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"></a>
   <a href="https://www.npmjs.com/package/v-selectpage"><img src="https://img.shields.io/npm/dy/v-selectpage.svg"></a>
 </p>
+
+<br>
+
+<h1 align="center">v-selectpage</h3>
+
+<p align="center">
+  A powerful selector for <strong>Vue2</strong>, list or table view of pagination, <br>
+  use tags for multiple selection, i18n and server side resources supports
+</p>
+
+
 
 <br><br><br><br><br>
 
