@@ -10,12 +10,10 @@
 
 <br>
 
-<h1 align="center">v-selectpage</h3>
+<h1 align="center">v-selectpage</h1>
 
-<p align="center">
-  A powerful selector for <strong>Vue2</strong>, list or table view of pagination, <br>
-  use tags for multiple selection, i18n and server side resources supports
-</p>
+A powerful selector for <strong>Vue2</strong>, list or table view of pagination, use tags for multiple selection, i18n and server side resources supports
+
 
 
 
