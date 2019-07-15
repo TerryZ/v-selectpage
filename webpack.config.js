@@ -1,6 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
-
+//var nodeExternals = require('webpack-node-externals');
+var isCoverage = process.env.NODE_ENV === 'coverage';
+//externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -13,6 +15,11 @@ module.exports = {
   },
   module: {
     rules: [
+      isCoverage ? {
+          test: /\.(js|ts)/,
+          include: path.resolve('src'), // instrument only testing sources with Istanbul, after ts-loader runs
+          loader: 'istanbul-instrumenter-loader'
+      }: [],
       {
         test: /\.css$/,
         use: [
@@ -80,6 +87,7 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
+  
   devServer: {
     historyApiFallback: true,
     noInfo: true,
@@ -88,7 +96,7 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: isCoverage?'inline-cheap-module-source-map':'#eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
