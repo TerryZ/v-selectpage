@@ -3,6 +3,7 @@
 <p align="center"><img src="https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png" alt="v-selectpage" ></p>
 
 <p align="center">
+  <a href="https://circleci.com/gh/TerryZ/v-selectpage"><img src="https://circleci.com/gh/TerryZ/v-selectpage.svg?style=svg"></a>
   <a href="https://www.npmjs.com/package/v-selectpage"><img src="https://img.shields.io/npm/v/v-selectpage.svg"></a>
   <a href="https://mit-license.org/"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"></a>
   <a href="https://www.npmjs.com/package/v-selectpage"><img src="https://img.shields.io/npm/dy/v-selectpage.svg"></a>
