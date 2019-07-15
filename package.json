@@ -7,7 +7,8 @@
   "main": "dist/v-selectpage.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "test:unit": "mocha-webpack --webpack-config webpack.config.js --require tests/unit/setup.js tests/unit/**/*.spec.js"
   },
   "dependencies": {
     "v-dropdown": "^2.0.6",
@@ -35,13 +36,19 @@
     "not ie <= 8"
   ],
   "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.29",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
+    "chai": "^4.2.0",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
+    "jsdom": "^15.1.1",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^6.1.4",
+    "mocha-webpack": "^1.1.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^6.0.7",
     "vue-loader": "^13.7.3",
