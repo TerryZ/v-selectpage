@@ -28,7 +28,7 @@ jobs:
 
       - run: npm install
       - run: npm rebuild node-sass
-      - run: npm install -g codecov
+      - run: npm install -g codecov sudo
 
       - save_cache:
           paths:
