@@ -4,6 +4,7 @@
 
 <p align="center">
   <a href="https://circleci.com/gh/TerryZ/v-selectpage"><img src="https://circleci.com/gh/TerryZ/v-selectpage.svg?style=svg"></a>
+  <a href="https://codecov.io/gh/TerryZ/v-selectpage"><img src="https://codecov.io/gh/TerryZ/v-selectpage/branch/master/graph/badge.svg" /></a>
   <a href="https://www.npmjs.com/package/v-selectpage"><img src="https://img.shields.io/npm/v/v-selectpage.svg"></a>
   <a href="https://mit-license.org/"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"></a>
   <a href="https://www.npmjs.com/package/v-selectpage"><img src="https://img.shields.io/npm/dy/v-selectpage.svg"></a>
