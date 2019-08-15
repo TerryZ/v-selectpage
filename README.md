@@ -55,13 +55,13 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
 ![table](https://terryz.github.io/image/v-selectpage/v-selectpage-table.png)
 
-## Install
+## Installation
 
 ``` bash
 npm i v-selectpage --save
 ```
 
-Include plugin in your `main.js` file.
+Include and install plugin in your `main.js` file.
 
 ```js
 import Vue from 'vue'
@@ -73,8 +73,6 @@ Vue.use(vSelectPage, { global config options });
 
 
 ## Deploy on your component
-
-template code
 
 ```vue
 <template>
