@@ -143,7 +143,7 @@ export default {
 		placeholder: 'Sélectionnez une option',
 		items_selected: 'selected_count éléments sélectionnés'
 	},
-	pt_br: {// Portugues-brazil
+	pt_br: {// Portuguese-Brazil
 		next: 'Página seguinte',
 		prev: 'Página anterior',
 		first: 'Primera página',
