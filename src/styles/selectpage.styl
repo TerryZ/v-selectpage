@@ -1,0 +1,338 @@
+@import "./icons.styl"
+
+fonts = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+
+div.v-selectpage
+  font-family fonts
+  box-sizing border-box
+  div.sp-input-container
+    position relative
+    span.sp-placeholder
+      color #aaa
+    &.sp-open
+      div.sp-input
+      div.sp-inputs
+        border 1px solid #aaa
+        color black
+        border-radius 2px
+      div.sp-input
+        background-color #F9F9F9
+    &.sp-disabled
+      div.sp-input
+      div.sp-inputs
+        cursor not-allowed
+        color #aaa
+        background-color #eee
+      div.sp-button
+        cursor not-allowed
+    div.sp-base
+      display block
+      height 34px
+      padding 6px 12px
+      font-size 14px
+      line-height 1.42857143
+      color #555
+      background-color #fff
+      background-image none
+      border 1px solid #CED4DA
+      border-radius 4px
+      -webkit-box-shadow none
+      box-shadow none
+      will-change border-color, box-shadow, background-color
+      -webkit-transition border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s, background-color ease-in-out .3s
+      -o-transition border-color ease-in-out .15s, box-shadow ease-in-out .15s, background-color ease-in-out .3s
+      transition border-color ease-in-out .15s, box-shadow ease-in-out .15s, background-color ease-in-out .3s
+      box-sizing border-box
+    div.sp-input
+      background-color white
+      cursor pointer
+      color #333
+      opacity 1
+    div.sp-inputs
+      padding 3px 24px 0 3px
+      position relative
+      overflow hidden
+      clear both
+      cursor pointer
+      list-style none
+      height auto
+      min-height 34px
+      font-size 14px
+      span.sp-placeholder
+        margin-left 9px
+        margin-top 3px
+        display inline-block
+      span.sp-selected-tag
+        list-style none
+        padding 3px 8px
+        margin 0 3px 3px 0
+        float left
+        position relative
+        box-sizing content-box
+        //border 1px solid #ccc
+        border-radius 3px
+        background-color #E4EAEE /*#EFEFEF*/
+        cursor pointer
+        max-width 100%
+        //box-shadow 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05)
+        //height 24px
+        line-height 1.42
+        -webkit-transition all .5s cubic-bezier(.175, .885, .32, 1)
+        transition all .5s cubic-bezier(.175, .885, .32, 1)
+        &:hover
+          background-color white
+          box-shadow 0 0 10px rgba(0, 0, 0, .15)
+          //border 1px solid #D0D0D0
+        i
+          font-size 14px
+          color #aaa
+          margin-left 3px
+          &:hover
+            color black
+    div.sp-clear
+      position absolute
+      top 0
+      right 25px
+      display block
+      width auto
+      height 100%
+      cursor pointer
+      font-size 20px
+      color #999
+      font-weight 600
+      margin 0
+      padding 4px 0 0 0
+      box-sizing border-box
+      line-height 1
+      i
+        font-size 12px
+      &:hover
+        color black
+        font-weight bold
+    div.sp-button
+      display inline-block
+      border-bottom-right-radius 0
+      border-top-right-radius 0
+      cursor pointer
+      text-align center
+      box-sizing border-box
+      border 0
+      width 24px
+      height 100%
+      padding 0
+      vertical-align middle
+      line-height 100%
+      position absolute
+      top 0
+      right 0
+      span.sp-caret
+        position absolute
+        top 50%
+        right 12px
+        margin-top -1px
+        vertical-align middle
+        display inline-block
+        width 0
+        height 0
+        margin-left 2px
+        border-top 4px dashed
+        /*border-top 4px solid\9*/
+        border-right 4px solid transparent
+        border-left 4px solid transparent
+        transition transform .2s ease
+      &.open span.sp-caret
+        transform rotate(180deg)
+div.sp-header
+  background-color white
+  font-family fonts
+  & > h3
+    margin 6px 100px 0 10px
+    text-align left
+    height 18px
+    color #24292e
+    font-size 16px
+    font-weight 500
+    white-space nowrap
+  button
+    position absolute
+    padding 0
+    cursor pointer
+    background 0 0
+    border 0
+    outline none
+    line-height 100%
+    color #999
+    top 3px
+    font-size 21px
+    &.sp-close-btn
+      right 9px
+    &.sp-remove-all-btn
+      right 55px
+    &.sp-select-all-btn
+      right 81px
+    &.sp-clear-all-btn
+      right 31px
+    &:hover
+      color black
+.sp-search
+  font-family fonts
+  padding 10px
+  background-color white
+  .sp-search-input
+    display block
+    border 0
+    background-color #eee
+    margin 0 !important
+    width 100%
+    font-size 14px
+    line-height 1.43
+    padding 4px 6px
+    box-sizing border-box
+    outline none !important
+    border-radius 2px
+    will-change border-color, box-shadow, background-color
+    transition border-color .3s ease-in-out, box-shadow .3s ease-in-out, background-color .3s ease-in-out
+    &:focus
+      background-color #f5f5f5
+    &.sp-search-input--rtl
+      direction rtl
+div.sp-result-area
+  background-color white
+  min-width 300px
+  max-height 320px
+  overflow-y auto
+  font-family fonts
+  ul.sp-results
+    background-color white
+    list-style none
+    margin 0
+    padding 0
+    li
+      height auto !important
+      line-height 1.43
+      margin 0
+      overflow hidden
+      padding 3px 10px
+      position relative
+      text-align left
+      white-space nowrap
+      font-size 14px
+      color #666
+      cursor pointer
+      &.sp-over
+        background-color #F6F8FA /*#53A4EA #2196F3*/!important
+        color black !important
+        cursor pointer
+      &.sp-selected
+        color #ccc
+        cursor default
+      &.sp-rtl
+        direction rtl
+        text-align right
+  div.sp-result-message
+    font-family fonts
+    padding 10px
+    text-align center
+  table.sp-table
+    width 100%
+    border-spacing 0
+    td
+    th
+      font-size 14px
+      line-height 1.43
+      border 0 !important
+    th
+      padding 0 8px 5px
+      font-weight 600
+      font-size 15px
+      color #333
+      text-align left
+    td
+      padding 4px 8px
+      color #666
+    tbody tr
+      &.sp-over td
+        background-color #F6F8FA/*2196F3*/ !important
+        color black !important
+        cursor pointer
+      &.sp-selected td
+        color #ccc
+        cursor default
+    thead tr.sp-rtl th
+    tbody tr.sp-rtl td
+      direction rtl
+      text-align right
+div.sp-pagination
+  font-family fonts
+  padding 0
+  background-color white
+  position relative
+  border-bottom-left-radius 2px
+  border-bottom-right-radius 2px
+  text-align center
+  font-size 14px
+  div.sp-page-info
+    height 28px
+    line-height 28px
+    font-weight 400
+    color #333 
+  ul
+    position absolute
+    top 0
+    padding 0
+    margin 0
+    text-align left
+    border-bottom-left-radius 2px
+    border-bottom-right-radius 2px
+    width 100%
+    li
+      display inline-block
+      text-align center
+      a
+        display inline-block
+        padding 7px 7px 5px 7px
+        font-size 14px
+        color #6a737d
+        text-decoration none
+        cursor pointer
+        height 28px
+        line-height 1
+        background transparent
+        &:hover
+          color black
+          font-weight bold
+      &.sp-right
+        float right
+      &first-child
+        border-bottom-left-radius 2px
+      &last-child
+        border-bottom-right-radius 2px
+      &.sp-disabled a
+        color #ddd
+        font-weight normal
+        /*cursor not-allowed*/
+div.sp-message
+  font-family fonts
+  padding 10px
+  position relative
+  background-color #E4EAEE
+  color black
+  i
+    position absolute
+    top 6px
+    font-size 22px
+  span
+    margin-left 30px
+    font-size 16px
+.sp-message-slide-enter-active
+.sp-message-slide-leave-active
+  transition opacity 300ms
+.sp-message-slide-enter
+.sp-message-slide-leave-to
+  opacity 0
+.sp-message-slide-enter-to
+.sp-message-slide-leave
+  opacity 1
+
+
+

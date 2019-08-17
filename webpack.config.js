@@ -19,7 +19,7 @@ module.exports = {
           test: /\.(js|ts)/,
           include: path.resolve('src'), // instrument only testing sources with Istanbul, after ts-loader runs
           loader: 'istanbul-instrumenter-loader'
-      }: [],
+      }: {},
       {
         test: /\.css$/,
         use: [
@@ -33,6 +33,14 @@ module.exports = {
           'vue-style-loader',
           'css-loader',
           'sass-loader'
+        ],
+      },
+      {
+        test: /\.styl$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'stylus-loader'
         ],
       },
       {

@@ -1,3 +1,4 @@
+// require("@babel/register");
 require('jsdom-global')();
 /**
  * this line code is to fix 'TypeError: Super expression must either be null or a function' issues

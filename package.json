@@ -1,7 +1,7 @@
 {
   "name": "v-selectpage",
   "description": "A powerful selector for Vue2, list or table view of pagination, use tags for multiple selection, i18n and server side resources supports",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "author": "TerryZ <terry5@foxmail.com>",
   "license": "MIT",
   "main": "dist/v-selectpage.js",
@@ -12,8 +12,7 @@
     "cover": "cross-env NODE_ENV=coverage nyc --reporter=lcov --reporter=text npm run test:unit"
   },
   "dependencies": {
-    "v-dropdown": "^2.0.6",
-    "vue": "^2.6.10"
+    "v-dropdown": "^2.0.6"
   },
   "keywords": [
     "front-end",
@@ -40,6 +39,7 @@
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-dynamic-import-node": "^2.3.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
@@ -55,6 +55,9 @@
     "node-sass": "^4.12.0",
     "nyc": "^14.1.1",
     "sass-loader": "^6.0.7",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vue": "^2.6.10",
     "vue-loader": "^13.7.3",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^3.6.0",
