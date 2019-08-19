@@ -160,5 +160,23 @@ export default {
     max_selected: 'Máximo permitido max_selected_limit itens',
     placeholder: 'Selecione uma opção',
     items_selected: 'selected_count itens selecionados'
-  }
+  },
+  pl: { // Polish
+    next: 'Następna',
+    prev: 'Poprzednia',
+    first: 'Pierwsza',
+    last: 'Ostatnia',
+    close_btn: 'Zamknij (ESC)',
+    loading: 'Ładowanie...',
+    page_info: 'Strona page_num/page_count ( row_count rekordów )',
+    not_found: 'Nic nie znaleziono',
+    server_error: 'Wystąpił problem w połączeniu z serwerem.',
+    clear: 'Wyczyść',
+    select_all: 'Zaznacz wszystko',
+    unselect_all: 'Usuń zaznaczenie',
+    clear_all: 'Usuń wszystkie zaznaczone',
+    max_selected: 'Możesz zaznaczyć maksymalnie max_selected_limit',
+    placeholder: 'Wybierz z listy',
+    items_selected: 'selected_count zaznaczonych'
+  },
 }
