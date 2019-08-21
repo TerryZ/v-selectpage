@@ -1,20 +1,6 @@
-<br><br>
+# [v-selectpage](https://terryz.github.io/vue/#/selectpage) &middot; [![circle ci](https://circleci.com/gh/TerryZ/v-selectpage.svg?style=svg)](https://circleci.com/gh/TerryZ/v-selectpage) [![code coverage](https://codecov.io/gh/TerryZ/v-selectpage/branch/master/graph/badge.svg)](https://codecov.io/gh/TerryZ/v-selectpage) [![npm version](https://img.shields.io/npm/v/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage) [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://mit-license.org/) [![npm download](https://img.shields.io/npm/dy/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage) [![npm version](https://img.shields.io/badge/language-Vue2-brightgreen.svg)](https://www.npmjs.com/package/v-selectpage)
 
-<p align="center"><img src="https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png" alt="v-selectpage" ></p>
-
-<p align="center">
-  <a href="https://circleci.com/gh/TerryZ/v-selectpage"><img src="https://circleci.com/gh/TerryZ/v-selectpage.svg?style=svg"></a>
-  <a href="https://codecov.io/gh/TerryZ/v-selectpage"><img src="https://codecov.io/gh/TerryZ/v-selectpage/branch/master/graph/badge.svg" /></a>
-  <a href="https://www.npmjs.com/package/v-selectpage"><img src="https://img.shields.io/npm/v/v-selectpage.svg"></a>
-  <a href="https://mit-license.org/"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"></a>
-  <a href="https://www.npmjs.com/package/v-selectpage"><img src="https://img.shields.io/npm/dy/v-selectpage.svg"></a>
-</p>
-
-<br>
-
-<h1 align="center">v-selectpage</h1>
-
-A powerful selector for <strong>Vue2</strong>, list or table view of pagination, use tags for multiple selection, i18n and server side resources supports
+A powerful selection plugin for **Vue2**, list or table view of pagination, use tags form for multiple selection, i18n and server side resources supports
 
 ## Demos and Documents
 Explorer on
@@ -37,21 +23,21 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
 ## Browsers support
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="48px" height="48px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="48px" height="48px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="48px" height="48px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="48px" height="48px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="48px" height="48px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
 | --------- | --------- | --------- | --------- | --------- |
 | IE9, IE10, IE11, Edge | Firefox 18+ | Chrome 49+ | Safari 10+ | Opera 36+ |
 
 ## Plugin preview
 
-*single selection show by list view*
+*Single selection display by list view*
 
 ![single](https://terryz.github.io/image/v-selectpage/v-selectpage-single.png)
 
-*multiple selection with tags show by list view*
+*multiple selection with tags display by list view*
 
 ![multiple](https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png)
 
-*single selection show by table view*
+*single selection display by table view*
 
 ![table](https://terryz.github.io/image/v-selectpage/v-selectpage-table.png)
 
