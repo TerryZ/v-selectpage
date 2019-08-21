@@ -2,7 +2,7 @@
 
 A powerful selection plugin for **Vue2**, list or table view of pagination, use tags form for multiple selection, i18n and server side resources supports
 
-## Demos and Documents
+## Examples and Documentations
 Explorer on
 
 - [English site](https://terryz.github.io/vue/#/selectpage)
@@ -29,15 +29,15 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
 ## Plugin preview
 
-*Single selection display by list view*
+*List view for Single selection*
 
 ![single](https://terryz.github.io/image/v-selectpage/v-selectpage-single.png)
 
-*multiple selection with tags display by list view*
+*List view for multiple selection with tags form*
 
 ![multiple](https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png)
 
-*single selection display by table view*
+*Table view for single selection*
 
 ![table](https://terryz.github.io/image/v-selectpage/v-selectpage-table.png)
 
