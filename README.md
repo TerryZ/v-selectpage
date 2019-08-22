@@ -43,6 +43,8 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
 ## Installation
 
+<a href="https://nodei.co/npm/v-selectpage/"><img src="https://nodei.co/npm/v-selectpage.png"></a>
+
 ``` bash
 npm i v-selectpage --save
 ```
@@ -54,9 +56,6 @@ import Vue from 'vue'
 import vSelectPage from 'v-selectpage';
 Vue.use(vSelectPage, { global config options });
 ```
-
-<a href="https://nodei.co/npm/v-selectpage/"><img src="https://nodei.co/npm/v-selectpage.png"></a>
-
 
 ## Deploy on your component
 
