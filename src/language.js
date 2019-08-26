@@ -179,4 +179,22 @@ export default {
     placeholder: 'Wybierz z listy',
     items_selected: 'selected_count zaznaczonych'
   },
+  nl: { // Dutch
+    next: 'Volgende pagina',
+    prev: 'Vorige pagina',
+    first: 'Eerste pagina',
+    last: 'Laatste pagina',
+    close_btn: 'Sluiten (Esc toets)',
+    loading: 'laden...',
+    page_info: 'Pagina page_num/page_count ( row_count items )',
+    not_found: 'Niet gevonden',
+    server_error: 'Er is een fout opgetreden tijdens het verbinden met de server',
+    clear: 'Wissen',
+    select_all: 'Selecteer huidige pagina',
+    unselect_all: 'Wis huidige pagina',
+    clear_all: 'Wis selectie',
+    max_selected: 'Je kunt maar max_selected_limit items selecteren',
+    placeholder: 'Kies een optie',
+    items_selected: 'selected_count Items geselecteerd'
+  },
 }
