@@ -3,7 +3,8 @@
 A powerful selection plugin for **Vue2**, list or table view of pagination, use tags form for multiple selection, i18n and server side resources supports
 
 ## Examples and Documentation
-Explorer on
+
+Live Examples on [CodePen](https://codepen.io/terry05/pen/wXNKOK), more examples and documentation please visit below sites
 
 - [English site](https://terryz.github.io/vue/#/selectpage)
 - [国内站点](https://terryz.gitee.io/vue/#/selectpage)
