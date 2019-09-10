@@ -42,20 +42,6 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 | --------- | --------- | --------- | --------- | --------- |
 | IE9, IE10, IE11, Edge | Firefox 18+ | Chrome 49+ | Safari 10+ | Opera 36+ |
 
-## Plugin preview
-
-*List view for Single selection*
-
-![single](https://terryz.github.io/image/v-selectpage/v-selectpage-single.png)
-
-*List view for multiple selection with tags form*
-
-![multiple](https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png)
-
-*Table view for single selection*
-
-![table](https://terryz.github.io/image/v-selectpage/v-selectpage-table.png)
-
 ## Installation
 
 <a href="https://nodei.co/npm/v-selectpage/"><img src="https://nodei.co/npm/v-selectpage.png"></a>
@@ -72,7 +58,7 @@ import vSelectPage from 'v-selectpage';
 Vue.use(vSelectPage, { global config options });
 ```
 
-## Deploy on your component
+## Usage
 
 ```vue
 <template>
@@ -94,6 +80,20 @@ export default {
 }
 </script>
 ```
+
+## Plugin preview
+
+*List view for Single selection*
+
+![single](https://terryz.github.io/image/v-selectpage/v-selectpage-single.png)
+
+*List view for multiple selection with tags form*
+
+![multiple](https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png)
+
+*Table view for single selection*
+
+![table](https://terryz.github.io/image/v-selectpage/v-selectpage-table.png)
 
 ## Dependenics
 
