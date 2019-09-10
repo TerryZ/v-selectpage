@@ -17,6 +17,8 @@ A powerful selection plugin for **Vue2**, list or table view of pagination, use 
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://mit-license.org/)
 [![language](https://img.shields.io/badge/language-Vue2-brightgreen.svg)](https://www.npmjs.com/package/v-selectpage)
 
+<br><br><br>
+
 ## Examples and Documentation
 
 Live Examples on [CodePen](https://codepen.io/terry05/pen/wXNKOK), more examples and documentation please visit below sites
