@@ -1,6 +1,20 @@
+<a href="https://terryz.github.io/vue/#/selectpage" target="_blank">
+  <img src="https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png" alt="SelectPage" align="right" valign="top" >
+</a>
+
+<!--
 # [v-selectpage](https://terryz.github.io/vue/#/selectpage) &middot; [![circle ci](https://circleci.com/gh/TerryZ/v-selectpage.svg?style=svg)](https://circleci.com/gh/TerryZ/v-selectpage) [![code coverage](https://codecov.io/gh/TerryZ/v-selectpage/branch/master/graph/badge.svg)](https://codecov.io/gh/TerryZ/v-selectpage) [![npm version](https://img.shields.io/npm/v/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage) [![npm download](https://img.shields.io/npm/dy/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage) [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://mit-license.org/) [![language](https://img.shields.io/badge/language-Vue2-brightgreen.svg)](https://www.npmjs.com/package/v-selectpage)
+-->
+
+# [v-selectpage](https://terryz.github.io/vue/#/selectpage)
 
 A powerful selection plugin for **Vue2**, list or table view of pagination, use tags form for multiple selection, i18n and server side resources supports
+
+[![circle ci](https://circleci.com/gh/TerryZ/v-selectpage.svg?style=svg)](https://circleci.com/gh/TerryZ/v-selectpage)
+[![code coverage](https://codecov.io/gh/TerryZ/v-selectpage/branch/master/graph/badge.svg)](https://codecov.io/gh/TerryZ/v-selectpage) [![npm version](https://img.shields.io/npm/v/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage)
+[![npm download](https://img.shields.io/npm/dy/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage)
+[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://mit-license.org/)
+[![language](https://img.shields.io/badge/language-Vue2-brightgreen.svg)](https://www.npmjs.com/package/v-selectpage)
 
 ## Examples and Documentation
 
