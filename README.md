@@ -57,8 +57,20 @@ Include and install plugin in your `main.js` file.
 
 ```js
 import Vue from 'vue'
-import vSelectPage from 'v-selectpage';
-Vue.use(vSelectPage, { global config options });
+import vSelectPage from 'v-selectpage'
+Vue.use(vSelectPage, { global config options })
+```
+
+You also can import `v-selectpage` as a local component
+
+```js
+import { SelectPage } from 'v-selectpage'
+
+export default {
+  components: {
+    'v-selectpage': SelectPage
+  }
+}
 ```
 
 ## Usage
