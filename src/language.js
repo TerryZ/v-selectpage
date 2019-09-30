@@ -125,6 +125,24 @@ export default {
     placeholder: 'Selectează o înregistrare',
     items_selected: 'selected_count înregistrări selectate'
   },
+  ru: { // Russian
+    next: 'Вперед',
+    prev: 'Назад',
+    first: 'В начало',
+    last: 'В конец',
+    close_btn: 'Закрыть (Esc)',
+    loading: 'загрузка...',
+    page_info: 'Стр. page_num/page_count (всего - row_count)',
+    not_found: 'Нет данных',
+    server_error: 'Ошибка загрузки данных',
+    clear: 'Очистить',
+    select_all: 'Выбрать все',
+    unselect_all: 'Сбросить все',
+    clear_all: 'Очистить выбранное',
+    max_selected: 'Нельзя выбрать более max_selected_limit значений',
+    placeholder: 'Выберите значение',
+    items_selected: 'selected_count - выбрано'
+  },
   fr: { // French
     next: 'Page suivante',
     prev: 'Page précédente',
