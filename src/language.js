@@ -215,4 +215,22 @@ export default {
     placeholder: 'Kies een optie',
     items_selected: 'selected_count Items geselecteerd'
   },
+  tw: { // Traditional Chinese
+    next: '下一頁',
+    prev: '上一頁',
+    first: '首頁',
+    last: '尾頁',
+    close_btn: '關閉 (Esc鍵)',
+    loading: '讀取中...',
+    page_info: '第 page_num/page_count 頁( 共 row_count 條記錄 )',
+    not_found: '無查詢結果',
+    server_error: '連接到服務器時發生錯誤！',
+    clear: '清除內容',
+    select_all: '選擇當前頁項目',
+    unselect_all: '取消選擇當前頁項目',
+    clear_all: '清除全部已選擇項目',
+    max_selected: '最多只能選擇 max_selected_limit 個項目',
+    placeholder: '請選擇一個項目',
+    items_selected: '已選擇 selected_count 個項目'
+  }
 }
