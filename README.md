@@ -96,8 +96,8 @@ Include and install plugin in your `main.js` file.
 
 ```js
 import Vue from 'vue'
-import vSelectPage from 'v-selectpage'
-Vue.use(vSelectPage, { global config options })
+import SelectPage from 'v-selectpage'
+Vue.use(SelectPage, { global config options })
 ```
 
 You also can import `v-selectpage` as a local component
