@@ -232,5 +232,23 @@ export default {
     max_selected: '最多只能選擇 max_selected_limit 個項目',
     placeholder: '請選擇一個項目',
     items_selected: '已選擇 selected_count 個項目'
+  },
+  tr: { // Turkish
+    next: 'Sonraki',
+    prev: 'Önceki',
+    first: 'İlk',
+    last: 'Son',
+    close_btn: 'Kapat (Esc)',
+    loading: 'yükleniyor...',
+    page_info: 'Sayfa page_num/page_count ( row_count kayıt )',
+    not_found: 'Bulunamadı',
+    server_error: 'Servera bağlanılamadı',
+    clear: 'İçeriği temizle',
+    select_all: 'Tüm sayfayı seç',
+    unselect_all: 'Tüm sayfayı bırak',
+    clear_all: 'Tüm seçilenleri bırak',
+    max_selected: 'Sadece max_selected_limit kadar seçim yapabilirsin.',
+    placeholder: 'Seçim yapınız.',
+    items_selected: 'selected_count seçildi.'
   }
 }
