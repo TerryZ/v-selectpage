@@ -59,7 +59,7 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 ## Features
 
 - show content by pagination
-- i18n support, provide languages:
+- i18n support, provided languages:
   - Chinese
   - English
   - Japanese
