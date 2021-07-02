@@ -30,6 +30,10 @@
     "tags",
     "multiple"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TerryZ/v-selectpage.git"
+  },    
   "browserslist": [
     "> 1%",
     "last 2 versions",
