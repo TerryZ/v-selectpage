@@ -1,4 +1,0 @@
-{
-  "presets": ["stage-3","es2015"],
-  "plugins": ["dynamic-import-node"]
-}

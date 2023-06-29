@@ -5,9 +5,13 @@
 version: 2
 jobs:
   build:
+    branches:
+      only: master
+
     docker:
       # specify the version you desire here
-      - image: circleci/node:8-browsers
+      # - image: circleci/node:12.22-browsers
+      - image: cimg/node:16.17.0-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -27,7 +31,7 @@ jobs:
             - v1-dependencies-
 
       - run: npm install
-      - run: npm rebuild node-sass
+      # - run: npm rebuild node-sass
       - run: sudo npm install -g codecov
 
       - save_cache:
@@ -36,5 +40,5 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm run cover
+      - run: npm run coverage
       - run: codecov
