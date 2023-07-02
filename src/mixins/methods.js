@@ -199,7 +199,8 @@ export default {
     remote (initPicked = false) {
       if (typeof this.data === 'string' && this.dataLoad && typeof this.dataLoad === 'function') {
         const queryParams = this.params && Object.keys(this.params).length
-          ? JSON.parse(JSON.stringify(this.params)) : {}
+          ? JSON.parse(JSON.stringify(this.params))
+          : {}
         queryParams.pageSize = this.pageSize
         queryParams.pageNumber = this.pageNumber
         if (this.sort) queryParams.orderBy = this.sort

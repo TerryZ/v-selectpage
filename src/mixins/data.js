@@ -59,9 +59,9 @@ export default {
      * title: [string] - the title content text,
      * data: [string|function] - specify column name to load data,
      * [
-     *      {title: 'full name', data: function(row){ return row.lastName + ' ' + row.firstName; }},
-     *      {title: 'age', data: 'age'},
-     *      {title: 'birthday', data: function(row){ return someformat(row.birthday); }}
+     *   {title: 'full name', data: function(row){ return row.lastName + ' ' + row.firstName; }},
+     *   {title: 'age', data: 'age'},
+     *   {title: 'birthday', data: function(row){ return doSomeFormat(row.birthday); }}
      * ]
      */
     tbColumns: Array,
@@ -111,7 +111,7 @@ export default {
       search: '',
       lastSearch: null,
       searchColumn: null,
-      i18n: lang[this.language] || lang['cn'],
+      i18n: lang[this.language] || lang.cn,
       message: '',
       highlight: -1,
 

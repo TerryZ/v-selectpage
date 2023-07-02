@@ -1,30 +1,22 @@
-import view from '../mixins/view'
+import { h } from 'vue'
+
 export default {
   name: 'SelectPageList',
-  mixins: [view],
-  render (h) {
-    return h('ul', {
+  setup (props) {
+    return () => h('ul', {
       class: 'sp-results',
-      on: {
-        mouseleave: () => this.highlight(-1)
-      }
+      onMouseleave: () => this.highlight(-1)
     }, this.list.map((val, index) => {
       return h('li', {
-        class: this.rowClass(val, index),
         key: index,
-        attrs: {
-          title: val[this.showField] || ''
+        class: this.rowClass(val, index),
+        title: val[this.showField] || '',
+        innerHTML: this.renderCell(val),
+        onClick: e => {
+          e.stopPropagation()
+          this.rowClick(val)
         },
-        domProps: {
-          innerHTML: this.renderCell(val)
-        },
-        on: {
-          click: e => {
-            e.stopPropagation()
-            this.rowClick(val)
-          },
-          mouseenter: () => this.highlight(this.inPicked(val) ? -1 : index)
-        }
+        onMouseenter: () => this.highlight(this.inPicked(val) ? -1 : index)
       })
     }))
   }
