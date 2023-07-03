@@ -1,77 +1,68 @@
-const FIRST = 1
+import { ref, computed, h } from 'vue'
+
+import { FIRST_PAGE } from '../core/constants'
+
 export default {
   name: 'SelectPagePagination',
-  render (h) {
-    const list = []
-    /**
-     * page number generator
-     * @param classes
-     * @param title
-     * @param action
-     * @returns VNode
-     */
-    const genItem = (classes, title, action) => {
-      return h('li', {
-        class: classes,
-        attrs: {
-          title: title
-        }
-      }, [
-        h('a', {
-          attrs: { href: 'javascript:void(0);' },
-          on: { click: () => this.switchPage(action) }
-        }, [h('i', { class: `sp-iconfont sp-icon-${action}` })])
-      ])
-    }
-    list.push(genItem({ 'sp-disabled': this.value === FIRST }, this.i18n.first, 'first'))
-    list.push(genItem({ 'sp-disabled': this.value === FIRST }, this.i18n.prev, 'previous'))
-    list.push(genItem({ 'sp-disabled': this.value === this.totalPage, 'sp-right': true }, this.i18n.last, 'last'))
-    list.push(genItem({ 'sp-disabled': this.value === this.totalPage, 'sp-right': true }, this.i18n.next, 'next'))
-
-    return h('div', { class: 'sp-pagination' }, [
-      h('div', { class: 'sp-page-info' }, this.pageInfo),
-      h('ul', list)
-    ])
-  },
   props: {
-    value: {
-      type: Number,
-      default: 1
-    },
+    modelValue: { type: Number, default: FIRST_PAGE },
     pageSize: Number,
     totalRow: Number
   },
   inject: ['i18n'],
-  data () {
-    return {
-      lastNumber: -1
-    }
-  },
-  computed: {
-    pageInfo () {
-      return this.i18n.page_info
-        .replace('page_num', this.value)
-        .replace('page_count', this.totalPage)
-        .replace('row_count', this.totalRow)
-    },
-    totalPage () {
-      return Math.ceil(this.totalRow / this.pageSize)
-    }
-  },
-  methods: {
-    getPageNumber (action) {
+  emits: ['update:modelValue'],
+  setup (props, { emit }) {
+    const lastNumber = ref(-1)
+
+    const totalPage = computed(() => Math.ceil(props.totalRow / props.pageSize))
+    const pageInfo = computed(() =>
+      this.i18n.page_info
+        .replace('page_num', props.modelValue)
+        .replace('page_count', totalPage.value)
+        .replace('row_count', props.totalRow)
+    )
+
+    const getPageNumber = function (action) {
       switch (action) {
-        case 'first': return FIRST
-        case 'previous': return this.value > FIRST ? this.value - 1 : FIRST
-        case 'next': return this.value < this.totalPage ? this.value + 1 : this.totalPage
-        case 'last': return this.totalPage
+        case 'first': return FIRST_PAGE
+        case 'previous': return props.modelValue > FIRST_PAGE ? props.modelValue - 1 : FIRST_PAGE
+        case 'next': return props.modelValue < totalPage.value ? props.modelValue + 1 : totalPage.value
+        case 'last': return totalPage.value
       }
-    },
-    switchPage (action) {
-      const pageNumber = this.getPageNumber(action)
-      if (pageNumber === this.lastNumber) return
-      if (pageNumber) this.$emit('input', pageNumber)
-      this.lastNumber = pageNumber
+    }
+    const switchPage = function (action) {
+      const pageNumber = getPageNumber(action)
+      if (pageNumber === lastNumber.value) {
+        return
+      }
+      if (pageNumber) {
+        emit('update:modelValue', pageNumber)
+      }
+      lastNumber.value = pageNumber
+    }
+
+    return () => {
+      const list = []
+      const genItem = (classes, title, action) => {
+        return h('li', {
+          class: classes,
+          title
+        }, [
+          h('a', {
+            href: 'javascript:void(0)',
+            onClick: () => switchPage(action)
+          }, [h('i', { class: `sp-iconfont sp-icon-${action}` })])
+        ])
+      }
+      list.push(genItem({ 'sp-disabled': props.modelValue === FIRST_PAGE }, this.i18n.first, 'first'))
+      list.push(genItem({ 'sp-disabled': props.modelValue === FIRST_PAGE }, this.i18n.prev, 'previous'))
+      list.push(genItem({ 'sp-disabled': props.modelValue === totalPage.value, 'sp-right': true }, this.i18n.last, 'last'))
+      list.push(genItem({ 'sp-disabled': props.modelValue === totalPage.value, 'sp-right': true }, this.i18n.next, 'next'))
+
+      return h('div', { class: 'sp-pagination' }, [
+        h('div', { class: 'sp-page-info' }, pageInfo.value),
+        h('ul', list)
+      ])
     }
   }
 }

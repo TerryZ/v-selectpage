@@ -3,3 +3,5 @@ export const [
 ] = [
   37, 38, 39, 40, 9, 13, 27
 ]
+
+export const FIRST_PAGE = 1
