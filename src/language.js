@@ -4,7 +4,7 @@ export const [
   'zh-chs', 'en', 'ja', 'ar', 'es', 'es', 'de', 'ro', 'ru', 'fr', 'pt-br', 'pl', 'nl', 'zh-cht'
 ]
 
-export default {
+export const languages = {
   [ZH_CHS]: { // Chinese
     next: '下一页',
     prev: '上一页',

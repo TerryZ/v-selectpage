@@ -1,6 +1,7 @@
-import { ref, computed, h } from 'vue'
+import { ref, computed, inject, h } from 'vue'
 
 import { FIRST_PAGE } from '../core/constants'
+import { useLanguage } from '../core/helper'
 
 export default {
   name: 'SelectPagePagination',
@@ -9,14 +10,16 @@ export default {
     pageSize: Number,
     totalRow: Number
   },
-  inject: ['i18n'],
   emits: ['update:modelValue'],
   setup (props, { emit }) {
     const lastNumber = ref(-1)
 
+    const language = inject('language')
+    const lang = useLanguage(language)
+
     const totalPage = computed(() => Math.ceil(props.totalRow / props.pageSize))
     const pageInfo = computed(() =>
-      this.i18n.page_info
+      lang.pageInfo
         .replace('page_num', props.modelValue)
         .replace('page_count', totalPage.value)
         .replace('row_count', props.totalRow)
@@ -54,10 +57,10 @@ export default {
           }, [h('i', { class: `sp-iconfont sp-icon-${action}` })])
         ])
       }
-      list.push(genItem({ 'sp-disabled': props.modelValue === FIRST_PAGE }, this.i18n.first, 'first'))
-      list.push(genItem({ 'sp-disabled': props.modelValue === FIRST_PAGE }, this.i18n.prev, 'previous'))
-      list.push(genItem({ 'sp-disabled': props.modelValue === totalPage.value, 'sp-right': true }, this.i18n.last, 'last'))
-      list.push(genItem({ 'sp-disabled': props.modelValue === totalPage.value, 'sp-right': true }, this.i18n.next, 'next'))
+      list.push(genItem({ 'sp-disabled': props.modelValue === FIRST_PAGE }, lang.first, 'first'))
+      list.push(genItem({ 'sp-disabled': props.modelValue === FIRST_PAGE }, lang.prev, 'previous'))
+      list.push(genItem({ 'sp-disabled': props.modelValue === totalPage.value, 'sp-right': true }, lang.last, 'last'))
+      list.push(genItem({ 'sp-disabled': props.modelValue === totalPage.value, 'sp-right': true }, lang.next, 'next'))
 
       return h('div', { class: 'sp-pagination' }, [
         h('div', { class: 'sp-page-info' }, pageInfo.value),
