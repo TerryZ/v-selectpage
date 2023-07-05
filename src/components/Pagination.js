@@ -1,14 +1,14 @@
 import { ref, computed, inject, h } from 'vue'
 
-import { FIRST_PAGE } from '../core/constants'
+import { FIRST_PAGE, DEFAULT_PAGE_SIZE } from '../core/constants'
 import { useLanguage } from '../core/helper'
 
 export default {
   name: 'SelectPagePagination',
   props: {
     modelValue: { type: Number, default: FIRST_PAGE },
-    pageSize: Number,
-    totalRow: Number
+    pageSize: { type: Number, default: DEFAULT_PAGE_SIZE },
+    totalRow: { type: Number, default: 0 }
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
@@ -54,7 +54,7 @@ export default {
           h('a', {
             href: 'javascript:void(0)',
             onClick: () => switchPage(action)
-          }, [h('i', { class: `sp-iconfont sp-icon-${action}` })])
+          }, h('i', { class: `sp-iconfont sp-icon-${action}` }))
         ])
       }
       list.push(genItem({ 'sp-disabled': props.modelValue === FIRST_PAGE }, lang.first, 'first'))

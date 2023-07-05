@@ -1,22 +1,29 @@
 import { h } from 'vue'
 
+import { listProps, listEmits, useList, useInject } from '../core/list'
+
 export default {
   name: 'SelectPageList',
-  setup (props) {
+  props: listProps(),
+  emits: listEmits(),
+  setup (props, { emit }) {
+    const { itemSelect, setItemHighlight, itemClasses } = useList(props, emit)
+    const { isPicked, showField, renderCell } = useInject()
+
     return () => h('ul', {
       class: 'sp-results',
-      onMouseleave: () => this.highlight(-1)
-    }, this.list.map((val, index) => {
+      onMouseleave: () => setItemHighlight(-1)
+    }, props.list.map((item, index) => {
       return h('li', {
         key: index,
-        class: this.rowClass(val, index),
-        title: val[this.showField] || '',
-        innerHTML: this.renderCell(val),
+        class: itemClasses(item, index),
+        title: item[showField] || '',
+        innerHTML: renderCell(item),
         onClick: e => {
           e.stopPropagation()
-          this.rowClick(val)
+          itemSelect(item)
         },
-        onMouseenter: () => this.highlight(this.inPicked(val) ? -1 : index)
+        onMouseenter: () => setItemHighlight(isPicked(item) ? -1 : index)
       })
     }))
   }

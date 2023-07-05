@@ -1,40 +1,44 @@
+import { h } from 'vue'
+
+import { useLanguage } from '../core/helper'
+import { useInject } from '../core/list'
+
 export default {
   name: 'SelectPageSelect',
   props: {
-    picked: Array,
-    disabled: Boolean,
-    placeholder: String
+    picked: { type: Array, default: undefined },
+    disabled: { type: Boolean, default: false },
+    placeholder: { type: String, default: '' }
   },
-  inject: ['i18n', 'renderCell'],
-  render (h) {
-    const children = []
-    let result = null
-    if (this.picked && this.picked.length) {
-      result = h('span', { domProps: { innerHTML: this.renderCell(this.picked[0]) } })
-    } else {
-      result = h('span', { class: 'sp-placeholder' }, this.placeholder)
-    }
-    children.push(h('div', { class: 'sp-base sp-input' }, [result]))
-    // clear button
-    if (this.picked && this.picked.length && !this.disabled) {
-      children.push(h('div', {
-        class: 'sp-clear',
-        attrs: {
-          title: this.i18n.clear
-        },
-        on: {
-          click: e => {
+  emits: ['remove'],
+  setup (props, { emit }) {
+    const { language, renderCell } = useInject()
+    const lang = useLanguage(language)
+
+    const remove = () => emit('remove')
+
+    return () => {
+      const children = [
+        h('div', { class: 'sp-base sp-input' }, props.picked?.length
+          ? h('span', { innerHTML: renderCell(props.picked[0]) })
+          : h('span', { class: 'sp-placeholder' }, props.placeholder)
+        )
+      ]
+      // clear button
+      if (props.picked?.length && !props.disabled) {
+        const option = {
+          class: 'sp-clear',
+          title: lang.clear,
+          onClick: e => {
             e.stopPropagation()
-            this.remove()
+            remove()
           }
         }
-      }, [h('i', { class: 'sp-iconfont sp-icon-close' })]))
-    }
-    return h('div', children)
-  },
-  methods: {
-    remove () {
-      this.$emit('remove')
+        children.push(
+          h('div', option, h('i', { class: 'sp-iconfont sp-icon-close' }))
+        )
+      }
+      return h('div', children)
     }
   }
 }
