@@ -1,3 +1,11 @@
+import {
+  LANG_PAGE_NUMBER,
+  LANG_PAGE_COUNT,
+  LANG_ROW_COUNT,
+  LANG_MAX_SELECTED_LIMIT,
+  LANG_SELECTED_COUNT
+} from './core/constants'
+
 export const [
   ZH_CHS, EN, JA, AR, ES, DE, RO, RU, FR, PT_BR, PL, NL, ZH_CHT
 ] = [
@@ -12,16 +20,16 @@ export const languages = {
     last: '尾页',
     close_btn: '关闭 (Esc键)',
     loading: '读取中...',
-    pageInfo: '第 page_num/page_count 页( 共 row_count 条记录 )',
+    pageInfo: `第 ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} 页( 共 ${LANG_ROW_COUNT} 条记录 )`,
     notFound: '无查询结果',
     serverError: '连接到服务器时发生错误！',
     clear: '清除内容',
     selectAll: '选择当前页项目',
     unselectAll: '取消选择当前页项目',
     clearAll: '清除全部已选择项目',
-    maxSelected: '最多只能选择 max_selected_limit 个项目',
+    maxSelected: `最多只能选择 ${LANG_MAX_SELECTED_LIMIT} 个项目`,
     placeholder: '请选择一个项目',
-    itemsSelected: '已选择 selected_count 个项目'
+    itemsSelected: `已选择 ${LANG_SELECTED_COUNT} 个项目`
   },
   [EN]: { // English
     next: 'Next page',
@@ -30,16 +38,16 @@ export const languages = {
     last: 'Last page',
     close_btn: 'Close (Esc key)',
     loading: 'loading...',
-    pageInfo: 'Page page_num/page_count ( row_count records )',
+    pageInfo: `Page ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} records )`,
     notFound: 'not found',
     serverError: 'An error occurred while connecting to server.',
     clear: 'Clear content',
     selectAll: 'Select current page',
     unselectAll: 'Clear current page',
     clearAll: 'Clear all selected',
-    maxSelected: 'You can only select up to max_selected_limit items',
+    maxSelected: `You can only select up to ${LANG_MAX_SELECTED_LIMIT} items`,
     placeholder: 'Select an option',
-    itemsSelected: 'selected_count items selected'
+    itemsSelected: `${LANG_SELECTED_COUNT} items selected`
   },
   [JA]: { // Japanese
     next: '次へ',
@@ -48,16 +56,16 @@ export const languages = {
     last: '最後のページへ',
     close_btn: '閉じる (Esc キー)',
     loading: '読み込み中...',
-    pageInfo: 'page_num/page_count 件 ( 全 row_count つ記録 )',
+    pageInfo: `${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} 件 ( 全 ${LANG_ROW_COUNT} つ記録 )`,
     notFound: '(0 件)',
     serverError: 'サーバとの通信でエラーが発生しました。',
     clear: 'コンテンツをクリアする',
     selectAll: '当ページを選びます',
     unselectAll: '移して当ページを割ります',
     clearAll: '選択した項目をクリアする',
-    maxSelected: '最多で max_selected_limit のプロジェクトを選ぶことしかできません',
+    maxSelected: `最多で ${LANG_MAX_SELECTED_LIMIT} のプロジェクトを選ぶことしかできません`,
     placeholder: 'プロジェクトを選択してください',
-    itemsSelected: 'selected_count アイテムが選択されました'
+    itemsSelected: `${LANG_SELECTED_COUNT} アイテムが選択されました`
   },
   [AR]: { // Arabic
     next: 'التالي',
@@ -66,16 +74,16 @@ export const languages = {
     last: 'الأخير',
     close_btn: 'إغلاق عند الضغط على زر (Esc)',
     loading: 'جاري التحميل ...',
-    pageInfo: 'صفحة page_num/page_count ( row_count سجلات )',
+    pageInfo: `صفحة ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} سجلات )`,
     notFound: 'لا يوجد نتائج',
     serverError: 'لقد حدث خطأ أثناء الإتصال بالخادم.',
     clear: 'محو المحتوى',
     selectAll: 'تحديد الصفحة الحالية',
     unselectAll: 'إلغاء تحديد الصفحة الحالية',
     clearAll: 'إلغاء التحديد',
-    maxSelected: 'يمكنك فقط تحديد (max_selected_limit) عناصر',
+    maxSelected: `يمكنك فقط تحديد (${LANG_MAX_SELECTED_LIMIT}) عناصر`,
     placeholder: 'رجاء حدد الخيار',
-    itemsSelected: 'تم تحديد (selected_count) عناصر'
+    itemsSelected: `تم تحديد (${LANG_SELECTED_COUNT}) عناصر`
   },
   [ES]: { // Spanish
     next: 'Siguiente página',
@@ -84,16 +92,16 @@ export const languages = {
     last: 'última página',
     close_btn: 'Cerrar (tecla Esc)',
     loading: 'Cargando ...',
-    pageInfo: 'Página page_num/page_count ( row_count registros )',
+    pageInfo: `Página ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} registros )`,
     notFound: 'no encontrado',
     serverError: 'Ocurrió un error al conectarse al servidor.',
     clear: 'Borrar contenido',
     selectAll: 'Seleccionar página actual',
     unselectAll: 'Borrar la página actual',
     clearAll: 'Borrar todo lo seleccionado',
-    maxSelected: 'Solo puedes seleccionar hasta max_selected_limit items',
+    maxSelected: `Solo puedes seleccionar hasta ${LANG_MAX_SELECTED_LIMIT} items`,
     placeholder: 'Seleccione una opción',
-    itemsSelected: 'selected_count items Seleccionado'
+    itemsSelected: `${LANG_SELECTED_COUNT} items Seleccionado`
   },
   [DE]: { // German
     next: 'Nächste Seite',
@@ -102,16 +110,16 @@ export const languages = {
     last: 'Letzte Seite',
     close_btn: 'Schließen (Esc)',
     loading: 'Lädt...',
-    pageInfo: 'Seite page_num/page_count ( row_count Einträge )',
+    pageInfo: `Seite ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} Einträge )`,
     notFound: 'Nicht gefunden',
     serverError: 'Bei der Verbindung zum Server ist ein Fehler aufgetreten.',
     clear: 'Inhalt löschen',
     selectAll: 'Aktuelle Seite auswählen',
     unselectAll: 'Auswahl der aktuellen Seite aufheben',
     clearAll: 'Alle ausgewählten löschen',
-    maxSelected: 'Sie können nur bis zu max_selected_limit Elemente auswählen',
+    maxSelected: `Sie können nur bis zu ${LANG_MAX_SELECTED_LIMIT} Elemente auswählen`,
     placeholder: 'Wählen',
-    itemsSelected: 'selected_count Elemente ausgewählt'
+    itemsSelected: `${LANG_SELECTED_COUNT} Elemente ausgewählt`
   },
   [RO]: { // Romanian
     next: 'Pagina următoare',
@@ -120,16 +128,16 @@ export const languages = {
     last: 'Ultima pagină',
     close_btn: 'Închide (tasta Esc)',
     loading: 'se încarcă...',
-    pageInfo: 'Pagina page_num/page_count ( row_count înregistrări )',
+    pageInfo: `Pagina ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} înregistrări )`,
     notFound: 'nu a fost găsit',
     serverError: 'O eroare a apărut în timpul conectării la server.',
     clear: 'Șterge conținutul',
     selectAll: 'Selectează pagina curentă',
     unselectAll: 'Deselectează pagina curentă',
     clearAll: 'Șterge înregistrările selectate',
-    maxSelected: 'Poți selecta până la max_selected_limit înregistrări',
+    maxSelected: `Poți selecta până la ${LANG_MAX_SELECTED_LIMIT} înregistrări`,
     placeholder: 'Selectează o înregistrare',
-    itemsSelected: 'selected_count înregistrări selectate'
+    itemsSelected: `${LANG_SELECTED_COUNT} înregistrări selectate`
   },
   [RU]: { // Russian
     next: 'Вперед',
@@ -138,16 +146,16 @@ export const languages = {
     last: 'В конец',
     close_btn: 'Закрыть (Esc)',
     loading: 'загрузка...',
-    pageInfo: 'Стр. page_num/page_count (всего - row_count)',
+    pageInfo: `Стр. ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} (всего - ${LANG_ROW_COUNT})`,
     notFound: 'Нет данных',
     serverError: 'Ошибка загрузки данных',
     clear: 'Очистить',
     selectAll: 'Выбрать все',
     unselectAll: 'Сбросить все',
     clearAll: 'Очистить выбранное',
-    maxSelected: 'Нельзя выбрать более max_selected_limit значений',
+    maxSelected: `Нельзя выбрать более ${LANG_MAX_SELECTED_LIMIT} значений`,
     placeholder: 'Выберите значение',
-    itemsSelected: 'selected_count - выбрано'
+    itemsSelected: `${LANG_SELECTED_COUNT} - выбрано`
   },
   [FR]: { // French
     next: 'Page suivante',
@@ -156,16 +164,16 @@ export const languages = {
     last: 'Dernière page',
     close_btn: 'Fermer (touche Esc)',
     loading: 'chargement...',
-    pageInfo: 'Page page_num/page_count ( row_count lignes )',
+    pageInfo: `Page ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} lignes )`,
     notFound: 'Aucun résultat',
     serverError: 'Une erreur s\'est produite lors de la connexion avec le serveur.',
     clear: 'Effacer',
     selectAll: 'Sélectionner tous les éléments de la page',
     unselectAll: 'Déselectionner tous les élements de la page',
     clearAll: 'Tout déselectionner',
-    maxSelected: 'Vous ne pouvez pas sélectionner plus de max_selected_limit élements',
+    maxSelected: `Vous ne pouvez pas sélectionner plus de ${LANG_MAX_SELECTED_LIMIT} élements`,
     placeholder: 'Sélectionnez une option',
-    itemsSelected: 'selected_count éléments sélectionnés'
+    itemsSelected: `${LANG_SELECTED_COUNT} éléments sélectionnés`
   },
   [PT_BR]: { // Portuguese-Brazil
     next: 'Página seguinte',
@@ -174,16 +182,16 @@ export const languages = {
     last: 'Última página',
     close_btn: 'Encerrar (tecla Esc)',
     loading: 'Carregando ...',
-    pageInfo: 'Página page_num/page_count ( row_count registros )',
+    pageInfo: `Página ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} registros )`,
     notFound: 'não encontrado',
     serverError: 'Ocorreu um erro ao conectar com o servidor.',
     clear: 'Apagar conteúdo',
     selectAll: 'Selecionar página atual',
     unselectAll: 'Apagar página atual',
     clearAll: 'Apagar itens selecionados',
-    maxSelected: 'Máximo permitido max_selected_limit itens',
+    maxSelected: `Máximo permitido ${LANG_MAX_SELECTED_LIMIT} itens`,
     placeholder: 'Selecione uma opção',
-    itemsSelected: 'selected_count itens selecionados'
+    itemsSelected: `${LANG_SELECTED_COUNT} itens selecionados`
   },
   [PL]: { // Polish
     next: 'Następna',
@@ -192,16 +200,16 @@ export const languages = {
     last: 'Ostatnia',
     close_btn: 'Zamknij (ESC)',
     loading: 'Ładowanie...',
-    pageInfo: 'Strona page_num/page_count ( row_count rekordów )',
+    pageInfo: `Strona ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} rekordów )`,
     notFound: 'Nic nie znaleziono',
     serverError: 'Wystąpił problem w połączeniu z serwerem.',
     clear: 'Wyczyść',
     selectAll: 'Zaznacz wszystko',
     unselectAll: 'Usuń zaznaczenie',
     clearAll: 'Usuń wszystkie zaznaczone',
-    maxSelected: 'Możesz zaznaczyć maksymalnie max_selected_limit',
+    maxSelected: `Możesz zaznaczyć maksymalnie ${LANG_MAX_SELECTED_LIMIT}`,
     placeholder: 'Wybierz z listy',
-    itemsSelected: 'selected_count zaznaczonych'
+    itemsSelected: `${LANG_SELECTED_COUNT} zaznaczonych`
   },
   [NL]: { // Dutch
     next: 'Volgende pagina',
@@ -210,16 +218,16 @@ export const languages = {
     last: 'Laatste pagina',
     close_btn: 'Sluiten (Esc toets)',
     loading: 'laden...',
-    pageInfo: 'Pagina page_num/page_count ( row_count items )',
+    pageInfo: `Pagina ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} items )`,
     notFound: 'Niet gevonden',
     serverError: 'Er is een fout opgetreden tijdens het verbinden met de server',
     clear: 'Wissen',
     selectAll: 'Selecteer huidige pagina',
     unselectAll: 'Wis huidige pagina',
     clearAll: 'Wis selectie',
-    maxSelected: 'Je kunt maar max_selected_limit items selecteren',
+    maxSelected: `Je kunt maar ${LANG_MAX_SELECTED_LIMIT} items selecteren`,
     placeholder: 'Kies een optie',
-    itemsSelected: 'selected_count Items geselecteerd'
+    itemsSelected: `${LANG_SELECTED_COUNT} Items geselecteerd`
   },
   [ZH_CHT]: { // Traditional Chinese
     next: '下一頁',
@@ -228,15 +236,15 @@ export const languages = {
     last: '尾頁',
     close_btn: '關閉 (Esc鍵)',
     loading: '讀取中...',
-    pageInfo: '第 page_num/page_count 頁( 共 row_count 條記錄 )',
+    pageInfo: `第 ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} 頁( 共 ${LANG_ROW_COUNT} 條記錄 )`,
     notFound: '無查詢結果',
     serverError: '連接到服務器時發生錯誤！',
     clear: '清除內容',
     selectAll: '選擇當前頁項目',
     unselectAll: '取消選擇當前頁項目',
     clearAll: '清除全部已選擇項目',
-    maxSelected: '最多只能選擇 max_selected_limit 個項目',
+    maxSelected: `最多只能選擇 ${LANG_MAX_SELECTED_LIMIT} 個項目`,
     placeholder: '請選擇一個項目',
-    itemsSelected: '已選擇 selected_count 個項目'
+    itemsSelected: `已選擇 ${LANG_SELECTED_COUNT} 個項目`
   }
 }
