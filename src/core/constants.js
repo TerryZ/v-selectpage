@@ -8,28 +8,13 @@ export const FIRST_PAGE = 1
 
 export const DEFAULT_PAGE_SIZE = 10
 
-export const [
-  ACTION_FIRST,
-  ACTION_PREVIOUS,
-  ACTION_NEXT,
-  ACTION_LAST
-] = [
-  'first',
-  'previous',
-  'next',
-  'last'
-]
+export const ACTION_FIRST = 'first'
+export const ACTION_PREVIOUS = 'previous'
+export const ACTION_NEXT = 'next'
+export const ACTION_LAST = 'last'
 
-export const [
-  LANG_PAGE_NUMBER,
-  LANG_PAGE_COUNT,
-  LANG_ROW_COUNT,
-  LANG_MAX_SELECTED_LIMIT,
-  LANG_SELECTED_COUNT
-] = [
-  'page_num',
-  'page_count',
-  'row_count',
-  'max_selected_limit',
-  'selected_count'
-]
+export const LANG_PAGE_NUMBER = 'page_num'
+export const LANG_PAGE_COUNT = 'page_count'
+export const LANG_ROW_COUNT = 'row_count'
+export const LANG_MAX_SELECTED_LIMIT = 'max_selected_limit'
+export const LANG_SELECTED_COUNT = 'selected_count'
