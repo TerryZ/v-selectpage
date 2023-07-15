@@ -1,3 +1,5 @@
+import { ref } from 'vue'
+import { FIRST_PAGE } from './constants'
 import { EN } from '../language'
 
 export function selectPageProps () {
@@ -77,5 +79,11 @@ export function selectPageProps () {
 }
 
 export function useData (props) {
+  const currentPage = ref(FIRST_PAGE)
+  const totalRows = ref(0)
 
+  return {
+    currentPage,
+    totalRows
+  }
 }

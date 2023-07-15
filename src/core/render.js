@@ -48,17 +48,23 @@ export function useRender (props, emit) {
 
     return h(Transition, option, () => child)
   }
-  const renderPagination = () => {
+  const renderPagination = (currentPage, totalRows) => {
     if (!props.pagination) return
 
     return h(Pagination, {
-      totalRow: this.totalRows,
-      pageSize: this.pageSize,
-      modelValue: this.pageNumber,
+      totalRows: totalRows.value,
+      pageSize: props.pageSize,
+      modelValue: currentPage.value,
       'onUpdate:modelValue' (val) {
-        this.pageNumber = val
+        currentPage.value = val
       }
     })
   }
-  return undefined
+  return {
+    query,
+    message,
+    renderSearch,
+    renderMessage,
+    renderPagination
+  }
 }

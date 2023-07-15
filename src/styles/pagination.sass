@@ -1,0 +1,35 @@
+.sp-pagination
+  // font-family: fonts
+  padding: 0
+  background-color: white
+  display: flex
+  justify-content: space-between
+  align-items: center
+  .sp-page-info
+    height: 28px
+    line-height: 28px
+    font-weight: 400
+    color: #333
+    font-size: 14px
+  ul
+    padding: 0
+    margin: 0
+    li
+      display: inline-flex
+      a
+        display: inline-flex
+        padding: 7px
+        font-size: 14px
+        color: #6a737d
+        text-decoration: none
+        cursor: pointer
+        line-height: 1
+        background: transparent
+        transition: all .3s ease
+        &:hover
+          color: black
+          font-weight: bold
+      &.sp-disabled a
+        color: #ddd
+        font-weight: normal
+        /*cursor: not-allowed*/

@@ -1,5 +1,7 @@
 import { ref, computed, h } from 'vue'
 
+import '../styles/pagination.sass'
+
 import {
   FIRST_PAGE, DEFAULT_PAGE_SIZE,
   ACTION_FIRST, ACTION_PREVIOUS, ACTION_NEXT, ACTION_LAST,
@@ -8,12 +10,17 @@ import {
 import { useLanguage } from '../core/helper'
 import { useInject } from '../core/list'
 
+import IconFirst from '../icons/IconFirst.vue'
+import IconPrevious from '../icons/IconPrevious.vue'
+import IconNext from '../icons/IconNext.vue'
+import IconLast from '../icons/IconLast.vue'
+
 export default {
   name: 'SelectPagePagination',
   props: {
     modelValue: { type: Number, default: FIRST_PAGE },
     pageSize: { type: Number, default: DEFAULT_PAGE_SIZE },
-    totalRow: { type: Number, default: 0 }
+    totalRows: { type: Number, default: 0 }
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
@@ -23,11 +30,11 @@ export default {
 
     const lang = useLanguage(language)
 
-    const totalPage = computed(() => Math.ceil(props.totalRow / props.pageSize))
+    const totalPage = computed(() => Math.ceil(props.totalRows / props.pageSize))
     const pageInfo = computed(() => lang.pageInfo
       .replace(LANG_PAGE_NUMBER, props.modelValue)
       .replace(LANG_PAGE_COUNT, totalPage.value)
-      .replace(LANG_ROW_COUNT, props.totalRow)
+      .replace(LANG_ROW_COUNT, props.totalRows)
     )
     const isFirstPage = computed(() => props.modelValue === FIRST_PAGE)
     const isLastPage = computed(() => props.modelValue === totalPage.value)
@@ -59,26 +66,46 @@ export default {
 
     return () => {
       const list = []
-      const genItem = (classes, title, action) => {
+      const genItem = (classes, title, action, icon) => {
         const linkOption = {
           href: 'javascript:void(0)',
           onClick: () => switchPage(action)
         }
         return h('li', { class: classes, title }, [
-          h('a', linkOption, h('i', { class: `sp-iconfont sp-icon-${action}` }))
+          h('a', linkOption, h(icon))
         ])
       }
       list.push(
-        genItem({ 'sp-disabled': isFirstPage.value }, lang.first, ACTION_FIRST)
+        genItem(
+          { 'sp-disabled': isFirstPage.value },
+          lang.first,
+          ACTION_FIRST,
+          IconFirst
+        )
       )
       list.push(
-        genItem({ 'sp-disabled': isFirstPage.value }, lang.prev, ACTION_PREVIOUS)
+        genItem(
+          { 'sp-disabled': isFirstPage.value },
+          lang.prev,
+          ACTION_PREVIOUS,
+          IconPrevious
+        )
       )
       list.push(
-        genItem({ 'sp-disabled': isLastPage.value, 'sp-right': true }, lang.last, ACTION_LAST)
+        genItem(
+          { 'sp-disabled': isLastPage.value },
+          lang.last,
+          ACTION_LAST,
+          IconNext
+        )
       )
       list.push(
-        genItem({ 'sp-disabled': isLastPage.value, 'sp-right': true }, lang.next, ACTION_NEXT)
+        genItem(
+          { 'sp-disabled': isLastPage.value },
+          lang.next,
+          ACTION_NEXT,
+          IconLast
+        )
       )
 
       return h('div', { class: 'sp-pagination' }, [

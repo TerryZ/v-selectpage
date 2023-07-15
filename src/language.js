@@ -38,7 +38,7 @@ export const languages = {
     last: 'Last page',
     close_btn: 'Close (Esc key)',
     loading: 'loading...',
-    pageInfo: `Page ${LANG_PAGE_NUMBER}/${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} records )`,
+    pageInfo: `Page ${LANG_PAGE_NUMBER} of ${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} records )`,
     notFound: 'not found',
     serverError: 'An error occurred while connecting to server.',
     clear: 'Clear content',
