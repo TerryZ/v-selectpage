@@ -1,10 +1,19 @@
-import { ref, h, Transition } from 'vue'
+import { h, Transition } from 'vue'
 
+import { useData } from './data'
+
+import List from '../components/List'
 import Pagination from '../components/Pagination'
 
 export function useRender (props, emit) {
-  const query = ref('')
-  const message = ref('')
+  const {
+    query,
+    message,
+    currentPage,
+    lang,
+    haveData,
+    selectItem
+  } = useData(props)
 
   const renderSearch = () => {
     return h('div', { class: 'sp-search' }, [
@@ -48,12 +57,26 @@ export function useRender (props, emit) {
 
     return h(Transition, option, () => child)
   }
-  const renderPagination = (currentPage, totalRows) => {
+  const renderList = () => {
+    if (!haveData()) return renderNoDataMessage()
+
+    return h(List, {
+      list: props.data,
+      onSelect: row => selectItem(row)
+    })
+  }
+  const renderTable = () => {
+
+  }
+  const renderNoDataMessage = () => {
+    return h('div', { class: 'sp-result-message' }, lang.not_found)
+  }
+  const renderPagination = () => {
     if (!props.pagination) return
 
     return h(Pagination, {
-      totalRows: totalRows.value,
       pageSize: props.pageSize,
+      totalRows: props.totalRows,
       modelValue: currentPage.value,
       'onUpdate:modelValue' (val) {
         currentPage.value = val
@@ -63,8 +86,12 @@ export function useRender (props, emit) {
   return {
     query,
     message,
+    currentPage,
+
     renderSearch,
     renderMessage,
+    renderList,
+    renderTable,
     renderPagination
   }
 }

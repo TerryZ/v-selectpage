@@ -1,0 +1,28 @@
+.sp-list-view
+  background-color: white
+  min-width: 300px
+  max-height: 320px
+  overflow-y: auto
+  font-family: fonts
+  .sp-list-item
+    height: auto !important
+    line-height: 1.43
+    margin: 0
+    overflow: hidden
+    padding: 3px 10px
+    position: relative
+    text-align: left
+    white-space: nowrap
+    font-size: 14px
+    color: #666
+    cursor: pointer
+    &.sp-over
+      background-color: #F6F8FA !important
+      color: black !important
+      cursor: pointer
+    &.sp-selected
+      color: #ccc
+      cursor: default
+    &.sp-rtl
+      direction: rtl
+      text-align: right

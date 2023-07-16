@@ -1,6 +1,6 @@
 import './styles/select-page.sass'
 
-export { default as SelectPageListView } from './SelectPageListView'
+export { default as SelectPageListCore } from './SelectPageListCore'
 // import selectPage from './SelectPage'
 
 // const Plugin = {

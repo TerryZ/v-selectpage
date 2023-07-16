@@ -94,16 +94,16 @@ export default {
       list.push(
         genItem(
           { 'sp-disabled': isLastPage.value },
-          lang.last,
-          ACTION_LAST,
+          lang.next,
+          ACTION_NEXT,
           IconNext
         )
       )
       list.push(
         genItem(
           { 'sp-disabled': isLastPage.value },
-          lang.next,
-          ACTION_NEXT,
+          lang.last,
+          ACTION_LAST,
           IconLast
         )
       )

@@ -1,4 +1,4 @@
-import { selectPageProps, useData } from './core/data'
+import { selectPageProps } from './core/data'
 import { useRender } from './core/render'
 
 export default {
@@ -6,17 +6,19 @@ export default {
     ...selectPageProps()
   },
   setup (props) {
-    const { currentPage, totalRows } = useData(props)
     const {
       renderSearch,
       renderMessage,
+      renderList,
       renderPagination
     } = useRender(props)
+
     return () => {
       return [
         renderSearch(),
         renderMessage(),
-        renderPagination(currentPage, totalRows)
+        renderList(),
+        renderPagination()
       ]
     }
   }

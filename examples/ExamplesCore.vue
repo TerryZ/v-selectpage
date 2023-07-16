@@ -5,7 +5,10 @@
     <h5>List View 列表视图</h5>
     <div>
       <div class="shadow-sm rounded-3 border overflow-hidden">
-        <SelectPageListView />
+        <SelectPageListCore
+          :data="list1"
+          :total-rows="101"
+        />
       </div>
     </div>
   </div>
@@ -13,6 +16,8 @@
 
 <script setup>
 // import { ref } from 'vue'
-import { SelectPageListView } from '@/'
+import { SelectPageListCore } from '@/'
+
+import { list1 } from './data'
 
 </script>

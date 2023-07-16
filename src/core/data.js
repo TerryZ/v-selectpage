@@ -1,22 +1,19 @@
-import { ref } from 'vue'
+import { ref, provide } from 'vue'
 import { FIRST_PAGE } from './constants'
 import { EN } from '../language'
+import { useLanguage } from './helper'
 
 export function selectPageProps () {
   return {
     /**
-     * specify key to make list item selected, the must be match 'keyField' option value
+     * specify key to make list item selected, the must be match 'keyProp' option value
      *
      * example:
      * single mode: '123'
      * multiple mode: '123, 124, 125'
      */
-    value: { type: String, default: '' },
-    data: { type: [Array, String], required: true },
-    /**
-     * server side querying params
-     */
-    params: Object,
+    modelValue: { type: String, default: '' },
+    data: { type: Array, default: undefined },
     /**
      * server side result format
      * @param resp [object] server side request result
@@ -30,11 +27,11 @@ export function selectPageProps () {
     /**
      * specify field to be key field, the value will return by v-model
      */
-    keyField: { type: String, default: 'id' },
+    keyProp: { type: String, default: 'id' },
     /**
      * specify field to display
      */
-    showField: { type: [String, Function], default: 'name' },
+    labelProp: { type: [String, Function], default: 'name' },
     /**
      * the column setting for table view , format sample:
      *
@@ -45,9 +42,19 @@ export function selectPageProps () {
      *
      * @example
      * [
-     *   { title: 'full name', data: function(row){ return row.lastName + ' ' + row.firstName }},
+     *   {
+     *     title: 'full name',
+     *     data: function(row) {
+     *       return row.lastName + ' ' + row.firstName
+     *     }
+     *   },
      *   { title: 'age', data: 'age'},
-     *   { title: 'birthday', data: function(row){ return doSomeFormat(row.birthday) }}
+     *   {
+     *     title: 'birthday',
+     *     data: function(row) {
+     *       return doSomeFormat(row.birthday)
+     *     }
+     *   }
      * ]
      */
     columns: { type: Array, default: undefined },
@@ -58,6 +65,7 @@ export function selectPageProps () {
     sort: String,
     searchField: String,
     pageSize: { type: Number, default: 10 },
+    totalRows: { type: Number, default: 0 },
     /**
      * max selected item limit, set 0 to unlimited
      */
@@ -79,11 +87,46 @@ export function selectPageProps () {
 }
 
 export function useData (props) {
+  const lang = useLanguage(props.language)
+
+  const query = ref('')
+  const message = ref('')
   const currentPage = ref(FIRST_PAGE)
-  const totalRows = ref(0)
+  const picked = ref([])
+
+  const renderCell = function (row) {
+    if (!row || !Object.keys(row).length) return ''
+    switch (typeof props.labelProp) {
+      case 'string': return row[props.labelProp]
+      case 'function': return props.labelProp(row)
+    }
+  }
+  const haveData = () => {
+    return Array.isArray(props.data) && props.data.length
+  }
+  const isPicked = row => {
+    if (!picked.value.length) return false
+    return picked.value.some(val => val[props.keyProp] === row[props.keyProp])
+  }
+  const selectItem = row => {
+    if (isPicked(row)) return
+    picked.value.push(row)
+  }
+
+  provide('renderCell', renderCell)
+  provide('rtl', props.rtl)
+  provide('isPicked', isPicked)
 
   return {
+    query,
+    message,
     currentPage,
-    totalRows
+    picked,
+    lang,
+
+    renderCell,
+    haveData,
+    isPicked,
+    selectItem
   }
 }
