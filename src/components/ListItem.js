@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import { useInject } from '../core/list'
+import { useInject } from '../core/data'
 
 export default {
   props: {
@@ -17,7 +17,7 @@ export default {
       const option = {
         class: {
           'sp-list-item': true,
-          'sp-over': props.isHover,
+          'sp-over': !props.isSelected && props.isHover,
           'sp-selected': props.isSelected,
           'sp-rtl': rtl
         },

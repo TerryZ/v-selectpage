@@ -4,20 +4,57 @@
 
     <h5>List View 列表视图</h5>
     <div>
-      <div class="shadow-sm rounded-3 border overflow-hidden">
+      <div class="shadow-sm rounded-3 border overflow-hidden mb-3">
         <SelectPageListCore
-          :data="list1"
-          :total-rows="101"
+          :data="data1"
+          :total-rows="totalRows"
+          v-model="selected"
+          @search="search"
+          @selection-change="selectionChange"
+          @page-change="pageChange"
         />
+      </div>
+      <div>
+        选择的项目 key: <span v-text="selected.toString()" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-// import { ref } from 'vue'
-import { SelectPageListCore } from '@/'
+import { ref } from 'vue'
 
 import { list1 } from './data'
+
+import { SelectPageListCore } from '@/'
+
+const data1 = ref([])
+const selected = ref([3])
+const query = ref('')
+const totalRows = ref(0)
+const pageNumber = ref(1)
+const pageSize = ref(10)
+
+// local data list pagination
+function fetchData () {
+  const start = (pageNumber.value - 1) * pageSize.value
+  const end = start + pageSize.value - 1
+
+  const list = query.value ? list1.filter(val => val.name.includes(query.value)) : list1
+  totalRows.value = list.length
+  data1.value = list.filter((val, index) => index >= start && index <= end)
+}
+function search (keyword) {
+  query.value = keyword
+  fetchData()
+}
+function selectionChange (data) {
+  console.log(data)
+}
+function pageChange (data) {
+  pageNumber.value = data.pageNumber
+  pageSize.value = data.pageSize
+  fetchData()
+}
 
 </script>

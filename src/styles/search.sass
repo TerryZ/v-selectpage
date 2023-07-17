@@ -1,0 +1,24 @@
+.sp-search
+  // font-family: $fonts
+  padding: 10px
+  background-color: white
+  display: flex
+  align-items: center
+  .sp-search-input
+    display: block
+    border: 0
+    background-color: #eee
+    margin: 0 !important
+    width: 100%
+    font-size: 14px
+    line-height: 1.43
+    padding: 4px 6px
+    box-sizing: border-box
+    outline: none !important
+    border-radius: 2px
+    will-change: border-color, box-shadow, background-color
+    transition: border-color .3s ease-in-out, box-shadow .3s ease-in-out, background-color .3s ease-in-out
+    &:focus
+      background-color: #f5f5f5
+    &.sp-search-input--rtl
+      direction: rtl

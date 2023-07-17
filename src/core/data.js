@@ -1,5 +1,5 @@
-import { ref, provide } from 'vue'
-import { FIRST_PAGE } from './constants'
+import { ref, provide, watch, inject, onMounted } from 'vue'
+import { FIRST_PAGE, DEFAULT_PAGE_SIZE } from './constants'
 import { EN } from '../language'
 import { useLanguage } from './helper'
 
@@ -12,7 +12,7 @@ export function selectPageProps () {
      * single mode: '123'
      * multiple mode: '123, 124, 125'
      */
-    modelValue: { type: String, default: '' },
+    modelValue: { type: Array, default: undefined },
     data: { type: Array, default: undefined },
     /**
      * server side result format
@@ -64,7 +64,7 @@ export function selectPageProps () {
      */
     sort: String,
     searchField: String,
-    pageSize: { type: Number, default: 10 },
+    pageSize: { type: Number, default: DEFAULT_PAGE_SIZE },
     totalRows: { type: Number, default: 0 },
     /**
      * max selected item limit, set 0 to unlimited
@@ -86,7 +86,11 @@ export function selectPageProps () {
   }
 }
 
-export function useData (props) {
+export function selectPageEmits () {
+  return ['search', 'selection-change', 'update:modelValue', 'page-change']
+}
+
+export function useData (props, emit) {
   const lang = useLanguage(props.language)
 
   const query = ref('')
@@ -110,12 +114,35 @@ export function useData (props) {
   }
   const selectItem = row => {
     if (isPicked(row)) return
-    picked.value.push(row)
+
+    if (props.multiple) {
+      picked.value.push(row)
+      return
+    }
+    picked.value = [row]
+  }
+  function pageChange () {
+    emit('page-change', {
+      pageNumber: currentPage.value,
+      pageSize: props.pageSize
+    })
   }
 
   provide('renderCell', renderCell)
   provide('rtl', props.rtl)
+  provide('pageSize', props.pageSize)
   provide('isPicked', isPicked)
+
+  watch(picked, val => {
+    emit('update:modelValue', val.map(value => value[props.keyProp]))
+    emit('selection-change', val)
+  })
+  watch(currentPage, pageChange)
+  watch(query, val => emit('search', val))
+
+  onMounted(() => {
+    pageChange()
+  })
 
   return {
     query,
@@ -128,5 +155,16 @@ export function useData (props) {
     haveData,
     isPicked,
     selectItem
+  }
+}
+
+export function useInject () {
+  return {
+    // keyProp: inject('keyProp'),
+    // labelProp: inject('labelProp'),
+    renderCell: inject('renderCell'),
+    rtl: inject('rtl'),
+    isPicked: inject('isPicked'),
+    pageSize: inject('pageSize')
   }
 }

@@ -3,12 +3,12 @@ import { ref, computed, h } from 'vue'
 import '../styles/pagination.sass'
 
 import {
-  FIRST_PAGE, DEFAULT_PAGE_SIZE,
+  FIRST_PAGE,
   ACTION_FIRST, ACTION_PREVIOUS, ACTION_NEXT, ACTION_LAST,
   LANG_PAGE_NUMBER, LANG_PAGE_COUNT, LANG_ROW_COUNT
 } from '../core/constants'
 import { useLanguage } from '../core/helper'
-import { useInject } from '../core/list'
+import { useInject } from '../core/data'
 
 import IconFirst from '../icons/IconFirst.vue'
 import IconPrevious from '../icons/IconPrevious.vue'
@@ -19,18 +19,17 @@ export default {
   name: 'SelectPagePagination',
   props: {
     modelValue: { type: Number, default: FIRST_PAGE },
-    pageSize: { type: Number, default: DEFAULT_PAGE_SIZE },
     totalRows: { type: Number, default: 0 }
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
-    const { language } = useInject()
+    const { language, pageSize } = useInject()
 
     const lastNumber = ref(-1)
 
     const lang = useLanguage(language)
 
-    const totalPage = computed(() => Math.ceil(props.totalRows / props.pageSize))
+    const totalPage = computed(() => Math.ceil(props.totalRows / pageSize))
     const pageInfo = computed(() => lang.pageInfo
       .replace(LANG_PAGE_NUMBER, props.modelValue)
       .replace(LANG_PAGE_COUNT, totalPage.value)

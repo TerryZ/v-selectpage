@@ -1,4 +1,4 @@
-export const list1 = Array.from({ length: 10 }).map((val, index) => ({
+export const list1 = Array.from({ length: 101 }).map((val, index) => ({
   id: index + 1,
-  name: `item-${index + 1}`
+  name: `列表项目-item-${index + 1}`
 }))

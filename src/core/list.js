@@ -1,4 +1,6 @@
-import { ref, inject } from 'vue'
+import { ref } from 'vue'
+
+import { useInject } from './data'
 
 export const listProps = () => ({
   list: { type: Array, default: undefined },
@@ -7,16 +9,6 @@ export const listProps = () => ({
 })
 
 export const listEmits = () => ['select', 'update:modelValue']
-
-export function useInject () {
-  return {
-    keyProp: inject('keyProp'),
-    labelProp: inject('labelProp'),
-    renderCell: inject('renderCell'),
-    rtl: inject('rtl'),
-    isPicked: inject('isPicked')
-  }
-}
 
 export function useList (props, emit) {
   const highlightIndex = ref(-1)

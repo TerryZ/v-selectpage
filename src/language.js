@@ -39,7 +39,7 @@ export const languages = {
     close_btn: 'Close (Esc key)',
     loading: 'loading...',
     pageInfo: `Page ${LANG_PAGE_NUMBER} of ${LANG_PAGE_COUNT} ( ${LANG_ROW_COUNT} records )`,
-    notFound: 'not found',
+    notFound: 'Data not found',
     serverError: 'An error occurred while connecting to server.',
     clear: 'Clear content',
     selectAll: 'Select current page',

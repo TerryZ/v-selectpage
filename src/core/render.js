@@ -1,7 +1,9 @@
 import { h, Transition } from 'vue'
 
+import '../styles/common.sass'
 import { useData } from './data'
 
+import Search from '../components/Search'
 import List from '../components/List'
 import Pagination from '../components/Pagination'
 
@@ -13,29 +15,15 @@ export function useRender (props, emit) {
     lang,
     haveData,
     selectItem
-  } = useData(props)
+  } = useData(props, emit)
 
   const renderSearch = () => {
-    return h('div', { class: 'sp-search' }, [
-      h('input', {
-        type: 'text',
-        autocomplete: 'off',
-        value: query.value.trim(),
-        class: {
-          'sp-search-input': true,
-          'sp-search-input--rtl': props.rtl
-        },
-        onKeyup: e => this.processKey(e),
-        onKeydown: e => {
-          e.stopPropagation()
-          this.processControl(e)
-        },
-        onInput: e => {
-          query.value = e.target.value
-        },
-        ref: 'search'
-      })
-    ])
+    return h(Search, {
+      modelValue: query.value,
+      'onUpdate:modelValue' (val) {
+        query.value = val
+      }
+    })
   }
   const renderMessage = () => {
     const child = []
@@ -69,13 +57,12 @@ export function useRender (props, emit) {
 
   }
   const renderNoDataMessage = () => {
-    return h('div', { class: 'sp-result-message' }, lang.not_found)
+    return h('div', { class: 'sp-result-message' }, lang.notFound)
   }
   const renderPagination = () => {
     if (!props.pagination) return
 
     return h(Pagination, {
-      pageSize: props.pageSize,
       totalRows: props.totalRows,
       modelValue: currentPage.value,
       'onUpdate:modelValue' (val) {

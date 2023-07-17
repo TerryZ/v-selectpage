@@ -1,17 +1,18 @@
-import { selectPageProps } from './core/data'
+import { selectPageProps, selectPageEmits } from './core/data'
 import { useRender } from './core/render'
 
 export default {
   props: {
     ...selectPageProps()
   },
-  setup (props) {
+  emits: selectPageEmits(),
+  setup (props, { emit }) {
     const {
       renderSearch,
       renderMessage,
       renderList,
       renderPagination
-    } = useRender(props)
+    } = useRender(props, emit)
 
     return () => {
       return [
