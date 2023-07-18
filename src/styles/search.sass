@@ -1,13 +1,17 @@
 .sp-search
   // font-family: $fonts
   padding: 10px
-  background-color: white
+  background-color: #f7f7f7
   display: flex
   align-items: center
+  // border: 1px solid #ddd
+  margin: 10px
+  border-radius: .5rem
   .sp-search-input
     display: block
     border: 0
-    background-color: #eee
+    // background-color: #eee
+    background-color: transparent
     margin: 0 !important
     width: 100%
     font-size: 14px
@@ -19,6 +23,6 @@
     will-change: border-color, box-shadow, background-color
     transition: border-color .3s ease-in-out, box-shadow .3s ease-in-out, background-color .3s ease-in-out
     &:focus
-      background-color: #f5f5f5
+      // background-color: #f5f5f5
     &.sp-search-input--rtl
       direction: rtl

@@ -18,7 +18,7 @@ export default {
     // const { isPicked, showField, renderCell } = useInject()
 
     return () => h('div', {
-      class: 'sp-list-view',
+      class: 'sp-list',
       onMouseleave: () => setItemHighlight(-1)
     }, props.list.map((item, index) => {
       // return h('li', {

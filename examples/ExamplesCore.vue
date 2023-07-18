@@ -3,19 +3,40 @@
     <h3>核心模块</h3>
 
     <h5>List View 列表视图</h5>
-    <div>
-      <div class="shadow-sm rounded-3 border overflow-hidden mb-3">
-        <SelectPageListCore
-          :data="data1"
-          :total-rows="totalRows"
-          v-model="selected"
-          @search="search"
-          @selection-change="selectionChange"
-          @page-change="pageChange"
-        />
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <SelectPageListCore
+            :data="data1"
+            :total-rows="totalRows"
+            language="zh-chs"
+            class="shadow-sm rounded-3 border overflow-hidden"
+            v-model="selected"
+            @search="search"
+            @selection-change="selectionChange"
+            @page-change="pageChange"
+          />
+        </div>
+        <div>
+          选择的项目 key: <span v-text="selected.toString()" />
+        </div>
       </div>
-      <div>
-        选择的项目 key: <span v-text="selected.toString()" />
+      <div class="col-md-6">
+        <div class="mb-3">
+          <SelectPageListCore
+            :data="data1"
+            :total-rows="totalRows"
+            :label-prop="labelFormatter"
+            class="shadow-sm rounded-4 border overflow-hidden"
+            v-model="selected"
+            @search="search"
+            @selection-change="selectionChange"
+            @page-change="pageChange"
+          />
+        </div>
+        <div>
+          选择的项目 key: <span v-text="selected.toString()" />
+        </div>
       </div>
     </div>
   </div>
@@ -57,4 +78,7 @@ function pageChange (data) {
   fetchData()
 }
 
+function labelFormatter (row) {
+  return `${row.name} (id: ${row.id})`
+}
 </script>

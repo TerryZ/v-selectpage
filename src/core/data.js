@@ -82,7 +82,9 @@ export function selectPageProps () {
      * the width of drop down menu
      */
     width: { type: Number, default: undefined },
-    disabled: { type: Boolean, default: false }
+    disabled: { type: Boolean, default: false },
+    /** debounce delay when typing, in milliseconds */
+    debounce: { type: Number, default: 300 }
   }
 }
 
@@ -91,9 +93,12 @@ export function selectPageEmits () {
 }
 
 export function useData (props, emit) {
+  console.log(props.language)
   const lang = useLanguage(props.language)
 
+  // query string for search input
   const query = ref('')
+  // alert message
   const message = ref('')
   const currentPage = ref(FIRST_PAGE)
   const picked = ref([])
@@ -128,9 +133,10 @@ export function useData (props, emit) {
     })
   }
 
-  provide('renderCell', renderCell)
   provide('rtl', props.rtl)
   provide('pageSize', props.pageSize)
+  provide('language', props.language)
+  provide('renderCell', renderCell)
   provide('isPicked', isPicked)
 
   watch(picked, val => {
@@ -165,6 +171,7 @@ export function useInject () {
     renderCell: inject('renderCell'),
     rtl: inject('rtl'),
     isPicked: inject('isPicked'),
-    pageSize: inject('pageSize')
+    pageSize: inject('pageSize'),
+    language: inject('language')
   }
 }

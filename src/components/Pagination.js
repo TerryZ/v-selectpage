@@ -70,7 +70,11 @@ export default {
           href: 'javascript:void(0)',
           onClick: () => switchPage(action)
         }
-        return h('li', { class: classes, title }, [
+        const btnClass = {
+          ...classes,
+          'sp-page-button': true
+        }
+        return h('div', { class: btnClass, title }, [
           h('a', linkOption, h(icon))
         ])
       }
@@ -109,7 +113,7 @@ export default {
 
       return h('div', { class: 'sp-pagination' }, [
         h('div', { class: 'sp-page-info' }, pageInfo.value),
-        h('ul', list)
+        h('div', { class: 'sp-page-control' }, list)
       ])
     }
   }

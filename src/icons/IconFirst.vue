@@ -4,7 +4,7 @@
     width="16"
     height="16"
     fill="currentColor"
-    class="bi bi-chevron-bar-left"
+    class="sp-icon bi bi-chevron-bar-left"
     viewBox="0 0 16 16"
   >
     <path
