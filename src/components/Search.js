@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { ref, h } from 'vue'
 
 import '../styles/search.sass'
 import { useInject } from '../core/data'
@@ -11,9 +11,11 @@ export default {
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
-    return () => {
-      const { rtl } = useInject()
+    const { rtl, debounce } = useInject()
 
+    const timer = ref()
+
+    return () => {
       return h('div', { class: 'sp-search' }, [
         h(IconSearch),
         h('input', {
@@ -30,7 +32,10 @@ export default {
           //   this.processControl(e)
           // },
           onInput: e => {
-            emit('update:modelValue', e.target.value.trim())
+            clearTimeout(timer.value)
+            timer.value = setTimeout(() => {
+              emit('update:modelValue', e.target.value.trim())
+            }, debounce)
           },
           ref: 'search'
         })

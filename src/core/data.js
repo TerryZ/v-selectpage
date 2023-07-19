@@ -93,7 +93,6 @@ export function selectPageEmits () {
 }
 
 export function useData (props, emit) {
-  console.log(props.language)
   const lang = useLanguage(props.language)
 
   // query string for search input
@@ -138,6 +137,7 @@ export function useData (props, emit) {
   provide('language', props.language)
   provide('renderCell', renderCell)
   provide('isPicked', isPicked)
+  provide('debounce', props.debounce)
 
   watch(picked, val => {
     emit('update:modelValue', val.map(value => value[props.keyProp]))
@@ -172,6 +172,7 @@ export function useInject () {
     rtl: inject('rtl'),
     isPicked: inject('isPicked'),
     pageSize: inject('pageSize'),
-    language: inject('language')
+    language: inject('language'),
+    debounce: inject('debounce')
   }
 }
