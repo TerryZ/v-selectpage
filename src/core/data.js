@@ -16,6 +16,7 @@ export function selectPageProps () {
     data: { type: Array, default: undefined },
     title: { type: String, default: 'SelectPage' },
     placeholder: { type: String, default: '' },
+    /** multiple selection */
     multiple: { type: Boolean, default: false },
     language: { type: String, default: EN },
     /**
@@ -135,7 +136,7 @@ export function useData (props, emit) {
 
   provide('rtl', props.rtl)
   provide('pageSize', props.pageSize)
-  provide('language', props.language)
+  provide('language', lang)
   provide('renderCell', renderCell)
   provide('isPicked', isPicked)
   provide('debounce', props.debounce)

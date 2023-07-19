@@ -28,16 +28,18 @@
         // background-color: #f5f5f5
       &.sp-search-input--rtl
         direction: rtl
-  .bi-trash
-    color: #999
-    cursor: pointer
+    .bi-search
+      transition: all .3s ease
+      color: #999
+      &.sp-search-in-focus
+        color: #000
+  .sp-search-control
+    flex-grow: 0.001
     transition: all .3s ease
-    margin-left: 10px
-    &:hover
-      color: #000
-  .bi-search
-    transition: all .3s ease
-    color: #999
-    &.sp-search-in-focus
-      color: #000
-
+    .bi-trash
+      color: #999
+      cursor: pointer
+      transition: all .3s ease
+      margin-left: 10px
+      &:hover
+        color: #000

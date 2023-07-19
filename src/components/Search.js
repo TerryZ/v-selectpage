@@ -12,7 +12,7 @@ export default {
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
-    const { rtl, debounce, haveItemSelected, removeAll } = useInject()
+    const { rtl, debounce, haveItemSelected, removeAll, language } = useInject()
 
     const timer = ref()
     const inForce = ref(false)
@@ -49,13 +49,15 @@ export default {
         ])
       )
 
+      const icons = []
+
       if (haveItemSelected.value) {
-        items.push(
-          h(IconTrash, {
-            onClick: removeAll
-          })
+        icons.push(
+          h('div', { title: language.clearAll, onClick: removeAll }, h(IconTrash))
         )
       }
+
+      items.push(h('div', { class: 'sp-search-control' }, icons))
 
       return h('div', { class: 'sp-search' }, items)
     }

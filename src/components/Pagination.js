@@ -7,7 +7,6 @@ import {
   ACTION_FIRST, ACTION_PREVIOUS, ACTION_NEXT, ACTION_LAST,
   LANG_PAGE_NUMBER, LANG_PAGE_COUNT, LANG_ROW_COUNT
 } from '../core/constants'
-import { useLanguage } from '../core/helper'
 import { useInject } from '../core/data'
 
 import IconFirst from '../icons/IconFirst.vue'
@@ -27,10 +26,8 @@ export default {
 
     const lastNumber = ref(-1)
 
-    const lang = useLanguage(language)
-
     const totalPage = computed(() => Math.ceil(props.totalRows / pageSize))
-    const pageInfo = computed(() => lang.pageInfo
+    const pageInfo = computed(() => language.pageInfo
       .replace(LANG_PAGE_NUMBER, props.modelValue)
       .replace(LANG_PAGE_COUNT, totalPage.value)
       .replace(LANG_ROW_COUNT, props.totalRows)
@@ -81,7 +78,7 @@ export default {
       list.push(
         genItem(
           { 'sp-disabled': isFirstPage.value },
-          lang.first,
+          language.first,
           ACTION_FIRST,
           IconFirst
         )
@@ -89,7 +86,7 @@ export default {
       list.push(
         genItem(
           { 'sp-disabled': isFirstPage.value },
-          lang.prev,
+          language.prev,
           ACTION_PREVIOUS,
           IconPrevious
         )
@@ -97,7 +94,7 @@ export default {
       list.push(
         genItem(
           { 'sp-disabled': isLastPage.value },
-          lang.next,
+          language.next,
           ACTION_NEXT,
           IconNext
         )
@@ -105,7 +102,7 @@ export default {
       list.push(
         genItem(
           { 'sp-disabled': isLastPage.value },
-          lang.last,
+          language.last,
           ACTION_LAST,
           IconLast
         )
