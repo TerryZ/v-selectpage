@@ -28,14 +28,14 @@
             :total-rows="totalRows"
             :label-prop="labelFormatter"
             class="shadow-sm rounded-4 border overflow-hidden"
-            v-model="selected"
+            v-model="selected1"
             @search="search"
             @selection-change="selectionChange"
             @page-change="pageChange"
           />
         </div>
         <div>
-          选择的项目 key: <span v-text="selected.toString()" />
+          选择的项目 key: <span v-text="selected1.toString()" />
         </div>
       </div>
     </div>
@@ -51,6 +51,7 @@ import { SelectPageListCore } from '@/'
 
 const data1 = ref([])
 const selected = ref([3])
+const selected1 = ref([])
 const query = ref('')
 const totalRows = ref(0)
 const pageNumber = ref(1)

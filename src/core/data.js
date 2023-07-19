@@ -1,4 +1,4 @@
-import { ref, provide, watch, inject, onMounted } from 'vue'
+import { ref, provide, watch, computed, inject, onMounted } from 'vue'
 import { FIRST_PAGE, DEFAULT_PAGE_SIZE } from './constants'
 import { EN } from '../language'
 import { useLanguage } from './helper'
@@ -14,12 +14,6 @@ export function selectPageProps () {
      */
     modelValue: { type: Array, default: undefined },
     data: { type: Array, default: undefined },
-    /**
-     * server side result format
-     * @param resp [object] server side request result
-     * @return [object] the formatted data
-     */
-    resultFormat: Function,
     title: { type: String, default: 'SelectPage' },
     placeholder: { type: String, default: '' },
     multiple: { type: Boolean, default: false },
@@ -100,6 +94,7 @@ export function useData (props, emit) {
   // alert message
   const message = ref('')
   const currentPage = ref(FIRST_PAGE)
+  // select items
   const picked = ref([])
 
   const renderCell = function (row) {
@@ -112,6 +107,9 @@ export function useData (props, emit) {
   const haveData = () => {
     return Array.isArray(props.data) && props.data.length
   }
+  const haveItemSelected = computed(() => {
+    return !!picked.value.length
+  })
   const isPicked = row => {
     if (!picked.value.length) return false
     return picked.value.some(val => val[props.keyProp] === row[props.keyProp])
@@ -131,6 +129,9 @@ export function useData (props, emit) {
       pageSize: props.pageSize
     })
   }
+  function removeAll () {
+    picked.value = []
+  }
 
   provide('rtl', props.rtl)
   provide('pageSize', props.pageSize)
@@ -138,6 +139,8 @@ export function useData (props, emit) {
   provide('renderCell', renderCell)
   provide('isPicked', isPicked)
   provide('debounce', props.debounce)
+  provide('haveItemSelected', haveItemSelected)
+  provide('removeAll', removeAll)
 
   watch(picked, val => {
     emit('update:modelValue', val.map(value => value[props.keyProp]))
@@ -160,7 +163,9 @@ export function useData (props, emit) {
     renderCell,
     haveData,
     isPicked,
-    selectItem
+    haveItemSelected,
+    selectItem,
+    removeAll
   }
 }
 
@@ -173,6 +178,8 @@ export function useInject () {
     isPicked: inject('isPicked'),
     pageSize: inject('pageSize'),
     language: inject('language'),
-    debounce: inject('debounce')
+    debounce: inject('debounce'),
+    haveItemSelected: inject('haveItemSelected'),
+    removeAll: inject('removeAll')
   }
 }

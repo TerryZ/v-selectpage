@@ -1,23 +1,19 @@
 .sp-pagination
-  // font-family: fonts
-  // background-color: #f7f7f7
-  border-top: 1px solid #eee
+  // background-color: #fcfcfc
+  // border-top: 1px solid #eee
   display: flex
   justify-content: space-between
   align-items: center
-  margin-top: 5px
-  padding-left: 10px
-  padding-right: 10px
+  // margin-top: 5px
+  padding: 5px 10px
   .sp-page-info
-    height: 28px
-    line-height: 28px
-    font-weight: 400
-    color: #888
+    line-height: 1
+    color: #bbb
     font-size: 14px
-    font-weight: 500
+    font-weight: 600
     margin-right: 10px
   .sp-page-control
-    padding: 5px 0
+    padding: 0
     margin: 0
     .sp-page-button
       display: inline-flex
@@ -25,7 +21,7 @@
         display: inline-flex
         padding: 7px
         font-size: 14px
-        color: #6a737d
+        color: #333
         text-decoration: none
         cursor: pointer
         line-height: 1
@@ -34,12 +30,11 @@
         border-radius: .5rem
         &:hover
           color: black
-          font-weight: bold
           background-color: #f7f7f7
           // box-shadow: 0 2px 5px rgba(0, 0, 0, .2)
       &.sp-disabled a
         color: #ddd
         font-weight: normal
         background-color: transparent
+        cursor: default
         // box-shadow: none
-        /*cursor: not-allowed*/

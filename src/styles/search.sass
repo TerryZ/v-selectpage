@@ -1,28 +1,43 @@
 .sp-search
-  // font-family: $fonts
-  padding: 10px
-  background-color: #f7f7f7
   display: flex
   align-items: center
-  // border: 1px solid #ddd
   margin: 10px
-  border-radius: .5rem
-  .sp-search-input
-    display: block
-    border: 0
-    // background-color: #eee
-    background-color: transparent
-    margin: 0 !important
-    width: 100%
-    font-size: 14px
-    line-height: 1.43
-    padding: 4px 6px
-    box-sizing: border-box
-    outline: none !important
-    border-radius: 2px
-    will-change: border-color, box-shadow, background-color
-    transition: border-color .3s ease-in-out, box-shadow .3s ease-in-out, background-color .3s ease-in-out
-    &:focus
-      // background-color: #f5f5f5
-    &.sp-search-input--rtl
-      direction: rtl
+  .sp-search-container
+    display: flex
+    align-items: center
+    flex-grow: 1
+    padding: 5px 10px
+    background-color: #f7f7f7
+    border-radius: .5rem
+    transition: all .3s ease
+    .sp-search-input
+      // display: block
+      border: 0
+      // background-color: #eee
+      background-color: transparent
+      margin-left: 5px
+      font-size: 14px
+      line-height: 1.43
+      padding: 4px 6px
+      box-sizing: border-box
+      outline: none !important
+      flex-grow: 1
+      // will-change: border-color, box-shadow, background-color
+      // transition: border-color .3s ease-in-out, box-shadow .3s ease-in-out, background-color .3s ease-in-out
+      &:focus
+        // background-color: #f5f5f5
+      &.sp-search-input--rtl
+        direction: rtl
+  .bi-trash
+    color: #999
+    cursor: pointer
+    transition: all .3s ease
+    margin-left: 10px
+    &:hover
+      color: #000
+  .bi-search
+    transition: all .3s ease
+    color: #999
+    &.sp-search-in-focus
+      color: #000
+
