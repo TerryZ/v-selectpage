@@ -14,7 +14,8 @@ export function useRender (props, emit) {
     currentPage,
     lang,
     haveData,
-    selectItem
+    selectItem,
+    fetchData
   } = useData(props, emit)
 
   const renderSearch = () => {
@@ -67,6 +68,7 @@ export function useRender (props, emit) {
       modelValue: currentPage.value,
       'onUpdate:modelValue' (val) {
         currentPage.value = val
+        fetchData()
       }
     })
   }

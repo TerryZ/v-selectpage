@@ -84,7 +84,7 @@ export function selectPageProps () {
 }
 
 export function selectPageEmits () {
-  return ['search', 'selection-change', 'update:modelValue', 'page-change']
+  return ['search', 'selection-change', 'update:modelValue', 'page-change', 'fetch-data']
 }
 
 export function useData (props, emit) {
@@ -124,8 +124,9 @@ export function useData (props, emit) {
     }
     picked.value = [row]
   }
-  function pageChange () {
-    emit('page-change', {
+  function fetchData () {
+    emit('fetch-data', {
+      search: query.value,
       pageNumber: currentPage.value,
       pageSize: props.pageSize
     })
@@ -147,11 +148,14 @@ export function useData (props, emit) {
     emit('update:modelValue', val.map(value => value[props.keyProp]))
     emit('selection-change', val)
   })
-  watch(currentPage, pageChange)
-  watch(query, val => emit('search', val))
+  watch(query, () => {
+    // reset current page to 1 when query keyword change
+    currentPage.value = FIRST_PAGE
+    fetchData()
+  })
 
   onMounted(() => {
-    pageChange()
+    fetchData()
   })
 
   return {
@@ -166,7 +170,8 @@ export function useData (props, emit) {
     isPicked,
     haveItemSelected,
     selectItem,
-    removeAll
+    removeAll,
+    fetchData
   }
 }
 

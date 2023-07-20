@@ -12,9 +12,8 @@
             language="zh-chs"
             class="shadow-sm rounded-3 border overflow-hidden"
             v-model="selected"
-            @search="search"
             @selection-change="selectionChange"
-            @page-change="pageChange"
+            @fetch-data="fetchData"
           />
         </div>
         <div>
@@ -29,9 +28,8 @@
             :label-prop="labelFormatter"
             class="shadow-sm rounded-4 border overflow-hidden"
             v-model="selected1"
-            @search="search"
             @selection-change="selectionChange"
-            @page-change="pageChange"
+            @fetch-data="fetchData"
           />
         </div>
         <div>
@@ -52,31 +50,20 @@ import { SelectPageListCore } from '@/'
 const data1 = ref([])
 const selected = ref([3])
 const selected1 = ref([])
-const query = ref('')
 const totalRows = ref(0)
-const pageNumber = ref(1)
-const pageSize = ref(10)
 
 // local data list pagination
-function fetchData () {
-  const start = (pageNumber.value - 1) * pageSize.value
-  const end = start + pageSize.value - 1
+function fetchData (data) {
+  const { search, pageNumber, pageSize } = data
+  const start = (pageNumber - 1) * pageSize
+  const end = start + pageSize - 1
 
-  const list = query.value ? list1.filter(val => val.name.includes(query.value)) : list1
+  const list = search ? list1.filter(val => val.name.includes(search)) : list1
   totalRows.value = list.length
   data1.value = list.filter((val, index) => index >= start && index <= end)
 }
-function search (keyword) {
-  query.value = keyword
-  fetchData()
-}
 function selectionChange (data) {
   console.log(data)
-}
-function pageChange (data) {
-  pageNumber.value = data.pageNumber
-  pageSize.value = data.pageSize
-  fetchData()
 }
 
 function labelFormatter (row) {
