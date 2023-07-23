@@ -1,6 +1,8 @@
 import { h } from 'vue'
 import { useInject } from '../core/data'
 
+import IconClose from '../icons/IconClose.vue'
+
 export default {
   props: {
     data: { type: Object, default: undefined },
@@ -9,10 +11,10 @@ export default {
   },
   emits: ['select', 'hover'],
   setup (props, { emit }) {
-    const { renderCell, rtl } = useInject()
+    const { renderCell, rtl, removeItem } = useInject()
 
     return () => {
-      const content = renderCell(props.data)
+      const itemLabel = renderCell(props.data)
 
       const option = {
         class: {
@@ -21,13 +23,27 @@ export default {
           'sp-selected': props.isSelected,
           'sp-rtl': rtl
         },
-        title: content,
-        innerHTML: content,
+
         onClick: e => emit('select'),
         onMouseenter: () => emit('hover')
       }
 
-      return h('div', option)
+      const items = [
+        h('div', { title: itemLabel, innerHTML: itemLabel })
+      ]
+
+      if (props.isSelected) {
+        items.push(
+          h(IconClose, {
+            onClick: e => {
+              e.stopPropagation()
+              removeItem(props.data)
+            }
+          })
+        )
+      }
+
+      return h('div', option, items)
     }
   }
 }

@@ -4,7 +4,6 @@ import '../styles/search.sass'
 import { useInject } from '../core/data'
 
 import IconSearch from '../icons/IconSearch.vue'
-import IconTrash from '../icons/IconTrash.vue'
 import IconClose from '../icons/IconClose.vue'
 
 export default {
@@ -13,15 +12,13 @@ export default {
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
-    const { rtl, debounce, haveItemSelected, removeAll, language } = useInject()
+    const { rtl, debounce } = useInject()
 
     const timer = ref()
     const inFocus = ref(false)
     const searchRef = ref()
 
     return () => {
-      const items = []
-
       const searchModules = [
         h(IconSearch, { class: inFocus.value ? 'sp-search-in-focus' : '' }),
         h('input', {
@@ -49,9 +46,9 @@ export default {
         })
       ]
 
-      // have some search keyword
       if (props.modelValue.trim()) {
         searchModules.push(
+          // clean input content
           h(IconClose, {
             onClick () {
               clearTimeout(timer.value)
@@ -62,21 +59,7 @@ export default {
         )
       }
 
-      items.push(
-        h('div', { class: 'sp-search-container' }, searchModules)
-      )
-
-      const icons = []
-
-      if (haveItemSelected.value) {
-        icons.push(
-          h('div', { title: language.clearAll, onClick: removeAll }, h(IconTrash))
-        )
-      }
-
-      items.push(h('div', { class: 'sp-search-control' }, icons))
-
-      return h('div', { class: 'sp-search' }, items)
+      return h('div', { class: 'sp-search-container' }, searchModules)
     }
   }
 }

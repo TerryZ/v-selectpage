@@ -1,15 +1,19 @@
 .sp-search
   display: flex
   align-items: center
-  margin: 10px
+  // margin: 10px
+  padding: 2px 10px 2px 5px
   transition: all .3s ease
+  border-bottom: 1px solid #eee
   .sp-search-container
     display: flex
     align-items: center
     flex-grow: 1
     padding: 5px 10px
-    background-color: #f7f7f7
-    border-radius: .3rem
+    // background-color: #f1f1f1
+    // border: 1px solid #ddd
+    // border-radius: .3rem
+    // border-radius: 50rem
     transition: all .3s ease
     .sp-search-input
       // display: block
@@ -22,6 +26,7 @@
       padding: 4px 6px
       box-sizing: border-box
       outline: none !important
+      color: #777
       flex-grow: 1
       // will-change: border-color, box-shadow, background-color
       // transition: border-color .3s ease-in-out, box-shadow .3s ease-in-out, background-color .3s ease-in-out
@@ -32,7 +37,7 @@
     .bi-search,
     .bi-x-lg
       transition: all .3s ease
-      color: #999
+      color: #aaa
       &.sp-search-in-focus
         color: #000
     .bi-x-lg

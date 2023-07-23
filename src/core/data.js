@@ -2,6 +2,7 @@ import { ref, provide, watch, computed, inject, onMounted } from 'vue'
 import { FIRST_PAGE, DEFAULT_PAGE_SIZE } from './constants'
 import { EN } from '../language'
 import { useLanguage } from './helper'
+import { isEmptyArray } from './utilities'
 
 export function selectPageProps () {
   return {
@@ -84,7 +85,12 @@ export function selectPageProps () {
 }
 
 export function selectPageEmits () {
-  return ['search', 'selection-change', 'update:modelValue', 'page-change', 'fetch-data']
+  return [
+    'update:modelValue',
+    'fetch-data',
+    'fetch-selected-data',
+    'selection-change'
+  ]
 }
 
 export function useData (props, emit) {
@@ -98,6 +104,10 @@ export function useData (props, emit) {
   // select items
   const picked = ref([])
 
+  const haveItemSelected = computed(() => {
+    return !!picked.value.length
+  })
+
   const renderCell = function (row) {
     if (!row || !Object.keys(row).length) return ''
     switch (typeof props.labelProp) {
@@ -105,12 +115,8 @@ export function useData (props, emit) {
       case 'function': return props.labelProp(row)
     }
   }
-  const haveData = () => {
-    return Array.isArray(props.data) && props.data.length
-  }
-  const haveItemSelected = computed(() => {
-    return !!picked.value.length
-  })
+  const isDataEmpty = () => isEmptyArray(props.data)
+
   const isPicked = row => {
     if (!picked.value.length) return false
     return picked.value.some(val => val[props.keyProp] === row[props.keyProp])
@@ -131,42 +137,56 @@ export function useData (props, emit) {
       pageSize: props.pageSize
     })
   }
+  function fetchSelectedData () {
+    emit('fetch-selected-data', props.modelValue, data => {
+      if (isEmptyArray(data)) return
+      picked.value = data
+    })
+  }
   function removeAll () {
     picked.value = []
+  }
+  function removeItem (row) {
+    picked.value = picked.value.filter(val => {
+      return val[props.keyProp] !== row[props.keyProp]
+    })
   }
 
   provide('rtl', props.rtl)
   provide('pageSize', props.pageSize)
+  provide('debounce', props.debounce)
   provide('language', lang)
   provide('renderCell', renderCell)
   provide('isPicked', isPicked)
-  provide('debounce', props.debounce)
   provide('haveItemSelected', haveItemSelected)
   provide('removeAll', removeAll)
+  provide('removeItem', removeItem)
 
   watch(picked, val => {
     emit('update:modelValue', val.map(value => value[props.keyProp]))
     emit('selection-change', val)
   })
   watch(query, () => {
-    // reset current page to 1 when query keyword change
+    // reset current page to first page when query keyword change
     currentPage.value = FIRST_PAGE
     fetchData()
   })
 
   onMounted(() => {
     fetchData()
+    if (!isEmptyArray(props.modelValue)) {
+      fetchSelectedData()
+    }
   })
 
   return {
     query,
     message,
     currentPage,
-    picked,
     lang,
 
     renderCell,
-    haveData,
+    isDataEmpty,
     isPicked,
     haveItemSelected,
     selectItem,
@@ -186,6 +206,7 @@ export function useInject () {
     language: inject('language'),
     debounce: inject('debounce'),
     haveItemSelected: inject('haveItemSelected'),
-    removeAll: inject('removeAll')
+    removeAll: inject('removeAll'),
+    removeItem: inject('removeItem')
   }
 }

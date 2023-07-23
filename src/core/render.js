@@ -4,6 +4,7 @@ import '../styles/common.sass'
 import { useData } from './data'
 
 import Search from '../components/Search'
+import Control from '../components/Control'
 import List from '../components/List'
 import Pagination from '../components/Pagination'
 
@@ -13,18 +14,21 @@ export function useRender (props, emit) {
     message,
     currentPage,
     lang,
-    haveData,
+    isDataEmpty,
     selectItem,
     fetchData
   } = useData(props, emit)
 
   const renderSearch = () => {
-    return h(Search, {
-      modelValue: query.value,
-      'onUpdate:modelValue' (val) {
-        query.value = val
-      }
-    })
+    return h('div', { class: 'sp-search' }, [
+      h(Search, {
+        modelValue: query.value,
+        'onUpdate:modelValue' (val) {
+          query.value = val
+        }
+      }),
+      h(Control)
+    ])
   }
   const renderMessage = () => {
     const child = []
@@ -47,7 +51,7 @@ export function useRender (props, emit) {
     return h(Transition, option, () => child)
   }
   const renderList = () => {
-    if (!haveData()) return renderNoDataMessage()
+    if (isDataEmpty()) return renderNoDataMessage()
 
     return h(List, {
       list: props.data,

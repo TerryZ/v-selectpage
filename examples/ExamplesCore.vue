@@ -10,10 +10,11 @@
             :data="data1"
             :total-rows="totalRows"
             language="zh-chs"
-            class="shadow-sm rounded-3 border overflow-hidden"
+            class="shadow rounded-3 border overflow-hidden"
             v-model="selected"
             @selection-change="selectionChange"
             @fetch-data="fetchData"
+            @fetch-selected-data="fetchSelectedData"
           />
         </div>
         <div>
@@ -26,7 +27,7 @@
             :data="data1"
             :total-rows="totalRows"
             :label-prop="labelFormatter"
-            class="shadow-sm rounded-4 border overflow-hidden"
+            class="shadow-sm rounded-3 border overflow-hidden"
             v-model="selected1"
             @selection-change="selectionChange"
             @fetch-data="fetchData"
@@ -48,7 +49,7 @@ import { list1 } from './data'
 import { SelectPageListCore } from '@/'
 
 const data1 = ref([])
-const selected = ref([3])
+const selected = ref([23])
 const selected1 = ref([])
 const totalRows = ref(0)
 
@@ -61,6 +62,11 @@ function fetchData (data) {
   const list = search ? list1.filter(val => val.name.includes(search)) : list1
   totalRows.value = list.length
   data1.value = list.filter((val, index) => index >= start && index <= end)
+}
+function fetchSelectedData (data, callback) {
+  callback(
+    list1.filter(val => data.includes(val.id))
+  )
 }
 function selectionChange (data) {
   console.log(data)
