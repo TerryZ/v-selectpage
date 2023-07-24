@@ -1,8 +1,12 @@
 export const [
-  LEFT, UP, RIGHT, DOWN, TAB, ENTER, ESCAPE
+  LEFT, UP, RIGHT, DOWN, ENTER, ESCAPE
 ] = [
-  37, 38, 39, 40, 9, 13, 27
+  37, 38, 39, 40, 13, 27
 ]
+
+export const operationKeyCodes = [LEFT, UP, RIGHT, DOWN, ENTER, ESCAPE]
+
+export const NOT_SELECTED = -1
 
 export const FIRST_PAGE = 1
 

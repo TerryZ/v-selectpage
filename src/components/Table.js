@@ -10,7 +10,7 @@ export default {
   },
   setup (props, { emit }) {
     const { itemSelect, setItemHighlight, itemClasses } = useList(props, emit)
-    const { isPicked, rtl } = useInject()
+    const { isItemSelected, rtl } = useInject()
 
     const renderColumn = (row, col) => {
       if (!row || !Object.keys(row).length || !col || !col.data) return ''
@@ -31,7 +31,7 @@ export default {
             e.stopPropagation()
             itemSelect(val)
           },
-          onMouseenter: () => setItemHighlight(isPicked(val) ? -1 : index)
+          onMouseenter: () => setItemHighlight(isItemSelected(val) ? -1 : index)
         }, props.tbColumns.map((col, idx) => { // table cells
           return h('td', {
             key: idx,

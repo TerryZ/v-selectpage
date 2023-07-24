@@ -6,23 +6,26 @@
     <div class="row">
       <div class="col-md-6">
         <div class="mb-3">
+          选择的项目 key: <span v-text="selected.toString()" />
+        </div>
+        <div>
           <SelectPageListCore
             :data="data1"
             :total-rows="totalRows"
             language="zh-chs"
-            class="shadow rounded-3 border overflow-hidden"
+            class="shadow-sm rounded-3 border overflow-hidden"
             v-model="selected"
             @selection-change="selectionChange"
             @fetch-data="fetchData"
             @fetch-selected-data="fetchSelectedData"
           />
         </div>
-        <div>
-          选择的项目 key: <span v-text="selected.toString()" />
-        </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
+          选择的项目 key: <span v-text="selected1.toString()" />
+        </div>
+        <div>
           <SelectPageListCore
             :data="data1"
             :total-rows="totalRows"
@@ -32,9 +35,6 @@
             @selection-change="selectionChange"
             @fetch-data="fetchData"
           />
-        </div>
-        <div>
-          选择的项目 key: <span v-text="selected1.toString()" />
         </div>
       </div>
     </div>

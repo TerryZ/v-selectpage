@@ -2,6 +2,7 @@ import { ref, h } from 'vue'
 
 import '../styles/search.sass'
 import { useInject } from '../core/data'
+import { isOperationKey } from '../core/list'
 
 import IconSearch from '../icons/IconSearch.vue'
 import IconClose from '../icons/IconClose.vue'
@@ -10,7 +11,7 @@ export default {
   props: {
     modelValue: { type: String, default: '' }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'keyboard-operation'],
   setup (props, { emit }) {
     const { rtl, debounce } = useInject()
 
@@ -29,14 +30,17 @@ export default {
             'sp-search-input': true,
             'sp-search-input--rtl': rtl
           },
-          // onKeyup: e => this.processKey(e),
-          // onKeydown: e => {
-          //   e.stopPropagation()
-          //   this.processControl(e)
-          // },
+          onKeydown: e => {
+            e.stopPropagation()
+
+            if (!isOperationKey(e.keyCode)) return
+            emit('keyboard-operation', e.keyCode)
+          },
           onFocus: () => { inFocus.value = true },
           onBlur: () => { inFocus.value = false },
           onInput: e => {
+            if (isOperationKey(e.keyCode)) return
+
             clearTimeout(timer.value)
             timer.value = setTimeout(() => {
               emit('update:modelValue', e.target.value.trim())

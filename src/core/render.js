@@ -2,6 +2,7 @@ import { h, Transition } from 'vue'
 
 import '../styles/common.sass'
 import { useData } from './data'
+import { useListItemHighlight } from './list'
 
 import Search from '../components/Search'
 import Control from '../components/Control'
@@ -18,6 +19,11 @@ export function useRender (props, emit) {
     selectItem,
     fetchData
   } = useData(props, emit)
+  const {
+    highlightIndex,
+    keyboardNavigation,
+    setItemHighlight
+  } = useListItemHighlight(props, emit)
 
   const renderSearch = () => {
     return h('div', { class: 'sp-search' }, [
@@ -25,6 +31,9 @@ export function useRender (props, emit) {
         modelValue: query.value,
         'onUpdate:modelValue' (val) {
           query.value = val
+        },
+        onKeyboardOperation: keyCode => {
+          keyboardNavigation(keyCode)
         }
       }),
       h(Control)
@@ -55,7 +64,9 @@ export function useRender (props, emit) {
 
     return h(List, {
       list: props.data,
-      onSelect: row => selectItem(row)
+      highlightIndex: highlightIndex.value,
+      onSelect: row => selectItem(row),
+      onSetHighlight: index => setItemHighlight(index)
     })
   }
   const renderTable = () => {

@@ -6,12 +6,12 @@ import IconTrash from '../icons/IconTrash.vue'
 
 export default {
   setup (props, { emit }) {
-    const { haveItemSelected, removeAll, language } = useInject()
+    const { haveSomeOneSelected, removeAll, language } = useInject()
 
     return () => {
       const items = []
 
-      if (haveItemSelected.value) {
+      if (haveSomeOneSelected.value) {
         items.push(
           h('div', { title: language.clearAll, onClick: removeAll }, h(IconTrash))
         )
