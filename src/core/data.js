@@ -1,4 +1,4 @@
-import { ref, provide, watch, inject, onMounted } from 'vue'
+import { ref, provide, watch, inject, onMounted, toRef } from 'vue'
 import { FIRST_PAGE, DEFAULT_PAGE_SIZE } from './constants'
 import { EN } from '../language'
 import { useLanguage } from './helper'
@@ -20,6 +20,8 @@ export function selectPageProps () {
     placeholder: { type: String, default: '' },
     /** multiple selection */
     multiple: { type: Boolean, default: false },
+    /** data loading state, recommended to use it with the `fetch-data` event */
+    loading: { type: Boolean, default: false },
     language: { type: String, default: EN },
     /**
      * specify field to be key field, the value will return by v-model
@@ -62,6 +64,7 @@ export function selectPageProps () {
     sort: String,
     searchField: String,
     pageSize: { type: Number, default: DEFAULT_PAGE_SIZE },
+    /** total rows count */
     totalRows: { type: Number, default: 0 },
     /**
      * max selected item limit, set 0 to unlimited
@@ -138,6 +141,7 @@ export function useData (props, emit) {
   provide('rtl', props.rtl)
   provide('pageSize', props.pageSize)
   provide('debounce', props.debounce)
+  provide('loading', toRef(props, 'loading'))
   provide('language', lang)
   provide('renderCell', renderCell)
   provide('isItemSelected', isItemSelected)
@@ -182,6 +186,7 @@ export function useInject () {
     pageSize: inject('pageSize'),
     language: inject('language'),
     debounce: inject('debounce'),
+    loading: inject('loading'),
     haveSomeOneSelected: inject('haveSomeOneSelected'),
     removeAll: inject('removeAll'),
     removeItem: inject('removeItem')

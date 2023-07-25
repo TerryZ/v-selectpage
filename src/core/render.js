@@ -3,6 +3,7 @@ import { h, Transition } from 'vue'
 import '../styles/common.sass'
 import { useData } from './data'
 import { useListItemHighlight } from './list'
+import { usePagination } from './pagination'
 
 import Search from '../components/Search'
 import Control from '../components/Control'
@@ -24,6 +25,12 @@ export function useRender (props, emit) {
     keyboardNavigation,
     setItemHighlight
   } = useListItemHighlight(props, emit)
+  const {
+    paginationInfo,
+    isFirstPage,
+    isLastPage,
+    switchPage
+  } = usePagination(props, currentPage, lang)
 
   const renderSearch = () => {
     return h('div', { class: 'sp-search' }, [
@@ -70,7 +77,7 @@ export function useRender (props, emit) {
     })
   }
   const renderTable = () => {
-
+    if (isDataEmpty()) return renderNoDataMessage()
   }
   const renderNoDataMessage = () => {
     return h('div', { class: 'sp-result-message' }, lang.notFound)
@@ -79,10 +86,11 @@ export function useRender (props, emit) {
     if (!props.pagination) return
 
     return h(Pagination, {
-      totalRows: props.totalRows,
-      modelValue: currentPage.value,
-      'onUpdate:modelValue' (val) {
-        currentPage.value = val
+      pageInfo: paginationInfo.value,
+      isFirstPage: isFirstPage.value,
+      isLastPage: isLastPage.value,
+      onPageChange (action) {
+        switchPage(action)
         fetchData()
       }
     })

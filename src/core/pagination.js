@@ -1,55 +1,43 @@
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 
 import {
   FIRST_PAGE,
   ACTION_FIRST, ACTION_PREVIOUS, ACTION_NEXT, ACTION_LAST,
   LANG_PAGE_NUMBER, LANG_PAGE_COUNT, LANG_ROW_COUNT
 } from './constants'
-import { useInject } from '../core/data'
 
-export function usePagination (props, emit) {
-  const { language } = useInject()
-
-  const lastNumber = ref(-1)
-
+export function usePagination (props, currentPage, lang) {
   const totalPage = computed(() => Math.ceil(props.totalRows / props.pageSize))
-  const pageInfo = computed(() => language.pageInfo
-    .replace(LANG_PAGE_NUMBER, props.modelValue)
+  const isFirstPage = computed(() => currentPage.value === FIRST_PAGE)
+  const isLastPage = computed(() => currentPage.value === totalPage.value)
+  const paginationInfo = computed(() => lang.pageInfo
+    .replace(LANG_PAGE_NUMBER, currentPage.value)
     .replace(LANG_PAGE_COUNT, totalPage.value)
     .replace(LANG_ROW_COUNT, props.totalRows)
   )
-  const isFirstPage = computed(() => props.modelValue === FIRST_PAGE)
-  const isLastPage = computed(() => props.modelValue === totalPage.value)
 
   const getPageNumber = function (action) {
     switch (action) {
       case ACTION_FIRST: return FIRST_PAGE
-      case ACTION_PREVIOUS: return props.modelValue > FIRST_PAGE
-        ? props.modelValue - 1
-        : FIRST_PAGE
-      case ACTION_NEXT: return props.modelValue < totalPage.value
-        ? props.modelValue + 1
-        : totalPage.value
+      case ACTION_PREVIOUS: return currentPage.value - 1
+      case ACTION_NEXT: return currentPage.value + 1
       case ACTION_LAST: return totalPage.value
+      default: return undefined
     }
   }
   const switchPage = function (action) {
     const pageNumber = getPageNumber(action)
-    if (pageNumber === lastNumber.value) {
-      return
-    }
-    if (pageNumber) {
-      emit('update:modelValue', pageNumber)
-    }
-    lastNumber.value = pageNumber
+
+    if (typeof pageNumber === 'undefined') return
+    if (pageNumber === currentPage.value) return
+
+    currentPage.value = pageNumber
   }
 
   return {
-    totalPage,
-    pageInfo,
+    paginationInfo,
     isFirstPage,
     isLastPage,
-    getPageNumber,
     switchPage
   }
 }

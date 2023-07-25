@@ -1,4 +1,4 @@
-import { ref, h } from 'vue'
+import { ref, computed, h } from 'vue'
 
 import '../styles/search.sass'
 import { useInject } from '../core/data'
@@ -6,6 +6,7 @@ import { isOperationKey } from '../core/list'
 
 import IconSearch from '../icons/IconSearch.vue'
 import IconClose from '../icons/IconClose.vue'
+import IconLoading from '../icons/IconLoading.vue'
 
 export default {
   props: {
@@ -13,15 +14,22 @@ export default {
   },
   emits: ['update:modelValue', 'keyboard-operation'],
   setup (props, { emit }) {
-    const { rtl, debounce } = useInject()
+    const { rtl, debounce, loading } = useInject()
 
     const timer = ref()
     const inFocus = ref(false)
     const searchRef = ref()
 
     return () => {
+      const icon = computed(() => {
+        if (loading.value) {
+          return h(IconLoading)
+        }
+        return h(IconSearch, { class: inFocus.value ? 'sp-search-in-focus' : '' })
+      })
+
       const searchModules = [
-        h(IconSearch, { class: inFocus.value ? 'sp-search-in-focus' : '' }),
+        icon.value,
         h('input', {
           type: 'text',
           autocomplete: 'off',

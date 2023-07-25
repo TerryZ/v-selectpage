@@ -12,6 +12,7 @@
           <SelectPageListCore
             :data="data1"
             :total-rows="totalRows"
+            :loading="loading"
             language="zh-chs"
             class="shadow-sm rounded-3 border overflow-hidden"
             v-model="selected"
@@ -52,16 +53,22 @@ const data1 = ref([])
 const selected = ref([23])
 const selected1 = ref([])
 const totalRows = ref(0)
+const loading = ref(false)
 
 // local data list pagination
 function fetchData (data) {
+  loading.value = true
   const { search, pageNumber, pageSize } = data
   const start = (pageNumber - 1) * pageSize
   const end = start + pageSize - 1
 
   const list = search ? list1.filter(val => val.name.includes(search)) : list1
   totalRows.value = list.length
-  data1.value = list.filter((val, index) => index >= start && index <= end)
+
+  setTimeout(() => {
+    data1.value = list.filter((val, index) => index >= start && index <= end)
+    loading.value = false
+  }, 1000)
 }
 function fetchSelectedData (data, callback) {
   callback(
