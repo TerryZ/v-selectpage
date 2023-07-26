@@ -20,5 +20,5 @@ export function isPagingOperation (keyCode) {
 }
 
 export function isSelectOperation (keyCode) {
-  return keyCode === ENTER
+  return ENTER === keyCode
 }

@@ -78,11 +78,16 @@ export function useListItemHighlight (props, emit) {
     if (keyCode === DOWN) return moveDown()
   }
 
+  const isSomeRowHighlight = () => {
+    return highlightIndex.value !== NOT_SELECTED
+  }
+
   return {
     highlightIndex,
 
     setItemHighlight,
-    highlightNavigation
+    highlightNavigation,
+    isSomeRowHighlight
   }
 }
 

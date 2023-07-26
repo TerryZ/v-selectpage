@@ -24,7 +24,8 @@ export function useRender (props, emit) {
   const {
     highlightIndex,
     setItemHighlight,
-    highlightNavigation
+    highlightNavigation,
+    isSomeRowHighlight
   } = useListItemHighlight(props, emit)
   const {
     paginationInfo,
@@ -56,7 +57,10 @@ export function useRender (props, emit) {
             return
           }
           // press ENTER key to selected the highlight row
-          if (isSelectOperation(keyCode)) return selectItem(props.data[highlightIndex.value])
+          if (isSelectOperation(keyCode)) {
+            if (!isSomeRowHighlight()) return
+            return selectItem(props.data[highlightIndex.value])
+          }
         }
       }),
       h(Control)
@@ -111,6 +115,10 @@ export function useRender (props, emit) {
       }
     })
   }
+  const renderDropdown = () => {
+
+  }
+
   return {
     query,
     message,
@@ -120,6 +128,7 @@ export function useRender (props, emit) {
     renderMessage,
     renderList,
     renderTable,
-    renderPagination
+    renderPagination,
+    renderDropdown
   }
 }
