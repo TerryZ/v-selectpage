@@ -4,6 +4,7 @@ import '../styles/common.sass'
 import { useData } from './data'
 import { useListItemHighlight } from './list'
 import { usePagination } from './pagination'
+import { isHighlightOperation, isPagingOperation, isSelectOperation } from './helper'
 
 import Search from '../components/Search'
 import Control from '../components/Control'
@@ -22,15 +23,18 @@ export function useRender (props, emit) {
   } = useData(props, emit)
   const {
     highlightIndex,
-    keyboardNavigation,
-    setItemHighlight
+    setItemHighlight,
+    highlightNavigation
   } = useListItemHighlight(props, emit)
   const {
     paginationInfo,
     isFirstPage,
     isLastPage,
-    switchPage
+    switchPage,
+    pagingNavigation
   } = usePagination(props, currentPage, lang)
+
+  let keyboardTimer
 
   const renderSearch = () => {
     return h('div', { class: 'sp-search' }, [
@@ -40,7 +44,19 @@ export function useRender (props, emit) {
           query.value = val
         },
         onKeyboardOperation: keyCode => {
-          keyboardNavigation(keyCode)
+          // press UP or DOWN key to change highlight row
+          if (isHighlightOperation(keyCode)) return highlightNavigation(keyCode)
+          // press LEFT or RIGHT key to change current page
+          if (isPagingOperation(keyCode)) {
+            pagingNavigation(keyCode)
+
+            clearTimeout(keyboardTimer)
+            keyboardTimer = setTimeout(fetchData, props.debounce)
+
+            return
+          }
+          // press ENTER key to selected the highlight row
+          if (isSelectOperation(keyCode)) return selectItem(props.data[highlightIndex.value])
         }
       }),
       h(Control)

@@ -6,7 +6,11 @@
     <div class="row">
       <div class="col-md-6">
         <div class="mb-3">
-          选择的项目 key: <span v-text="selected.toString()" />
+          选择的项目 key:
+          <span
+            class="bg-light py-1 px-2 rounded-3 ms-2"
+            v-text="selected.toString()"
+          />
         </div>
         <div>
           <SelectPageListCore

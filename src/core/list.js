@@ -73,20 +73,16 @@ export function useListItemHighlight (props, emit) {
     highlightIndex.value += 1
   }
 
-  const keyboardNavigation = keyCode => {
-    if (!operationKeyCodes.includes(keyCode)) return
-
-    switch (keyCode) {
-      case UP: return moveUp()
-      case DOWN: return moveDown()
-    }
+  const highlightNavigation = keyCode => {
+    if (keyCode === UP) return moveUp()
+    if (keyCode === DOWN) return moveDown()
   }
 
   return {
     highlightIndex,
 
     setItemHighlight,
-    keyboardNavigation
+    highlightNavigation
   }
 }
 
