@@ -57,12 +57,6 @@ export function selectPageProps () {
      * ]
      */
     columns: { type: Array, default: undefined },
-    /**
-     * sort config, use space to split field name and sort order
-     * @example 'name desc'
-     */
-    sort: String,
-    searchField: String,
     pageSize: { type: Number, default: DEFAULT_PAGE_SIZE },
     /** total rows count */
     totalRows: { type: Number, default: 0 },

@@ -35,6 +35,7 @@
             :data="data1"
             :total-rows="totalRows"
             :label-prop="labelFormatter"
+            :multiple="true"
             class="shadow-sm rounded-3 border overflow-hidden"
             v-model="selected1"
             @selection-change="selectionChange"

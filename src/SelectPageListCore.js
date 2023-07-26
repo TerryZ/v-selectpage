@@ -1,9 +1,9 @@
-import { h } from 'vue'
+import { h, defineComponent } from 'vue'
 
 import { selectPageProps, selectPageEmits } from './core/data'
 import { useRender } from './core/render'
 
-export default {
+export default defineComponent({
   props: {
     ...selectPageProps()
   },
@@ -25,4 +25,4 @@ export default {
       ])
     }
   }
-}
+})

@@ -35,8 +35,8 @@ devDependencies:
     specifier: ^10.4.14
     version: registry.npmmirror.com/autoprefixer@10.4.14(postcss@8.4.27)
   bootstrap:
-    specifier: ^5.3.0
-    version: registry.npmmirror.com/bootstrap@5.3.0(@popperjs/core@2.11.8)
+    specifier: ^5.3.1
+    version: registry.npmmirror.com/bootstrap@5.3.1(@popperjs/core@2.11.8)
   eslint:
     specifier: ^8.45.0
     version: registry.npmmirror.com/eslint@8.45.0
@@ -1456,13 +1456,13 @@ packages:
     version: 1.0.0
     dev: true
 
-  registry.npmmirror.com/bootstrap@5.3.0(@popperjs/core@2.11.8):
-    resolution: {integrity: sha512-UnBV3E3v4STVNQdms6jSGO2CvOkjUMdDAVR2V5N4uCMdaIkaQjbcEAMqRimDHIs4uqBYzDAKCQwCB+97tJgHQw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bootstrap/-/bootstrap-5.3.0.tgz}
-    id: registry.npmmirror.com/bootstrap/5.3.0
+  registry.npmmirror.com/bootstrap@5.3.1(@popperjs/core@2.11.8):
+    resolution: {integrity: sha512-jzwza3Yagduci2x0rr9MeFSORjcHpt0lRZukZPZQJT1Dth5qzV7XcgGqYzi39KGAVYR8QEDVoO0ubFKOxzMG+g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bootstrap/-/bootstrap-5.3.1.tgz}
+    id: registry.npmmirror.com/bootstrap/5.3.1
     name: bootstrap
-    version: 5.3.0
+    version: 5.3.1
     peerDependencies:
-      '@popperjs/core': ^2.11.7
+      '@popperjs/core': ^2.11.8
     dependencies:
       '@popperjs/core': registry.npmmirror.com/@popperjs/core@2.11.8
     dev: true
