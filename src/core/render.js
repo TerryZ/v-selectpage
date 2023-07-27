@@ -10,6 +10,7 @@ import Search from '../components/Search'
 import Control from '../components/Control'
 import List from '../components/List'
 import Pagination from '../components/Pagination'
+import IconMessage from '../icons/IconMessage.vue'
 
 export function useRender (props, emit) {
   const {
@@ -71,8 +72,8 @@ export function useRender (props, emit) {
     if (message.value) {
       child.push(
         h('div', { class: 'sp-message' }, [
-          h('i', { class: 'sp-iconfont sp-icon-warning' }),
-          h('span', { innerHTML: message.value })
+          h(IconMessage),
+          h('div', { class: 'sp-message-body', innerHTML: message.value })
         ])
       )
     }
@@ -80,8 +81,12 @@ export function useRender (props, emit) {
     const option = {
       name: 'sp-message-slide',
       appear: true,
-      onEnter: () => this.adjust(),
-      onAfterLeave: () => this.adjust()
+      onEnter: () => {
+        // this.adjust()
+      },
+      onAfterLeave: () => {
+        // this.adjust()
+      }
     }
 
     return h(Transition, option, () => child)

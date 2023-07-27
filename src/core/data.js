@@ -1,5 +1,5 @@
 import { ref, provide, watch, inject, onMounted, toRef } from 'vue'
-import { FIRST_PAGE, DEFAULT_PAGE_SIZE } from './constants'
+import { FIRST_PAGE, DEFAULT_PAGE_SIZE, UNLIMITED, LANG_MAX_SELECTED_LIMIT } from './constants'
 import { EN } from '../language'
 import { useLanguage } from './helper'
 import { useItemSelection } from './list'
@@ -8,11 +8,7 @@ import { isEmptyArray } from './utilities'
 export function selectPageProps () {
   return {
     /**
-     * specify key to make list item selected, the must be match 'keyProp' option value
-     *
-     * example:
-     * single mode: '123'
-     * multiple mode: '123, 124, 125'
+     * binding selected item keys, it must be match 'keyProp' option value
      */
     modelValue: { type: Array, default: undefined },
     data: { type: Array, default: undefined },
@@ -61,15 +57,16 @@ export function selectPageProps () {
     /** total rows count */
     totalRows: { type: Number, default: 0 },
     /**
-     * max selected item limit, set 0 to unlimited
+     * maximum number of selection, set 0 to unlimited
+     * depend on `multiple` prop set to true
      */
-    maxSelectLimit: { type: Number, default: 0 },
+    max: { type: Number, default: UNLIMITED, validator: (val) => val >= 0 },
     /**
      * pagination bar
      */
     pagination: { type: Boolean, default: true },
     /**
-     * make row text and drop down container align to right
+     * text written from right to left
      */
     rtl: { type: Boolean, default: false },
     /**
@@ -108,24 +105,37 @@ export function useData (props, emit) {
   const message = ref('')
   // current page number
   const currentPage = ref(FIRST_PAGE)
+  let messageTimer
 
-  const renderCell = function (row) {
+  const isDataEmpty = () => isEmptyArray(props.data)
+  const renderCell = row => {
     if (!row || !Object.keys(row).length) return ''
     switch (typeof props.labelProp) {
       case 'string': return row[props.labelProp]
       case 'function': return props.labelProp(row)
     }
   }
-  const isDataEmpty = () => isEmptyArray(props.data)
+  const checkAndSelectItem = row => {
+    if (props.max === UNLIMITED) {
+      return selectItem(row)
+    }
+    if (selected.value.length === props.max) {
+      message.value = lang.maxSelected.replace(LANG_MAX_SELECTED_LIMIT, props.max)
 
-  function fetchData () {
+      clearTimeout(messageTimer)
+      messageTimer = setTimeout(() => { message.value = '' }, 3000)
+      return
+    }
+    selectItem(row)
+  }
+  const fetchData = () => {
     emit('fetch-data', {
       search: query.value,
       pageNumber: currentPage.value,
       pageSize: props.pageSize
     })
   }
-  function fetchSelectedData () {
+  const fetchSelectedData = () => {
     emit('fetch-selected-data', props.modelValue, data => {
       if (isEmptyArray(data)) return
       selected.value = data
@@ -166,7 +176,7 @@ export function useData (props, emit) {
     isDataEmpty,
     isItemSelected,
     haveSomeOneSelected,
-    selectItem,
+    selectItem: checkAndSelectItem,
     removeAll,
     fetchData
   }

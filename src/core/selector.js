@@ -1,6 +1,6 @@
 import { ref, h, mergeProps } from 'vue'
 import Dropdown from 'v-dropdown'
-import IconX from '../icons/IconX.vue'
+import IconClose from '../icons/IconClose.vue'
 
 import { useLanguage } from './helper'
 
@@ -16,7 +16,7 @@ export function useDropdown (props) {
     dropdown.value && dropdown.value.adjust()
   }
 
-  function generateDropdown (customProps, trigger, contents) {
+  function renderDropdown (customProps, trigger, contents) {
     const dropdownOption = {
       ref: dropdown,
       border: true,
@@ -29,7 +29,7 @@ export function useDropdown (props) {
     })
   }
 
-  function generateDropdownTriggerButton (slots, useContent, clear) {
+  function renderDropdownTriggerButton (slots, useContent, clear) {
     const lang = useLanguage(props.language)
     const content = useContent()
     const elements = []
@@ -41,7 +41,7 @@ export function useDropdown (props) {
         h('span', content?.value?.regionText || lang.pleaseSelect)
       ]
 
-      if (content?.value?.regionText) { // 清除图标
+      if (content?.value?.regionText) { // clean icon
         const clearOption = {
           class: 'rg-clear-btn',
           title: lang.clear,
@@ -50,8 +50,8 @@ export function useDropdown (props) {
             clear && clear()
           }
         }
-        buttonElements.push(h('span', clearOption, h(IconX)))
-      } else { // 下拉图标
+        buttonElements.push(h('span', clearOption, h(IconClose)))
+      } else { // dropdown icon
         buttonElements.push(h('span', { class: 'rg-caret-down' }))
       }
 
@@ -71,8 +71,8 @@ export function useDropdown (props) {
   return {
     visible,
     dropdown,
-    generateDropdown,
-    generateDropdownTriggerButton,
+    renderDropdown,
+    renderDropdownTriggerButton,
     closeDropdown,
     adjustDropdown
   }

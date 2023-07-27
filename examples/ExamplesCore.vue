@@ -1,15 +1,16 @@
 <template>
   <div class="p-3">
-    <h3>核心模块</h3>
+    <h1>核心模块</h1>
 
-    <h5>List View 列表视图</h5>
+    <h4>List View 列表视图</h4>
     <div class="row">
       <div class="col-md-6">
+        <h5>单选模式</h5>
         <div class="mb-3">
           选择的项目 key:
           <span
             class="bg-light py-1 px-2 rounded-3 ms-2"
-            v-text="selected.toString()"
+            v-text="selected.toString() || '无'"
           />
         </div>
         <div>
@@ -18,7 +19,7 @@
             :total-rows="totalRows"
             :loading="loading"
             language="zh-chs"
-            class="shadow-sm rounded-3 border overflow-hidden"
+            class="border overflow-hidden"
             v-model="selected"
             @selection-change="selectionChange"
             @fetch-data="fetchData"
@@ -27,8 +28,12 @@
         </div>
       </div>
       <div class="col-md-6">
+        <h5>多选模式</h5>
         <div class="mb-3">
-          选择的项目 key: <span v-text="selected1.toString()" />
+          选择的项目 key: <span
+            class="bg-light py-1 px-2 rounded-3 ms-2"
+            v-text="selected1.toString() || '无'"
+          />
         </div>
         <div>
           <SelectPageListCore
@@ -36,7 +41,8 @@
             :total-rows="totalRows"
             :label-prop="labelFormatter"
             :multiple="true"
-            class="shadow-sm rounded-3 border overflow-hidden"
+            :max="2"
+            class="border overflow-hidden"
             v-model="selected1"
             @selection-change="selectionChange"
             @fetch-data="fetchData"
@@ -73,7 +79,7 @@ function fetchData (data) {
   setTimeout(() => {
     data1.value = list.filter((val, index) => index >= start && index <= end)
     loading.value = false
-  }, 1000)
+  }, 500)
 }
 function fetchSelectedData (data, callback) {
   callback(

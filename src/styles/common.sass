@@ -12,6 +12,31 @@
     display: flex
     flex-direction: column
 
+.sp-message
+  display: flex
+  align-items: center
+  padding: 10px 0
+  background-color: #E4EAEE
+  color: black
+  flex-grow: 1
+  .bi-chat-left-dots
+    font-size: 1.2rem
+    margin: 0 1rem
+  .sp-message-body
+    font-size: 14px
+    line-height: 1
+    flex-wrap: wrap
+    max-width: 15rem
+.sp-message-slide-enter-active,
+.sp-message-slide-leave-active
+  transition: opacity 300ms
+.sp-message-slide-enter,
+.sp-message-slide-leave-to
+  opacity: 0
+.sp-message-slide-enter-to,
+.sp-message-slide-leave
+  opacity: 1
+
 .sp-icon
   width: 1em
   height: 1em

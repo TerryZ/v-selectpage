@@ -43,7 +43,7 @@ export function useItemSelection (props, emit) {
   watch(selected, val => {
     emit('update:modelValue', val.map(value => value[props.keyProp]))
     emit('selection-change', val)
-  })
+  }, { deep: true })
 
   return {
     selected,
