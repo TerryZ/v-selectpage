@@ -4,7 +4,13 @@ import '../styles/common.sass'
 import { useData } from './data'
 import { useListItemHighlight } from './list'
 import { usePagination } from './pagination'
-import { isHighlightOperation, isPagingOperation, isSelectOperation } from './helper'
+import {
+  isHighlightOperation,
+  isPagingOperation,
+  isSelectOperation,
+  useDebounce
+} from './helper'
+import { useDropdown } from './selector'
 
 import Search from '../components/Search'
 import Control from '../components/Control'
@@ -35,8 +41,16 @@ export function useRender (props, emit) {
     switchPage,
     pagingNavigation
   } = usePagination(props, currentPage, lang)
+  const {
+    visible,
+    dropdownRef,
+    adjustDropdown,
+    closeDropdown,
+    renderDropdown,
+    renderDropdownTriggerButton
+  } = useDropdown(props)
 
-  let keyboardTimer
+  const keyboardDebounce = useDebounce(props.debounce)
 
   const renderSearch = () => {
     return h('div', { class: 'sp-search' }, [
@@ -51,10 +65,7 @@ export function useRender (props, emit) {
           // press LEFT or RIGHT key to change current page
           if (isPagingOperation(keyCode)) {
             pagingNavigation(keyCode)
-
-            clearTimeout(keyboardTimer)
-            keyboardTimer = setTimeout(fetchData, props.debounce)
-
+            keyboardDebounce(fetchData)
             return
           }
           // press ENTER key to selected the highlight row
@@ -119,9 +130,6 @@ export function useRender (props, emit) {
         fetchData()
       }
     })
-  }
-  const renderDropdown = () => {
-
   }
 
   return {

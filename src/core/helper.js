@@ -11,6 +11,15 @@ export function useLanguage (lang) {
   return languages[EN]
 }
 
+export function useDebounce (time = 3000) {
+  let timer
+
+  return callback => {
+    clearTimeout(timer)
+    timer = setTimeout(callback, time)
+  }
+}
+
 export function isHighlightOperation (keyCode) {
   return [UP, DOWN].includes(keyCode)
 }

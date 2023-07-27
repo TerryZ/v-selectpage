@@ -6,19 +6,19 @@ import { useLanguage } from './helper'
 
 export function useDropdown (props) {
   const visible = ref(false)
-  const dropdown = ref(null)
+  const dropdownRef = ref(null)
 
   function closeDropdown () {
-    dropdown.value && dropdown.value.close()
+    dropdownRef.value && dropdownRef.value.close()
   }
 
   function adjustDropdown () {
-    dropdown.value && dropdown.value.adjust()
+    dropdownRef.value && dropdownRef.value.adjust()
   }
 
   function renderDropdown (customProps, trigger, contents) {
     const dropdownOption = {
-      ref: dropdown,
+      ref: dropdownRef,
       border: true,
       disabled: props.disabled,
       onVisibleChange (val) { visible.value = val }
@@ -70,7 +70,7 @@ export function useDropdown (props) {
 
   return {
     visible,
-    dropdown,
+    dropdownRef,
     renderDropdown,
     renderDropdownTriggerButton,
     closeDropdown,

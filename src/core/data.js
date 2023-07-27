@@ -1,7 +1,7 @@
 import { ref, provide, watch, inject, onMounted, toRef } from 'vue'
 import { FIRST_PAGE, DEFAULT_PAGE_SIZE, UNLIMITED, LANG_MAX_SELECTED_LIMIT } from './constants'
 import { EN } from '../language'
-import { useLanguage } from './helper'
+import { useLanguage, useDebounce } from './helper'
 import { useItemSelection } from './list'
 import { isEmptyArray } from './utilities'
 
@@ -105,7 +105,8 @@ export function useData (props, emit) {
   const message = ref('')
   // current page number
   const currentPage = ref(FIRST_PAGE)
-  let messageTimer
+
+  const messageDebounce = useDebounce()
 
   const isDataEmpty = () => isEmptyArray(props.data)
   const renderCell = row => {
@@ -122,8 +123,7 @@ export function useData (props, emit) {
     if (selected.value.length === props.max) {
       message.value = lang.maxSelected.replace(LANG_MAX_SELECTED_LIMIT, props.max)
 
-      clearTimeout(messageTimer)
-      messageTimer = setTimeout(() => { message.value = '' }, 3000)
+      messageDebounce(() => { message.value = '' })
       return
     }
     selectItem(row)

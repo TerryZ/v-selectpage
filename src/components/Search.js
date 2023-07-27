@@ -3,6 +3,7 @@ import { ref, computed, h } from 'vue'
 import '../styles/search.sass'
 import { useInject } from '../core/data'
 import { isOperationKey } from '../core/list'
+import { useDebounce } from '../core/helper'
 
 import IconSearch from '../icons/IconSearch.vue'
 import IconClose from '../icons/IconClose.vue'
@@ -16,9 +17,10 @@ export default {
   setup (props, { emit }) {
     const { rtl, debounce, loading } = useInject()
 
-    const timer = ref()
     const inFocus = ref(false)
     const searchRef = ref()
+
+    const inputDebounce = useDebounce(debounce)
 
     return () => {
       const icon = computed(() => {
@@ -49,10 +51,9 @@ export default {
           onInput: e => {
             if (isOperationKey(e.keyCode)) return
 
-            clearTimeout(timer.value)
-            timer.value = setTimeout(() => {
+            inputDebounce(() => {
               emit('update:modelValue', e.target.value.trim())
-            }, debounce)
+            })
           },
           ref: searchRef
         })
@@ -63,7 +64,6 @@ export default {
           // clean input content
           h(IconClose, {
             onClick () {
-              clearTimeout(timer.value)
               emit('update:modelValue', '')
               searchRef.value.focus()
             }
