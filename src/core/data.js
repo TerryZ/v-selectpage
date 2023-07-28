@@ -84,7 +84,9 @@ export function selectPageEmits () {
     'update:modelValue',
     'fetch-data',
     'fetch-selected-data',
-    'selection-change'
+    'selection-change',
+    'close-dropdown',
+    'adjust-dropdown'
   ]
 }
 

@@ -4,6 +4,7 @@ import { selectPageProps, selectPageEmits } from './core/data'
 import { useRender } from './core/render'
 
 export default defineComponent({
+  name: 'SelectPageListCore',
   props: {
     ...selectPageProps()
   },

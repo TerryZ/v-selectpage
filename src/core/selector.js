@@ -35,7 +35,7 @@ export function useDropdown (props) {
     const elements = []
 
     if (slots && 'default' in slots) { // scoped slot
-      elements.push(slots.default({ region: content?.value?.region, visible }))
+      elements.push(slots.default({ visible }))
     } else {
       const buttonElements = [
         h('span', content?.value?.regionText || lang.pleaseSelect)
@@ -43,7 +43,7 @@ export function useDropdown (props) {
 
       if (content?.value?.regionText) { // clean icon
         const clearOption = {
-          class: 'rg-clear-btn',
+          class: 'sp-clear-btn',
           title: lang.clear,
           onClick: e => {
             e.stopPropagation()
@@ -52,20 +52,20 @@ export function useDropdown (props) {
         }
         buttonElements.push(h('span', clearOption, h(IconClose)))
       } else { // dropdown icon
-        buttonElements.push(h('span', { class: 'rg-caret-down' }))
+        buttonElements.push(h('span', { class: 'sp-caret-down' }))
       }
 
       const btnOption = {
         class: {
-          'rg-default-btn': true,
-          'rg-opened': visible.value
+          'sp-default-btn': true,
+          'sp-opened': visible.value
         },
         type: 'button'
       }
       elements.push(h('button', btnOption, buttonElements))
     }
 
-    return h('div', { class: 'rg-trigger-container' }, elements)
+    return h('div', { class: 'sp-trigger-container' }, elements)
   }
 
   return {

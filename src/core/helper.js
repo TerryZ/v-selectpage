@@ -1,5 +1,5 @@
 import { languages, EN } from '../language'
-import { UP, DOWN, LEFT, RIGHT, ENTER } from './constants'
+import { UP, DOWN, LEFT, RIGHT, ENTER, ESCAPE } from './constants'
 
 export function useLanguage (lang) {
   if (!lang) return languages[EN]
@@ -30,4 +30,8 @@ export function isPagingOperation (keyCode) {
 
 export function isSelectOperation (keyCode) {
   return ENTER === keyCode
+}
+
+export function isEscapeOperation (keyCode) {
+  return ESCAPE === keyCode
 }

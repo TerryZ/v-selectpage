@@ -8,9 +8,9 @@ import {
   isHighlightOperation,
   isPagingOperation,
   isSelectOperation,
+  isEscapeOperation,
   useDebounce
 } from './helper'
-import { useDropdown } from './selector'
 
 import Search from '../components/Search'
 import Control from '../components/Control'
@@ -41,14 +41,6 @@ export function useRender (props, emit) {
     switchPage,
     pagingNavigation
   } = usePagination(props, currentPage, lang)
-  const {
-    visible,
-    dropdownRef,
-    adjustDropdown,
-    closeDropdown,
-    renderDropdown,
-    renderDropdownTriggerButton
-  } = useDropdown(props)
 
   const keyboardDebounce = useDebounce(props.debounce)
 
@@ -73,6 +65,10 @@ export function useRender (props, emit) {
             if (!isSomeRowHighlight()) return
             return selectItem(props.data[highlightIndex.value])
           }
+          // press ESCAPE key to close dropdown
+          if (isEscapeOperation(keyCode)) {
+            emit('close-dropdown')
+          }
         }
       }),
       h(Control)
@@ -92,12 +88,8 @@ export function useRender (props, emit) {
     const option = {
       name: 'sp-message-slide',
       appear: true,
-      onEnter: () => {
-        // this.adjust()
-      },
-      onAfterLeave: () => {
-        // this.adjust()
-      }
+      onEnter: () => emit('adjust-dropdown'),
+      onAfterLeave: () => emit('adjust-dropdown')
     }
 
     return h(Transition, option, () => child)
@@ -141,7 +133,6 @@ export function useRender (props, emit) {
     renderMessage,
     renderList,
     renderTable,
-    renderPagination,
-    renderDropdown
+    renderPagination
   }
 }
