@@ -32,9 +32,11 @@ export function useItemSelection (props, emit) {
     selected.value = [row]
   }
   const removeAll = () => {
+    emit('remove', selected.value)
     selected.value = []
   }
   const removeItem = function (row) {
+    emit('remove', [row])
     selected.value = selected.value.filter(val => {
       return val[props.keyProp] !== row[props.keyProp]
     })

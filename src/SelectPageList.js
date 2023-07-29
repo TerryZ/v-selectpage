@@ -11,7 +11,7 @@ export default defineComponent({
     disabled: { type: Boolean, default: false }
   },
   emits: ['visible-change'],
-  setup (props, { emit, slots, attrs }) {
+  setup (props, { emit, attrs }) {
     const {
       adjustDropdown,
       closeDropdown,
@@ -28,7 +28,7 @@ export default defineComponent({
 
     return () => {
       const dropdownTrigger = renderDropdownTriggerButton(
-        slots, () => listCore, clear
+        () => listCore, clear
       )
 
       const listCoreOption = {

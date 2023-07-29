@@ -19,11 +19,12 @@
             :total-rows="totalRows"
             :loading="loading"
             language="zh-chs"
-            class="border overflow-hidden"
+            class="border"
             v-model="selected"
             @selection-change="selectionChange"
             @fetch-data="fetchData"
             @fetch-selected-data="fetchSelectedData"
+            @remove="remove"
           />
         </div>
       </div>
@@ -42,10 +43,11 @@
             :label-prop="labelFormatter"
             :multiple="true"
             :max="2"
-            class="border overflow-hidden"
+            class="border"
             v-model="selected1"
             @selection-change="selectionChange"
             @fetch-data="fetchData"
+            @remove="remove"
           />
         </div>
       </div>
@@ -87,6 +89,9 @@ function fetchSelectedData (data, callback) {
   )
 }
 function selectionChange (data) {
+  console.log(data)
+}
+function remove (data) {
   console.log(data)
 }
 

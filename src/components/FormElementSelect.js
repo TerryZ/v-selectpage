@@ -18,7 +18,7 @@ export default {
     const remove = () => emit('remove')
 
     return () => {
-      const children = [
+      const items = [
         h('div', { class: 'sp-base sp-input' }, props.picked?.length
           ? h('span', { innerHTML: renderCell(props.picked[0]) })
           : h('span', { class: 'sp-placeholder' }, props.placeholder)
@@ -34,11 +34,11 @@ export default {
             remove()
           }
         }
-        children.push(
+        items.push(
           h('div', option, h('i', { class: 'sp-iconfont sp-icon-close' }))
         )
       }
-      return h('div', children)
+      return h('div', items)
     }
   }
 }

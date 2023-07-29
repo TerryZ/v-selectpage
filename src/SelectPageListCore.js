@@ -15,6 +15,7 @@ export default defineComponent({
       renderMessage,
       renderList,
       renderPagination
+
     } = useRender(props, emit)
 
     return () => {

@@ -128,6 +128,7 @@ export function useRender (props, emit) {
     query,
     message,
     currentPage,
+    lang,
 
     renderSearch,
     renderMessage,

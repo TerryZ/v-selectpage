@@ -85,6 +85,7 @@ export function selectPageEmits () {
     'fetch-data',
     'fetch-selected-data',
     'selection-change',
+    'remove',
     'close-dropdown',
     'adjust-dropdown'
   ]

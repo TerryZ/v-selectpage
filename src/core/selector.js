@@ -6,7 +6,7 @@ import { useLanguage } from './helper'
 
 export function useDropdown (props) {
   const visible = ref(false)
-  const dropdownRef = ref(null)
+  const dropdownRef = ref()
 
   function closeDropdown () {
     dropdownRef.value && dropdownRef.value.close()
@@ -29,41 +29,33 @@ export function useDropdown (props) {
     })
   }
 
-  function renderDropdownTriggerButton (slots, useContent, clear) {
+  function renderDropdownTriggerButton (useContent, clear) {
     const lang = useLanguage(props.language)
     const content = useContent()
     const elements = []
 
-    if (slots && 'default' in slots) { // scoped slot
-      elements.push(slots.default({ visible }))
-    } else {
-      const buttonElements = [
-        h('span', content?.value?.regionText || lang.pleaseSelect)
-      ]
+    const buttonElements = [
+      h('span', content?.value?.regionText || lang.placeholder)
+    ]
 
-      if (content?.value?.regionText) { // clean icon
-        const clearOption = {
-          class: 'sp-clear-btn',
-          title: lang.clear,
-          onClick: e => {
-            e.stopPropagation()
-            clear && clear()
-          }
+    if (content?.value?.regionText) { // clean icon
+      const clearOption = {
+        class: 'sp-clear-btn',
+        title: lang.clear,
+        onClick: e => {
+          e.stopPropagation()
+          clear && clear()
         }
-        buttonElements.push(h('span', clearOption, h(IconClose)))
-      } else { // dropdown icon
-        buttonElements.push(h('span', { class: 'sp-caret-down' }))
       }
-
-      const btnOption = {
-        class: {
-          'sp-default-btn': true,
-          'sp-opened': visible.value
-        },
-        type: 'button'
-      }
-      elements.push(h('button', btnOption, buttonElements))
+      buttonElements.push(h('span', clearOption, h(IconClose)))
+    } else { // dropdown icon
+      buttonElements.push(h('span', { class: 'sp-caret-down' }))
     }
+
+    const btnOption = {
+      class: ['sp-default-trigger', { 'sp-opened': visible.value }]
+    }
+    elements.push(h('div', btnOption, buttonElements))
 
     return h('div', { class: 'sp-trigger-container' }, elements)
   }
