@@ -9,14 +9,18 @@ export default defineComponent({
     ...selectPageProps()
   },
   emits: selectPageEmits(),
-  setup (props, { emit }) {
+  setup (props, { emit, expose }) {
     const {
+      lang,
       renderSearch,
       renderMessage,
       renderList,
       renderPagination
-
     } = useRender(props, emit)
+
+    expose({
+      lang
+    })
 
     return () => {
       return h('div', { class: 'sp-container sp-list-view' }, [

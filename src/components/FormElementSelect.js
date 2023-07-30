@@ -3,6 +3,8 @@ import { h } from 'vue'
 import { useLanguage } from '../core/helper'
 import { useInject } from '../core/list'
 
+import IconClose from '../icons/IconClose.vue'
+
 export default {
   name: 'SelectPageSelect',
   props: {
@@ -35,7 +37,7 @@ export default {
           }
         }
         items.push(
-          h('div', option, h('i', { class: 'sp-iconfont sp-icon-close' }))
+          h('div', option, h(IconClose))
         )
       }
       return h('div', items)

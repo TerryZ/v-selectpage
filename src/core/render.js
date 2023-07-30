@@ -1,4 +1,4 @@
-import { h, Transition } from 'vue'
+import { h, Transition, ref, mergeProps } from 'vue'
 
 import '../styles/common.sass'
 import { useData } from './data'
@@ -12,11 +12,13 @@ import {
   useDebounce
 } from './helper'
 
+import Dropdown from 'v-dropdown'
 import Search from '../components/Search'
 import Control from '../components/Control'
 import List from '../components/List'
 import Pagination from '../components/Pagination'
 import IconMessage from '../icons/IconMessage.vue'
+import IconChevronDown from '../icons/IconChevronDown.vue'
 
 export function useRender (props, emit) {
   const {
@@ -135,5 +137,57 @@ export function useRender (props, emit) {
     renderList,
     renderTable,
     renderPagination
+  }
+}
+
+export function useDropdown (props) {
+  const visible = ref(false)
+  const dropdownRef = ref()
+
+  function closeDropdown () {
+    dropdownRef.value && dropdownRef.value.close()
+  }
+
+  // adjust dropdown position
+  function adjustDropdown () {
+    dropdownRef.value && dropdownRef.value.adjust()
+  }
+
+  function renderDropdown (customProps, trigger, contents) {
+    const dropdownOption = {
+      ref: dropdownRef,
+      border: true,
+      disabled: props.disabled,
+      onVisibleChange (val) { visible.value = val }
+    }
+    return h(Dropdown, mergeProps(dropdownOption, customProps), {
+      trigger: () => trigger,
+      default: () => contents
+    })
+  }
+
+  function renderDropdownTrigger (getContent) {
+    const contentRef = getContent()
+
+    const items = [
+      'asdf'
+    ]
+
+    items.push(h(IconChevronDown))
+
+    const btnOption = {
+      class: ['sp-trigger-container', { 'sp-opened': visible.value }]
+    }
+
+    return h('div', btnOption, items)
+  }
+
+  return {
+    visible,
+    dropdownRef,
+    renderDropdown,
+    renderDropdownTrigger,
+    closeDropdown,
+    adjustDropdown
   }
 }

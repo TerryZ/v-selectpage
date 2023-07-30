@@ -1,6 +1,6 @@
 import { ref, h, defineComponent, mergeProps } from 'vue'
 
-import { useDropdown } from './core/selector'
+import { useDropdown } from './core/render'
 
 import SelectPageListCore from './SelectPageListCore'
 
@@ -16,20 +16,18 @@ export default defineComponent({
       adjustDropdown,
       closeDropdown,
       renderDropdown,
-      renderDropdownTriggerButton
+      renderDropdownTrigger
     } = useDropdown(props)
 
     const listCore = ref()
 
-    function clear () {
-      listCore.value && listCore.value.clear()
-      closeDropdown()
-    }
+    // function clear () {
+    //   listCore.value && listCore.value.clear()
+    //   closeDropdown()
+    // }
 
     return () => {
-      const dropdownTrigger = renderDropdownTriggerButton(
-        () => listCore, clear
-      )
+      const dropdownTrigger = renderDropdownTrigger(() => listCore)
 
       const listCoreOption = {
         ref: listCore,
