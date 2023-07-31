@@ -17,18 +17,23 @@ import Search from '../components/Search'
 import Control from '../components/Control'
 import List from '../components/List'
 import Pagination from '../components/Pagination'
+import FormElementSelect from '../components/FormElementSelect'
+import FormElementTag from '../components/FormElementTag'
+
 import IconMessage from '../icons/IconMessage.vue'
 import IconChevronDown from '../icons/IconChevronDown.vue'
 
 export function useRender (props, emit) {
   const {
+    selected,
     query,
     message,
     currentPage,
     lang,
     isDataEmpty,
     selectItem,
-    fetchData
+    fetchData,
+    renderCell
   } = useData(props, emit)
   const {
     highlightIndex,
@@ -127,10 +132,13 @@ export function useRender (props, emit) {
   }
 
   return {
+    selected,
     query,
     message,
     currentPage,
     lang,
+
+    renderCell,
 
     renderSearch,
     renderMessage,
@@ -169,8 +177,19 @@ export function useDropdown (props) {
   function renderDropdownTrigger (getContent) {
     const contentRef = getContent()
 
+    const option = {
+      selected: contentRef.value?.selected,
+      disabled: props.disabled,
+      placeholder: props.placeholder,
+      lang: contentRef.value?.lang,
+      renderCell: contentRef.value?.renderCell,
+      onRemove () {
+        closeDropdown()
+      }
+    }
+
     const items = [
-      'asdf'
+      h(props.multiple ? FormElementTag : FormElementSelect, option)
     ]
 
     items.push(h(IconChevronDown))

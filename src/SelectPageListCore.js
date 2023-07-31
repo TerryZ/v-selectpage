@@ -11,7 +11,9 @@ export default defineComponent({
   emits: selectPageEmits(),
   setup (props, { emit, expose }) {
     const {
+      selected,
       lang,
+      renderCell,
       renderSearch,
       renderMessage,
       renderList,
@@ -19,7 +21,9 @@ export default defineComponent({
     } = useRender(props, emit)
 
     expose({
-      lang
+      selected,
+      lang,
+      renderCell
     })
 
     return () => {

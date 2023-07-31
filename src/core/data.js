@@ -170,6 +170,7 @@ export function useData (props, emit) {
   })
 
   return {
+    selected,
     query,
     message,
     currentPage,

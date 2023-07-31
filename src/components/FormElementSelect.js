@@ -1,46 +1,40 @@
 import { h } from 'vue'
 
-import { useLanguage } from '../core/helper'
-import { useInject } from '../core/list'
-
 import IconClose from '../icons/IconClose.vue'
 
 export default {
   name: 'SelectPageSelect',
   props: {
-    picked: { type: Array, default: undefined },
+    selected: { type: Array, default: undefined },
     disabled: { type: Boolean, default: false },
-    placeholder: { type: String, default: '' }
+    placeholder: { type: String, default: '' },
+    lang: { type: Object, default: undefined },
+    renderCell: { type: Function, default: undefined }
   },
   emits: ['remove'],
   setup (props, { emit }) {
-    const { language, renderCell } = useInject()
-    const lang = useLanguage(language)
-
     const remove = () => emit('remove')
 
     return () => {
       const items = [
-        h('div', { class: 'sp-base sp-input' }, props.picked?.length
-          ? h('span', { innerHTML: renderCell(props.picked[0]) })
-          : h('span', { class: 'sp-placeholder' }, props.placeholder)
+        h('div', { class: 'sp-input' }, props.selected?.length
+          ? h('span', { innerHTML: props.renderCell(props.selected[0]) })
+          : h('span', { class: 'sp-placeholder' }, props.placeholder || props.lang?.placeholder)
         )
       ]
       // clear button
-      if (props.picked?.length && !props.disabled) {
+      if (props.selected?.length && !props.disabled) {
         const option = {
           class: 'sp-clear',
-          title: lang.clear,
+          title: props.lang.clear,
           onClick: e => {
             e.stopPropagation()
             remove()
           }
         }
-        items.push(
-          h('div', option, h(IconClose))
-        )
+        items.push(h('div', option, h(IconClose)))
       }
-      return h('div', items)
+      return h('div', { class: 'sp-trigger' }, items)
     }
   }
 }

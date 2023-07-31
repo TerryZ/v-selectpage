@@ -1,7 +1,5 @@
 import { h } from 'vue'
 
-import { useInject } from '../core/list'
-
 export default {
   name: 'SelectPageTag',
   props: {
@@ -11,8 +9,6 @@ export default {
   },
   emits: ['remove'],
   setup (props, { emit }) {
-    const { renderCell } = useInject()
-
     const remove = index => emit('remove', index)
 
     return () => {
