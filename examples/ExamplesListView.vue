@@ -2,8 +2,8 @@
   <div class="p-3">
     <h1>List View 列表视图</h1>
 
-    <h4>使用内置按钮</h4>
-    <div>
+    <h4>单选模式</h4>
+    <div class="mb-3">
       <SelectPageList
         :data="data1"
         :total-rows="totalRows"
@@ -14,6 +14,24 @@
         @selection-change="selectionChange"
         @fetch-data="fetchData"
         @fetch-selected-data="fetchSelectedData"
+        @remove="remove"
+      />
+    </div>
+
+    <h4>多选模式</h4>
+    <div>
+      <SelectPageList
+        :data="data1"
+        :total-rows="totalRows"
+        :loading="loading"
+        multiple
+        language="zh-chs"
+        class=""
+        v-model="selected1"
+        @selection-change="selectionChange"
+        @fetch-data="fetchData"
+        @fetch-selected-data="fetchSelectedData"
+        @remove="remove"
       />
     </div>
   </div>
@@ -27,6 +45,7 @@ import { list1 } from './data'
 
 const data1 = ref([])
 const selected = ref([23])
+const selected1 = ref([3, 5, 7])
 const totalRows = ref(0)
 const loading = ref(false)
 
@@ -51,6 +70,9 @@ function fetchSelectedData (data, callback) {
   )
 }
 function selectionChange (data) {
-  console.log(data)
+  console.log('selection-change', data)
+}
+function remove (data) {
+  console.log('remove', data)
 }
 </script>

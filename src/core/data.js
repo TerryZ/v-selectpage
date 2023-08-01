@@ -182,6 +182,7 @@ export function useData (props, emit) {
     haveSomeOneSelected,
     selectItem: checkAndSelectItem,
     removeAll,
+    removeItem,
     fetchData
   }
 }

@@ -1,39 +1,36 @@
-import { h } from 'vue'
+import { h, toRef } from 'vue'
+
+import IconClose from '../icons/IconClose.vue'
 
 export default {
   name: 'SelectPageTag',
   props: {
-    picked: { type: Array, default: undefined },
+    selected: { type: Object, default: undefined },
     disabled: { type: Boolean, default: false },
-    placeholder: { type: String, default: '' }
+    renderCell: { type: Function, default: undefined }
   },
   emits: ['remove'],
   setup (props, { emit }) {
-    const remove = index => emit('remove', index)
+    const selected = toRef(props, 'selected')
 
     return () => {
-      const tags = []
-      if (props.picked?.length) {
-        props.picked.forEach((val, index) => {
-          const tag = [h('span', { innerHTML: renderCell(val) })]
-          // close button in the tag
-          if (!props.disabled) {
-            tag.push(
-              h('span', {
-                onClick: e => {
-                  e.stopPropagation()
-                  remove(index)
-                }
-              }, h('i', { class: 'sp-iconfont sp-icon-close' }))
-            )
-          }
-          tags.push(h('span', { class: 'sp-selected-tag', key: index }, tag))
-        })
-      } else {
-        // display placeholder message when there are no tags
-        tags.push(h('span', { class: 'sp-placeholder' }, props.placeholder))
-      }
-      return h('div', { class: 'sp-base sp-inputs' }, tags)
+      const tags = selected.value.map((item, index) => {
+        const tag = [h('div', { innerHTML: props.renderCell(item) })]
+        // close icon for tag
+        if (!props.disabled) {
+          tag.push(
+            h('div', {
+              class: 'sp-tag-remove',
+              onClick: e => {
+                e.stopPropagation()
+                emit('remove', item)
+              }
+            }, h(IconClose))
+          )
+        }
+        return h('div', { class: 'sp-tag', key: index }, tag)
+      })
+      return h('div', { class: 'sp-trigger sp-tags' }, tags)
     }
   }
 }

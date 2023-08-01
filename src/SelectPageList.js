@@ -1,9 +1,12 @@
 import { ref, h, defineComponent, mergeProps } from 'vue'
 
 import { useDropdown } from './core/render'
+import { isMultiple } from './core/helper'
 
 import SelectPageListCore from './SelectPageListCore'
 import Trigger from './components/Trigger'
+import FormElementSelect from './components/FormElementSelect'
+import FormElementTag from './components/FormElementTag'
 
 export default defineComponent({
   name: 'SelectPageList',
@@ -20,30 +23,47 @@ export default defineComponent({
       renderDropdown
     } = useDropdown(props)
 
-    const listCore = ref()
-
     // function clear () {
     //   listCore.value && listCore.value.clear()
     //   closeDropdown()
     // }
 
+    const selected = ref([])
+    const listCore = ref(null)
+
     return () => {
-      const triggerOption = {
-        dropdownVisible: visible.value,
-        selected: listCore?.value?.selected || [],
+      const elementOption = {
+        selected,
         disabled: props.disabled,
-        placeholder: attrs.placeholder,
         lang: listCore?.value?.lang,
         renderCell: listCore?.value?.renderCell,
-        onRemove () {
-          closeDropdown()
+        onRemove (row) {
+          if (isMultiple(attrs)) {
+            listCore.value.removeItem(row)
+          } else {
+            listCore.value.removeAll()
+          }
         }
       }
+      const selectedContents = selected.value.length
+        ? () => h(isMultiple(attrs) ? FormElementTag : FormElementSelect, elementOption)
+        : undefined
+
+      const triggerOption = {
+        dropdownVisible: visible.value,
+        disabled: props.disabled,
+        placeholder: attrs.placeholder,
+        lang: listCore?.value?.lang
+      }
+      const dropdownTrigger = h(Trigger, triggerOption, selectedContents)
 
       const listCoreOption = {
         ref: listCore,
         onAdjustDropdown: adjustDropdown,
-        onCloseDropdown: closeDropdown
+        onCloseDropdown: closeDropdown,
+        onSelectionChange (data) {
+          selected.value = data
+        }
       }
 
       const dropdownOption = {
@@ -53,7 +73,7 @@ export default defineComponent({
       }
       return renderDropdown(
         dropdownOption,
-        h(Trigger, triggerOption),
+        dropdownTrigger,
         h(SelectPageListCore, mergeProps(listCoreOption, attrs))
       )
     }

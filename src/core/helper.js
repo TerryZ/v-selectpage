@@ -20,6 +20,14 @@ export function useDebounce (time = 3000) {
   }
 }
 
+export function isMultiple (attrs) {
+  if (!attrs) return false
+  if (!Object.hasOwn(attrs, 'multiple')) return false
+  if (typeof attrs.multiple === 'boolean') return attrs.multiple
+  if (attrs.multiple === '') return true
+  return false
+}
+
 export function isHighlightOperation (keyCode) {
   return [UP, DOWN].includes(keyCode)
 }

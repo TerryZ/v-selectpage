@@ -1,13 +1,12 @@
-import { h } from 'vue'
+import { h, toRef } from 'vue'
 
 import IconClose from '../icons/IconClose.vue'
 
 export default {
   name: 'SelectPageSelect',
   props: {
-    selected: { type: Array, default: undefined },
+    selected: { type: Object, default: undefined },
     disabled: { type: Boolean, default: false },
-    placeholder: { type: String, default: '' },
     lang: { type: Object, default: undefined },
     renderCell: { type: Function, default: undefined }
   },
@@ -15,15 +14,18 @@ export default {
   setup (props, { emit }) {
     const remove = () => emit('remove')
 
+    const selected = toRef(props, 'selected')
+
     return () => {
+      if (!selected.value?.length) return
+
       const items = [
-        h('div', { class: 'sp-input' }, props.selected?.length
-          ? h('span', { innerHTML: props.renderCell(props.selected[0]) })
-          : h('span', { class: 'sp-placeholder' }, props.placeholder || props.lang?.placeholder)
-        )
+        h('div', { class: 'sp-input' }, [
+          h('span', { innerHTML: props.renderCell(selected.value[0]) })
+        ])
       ]
       // clear button
-      if (props.selected?.length && !props.disabled) {
+      if (selected.value?.length && !props.disabled) {
         const option = {
           class: 'sp-clear',
           title: props.lang.clear,

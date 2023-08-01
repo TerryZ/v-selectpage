@@ -14,6 +14,8 @@ export default defineComponent({
       selected,
       lang,
       renderCell,
+      removeAll,
+      removeItem,
       renderSearch,
       renderMessage,
       renderList,
@@ -23,7 +25,9 @@ export default defineComponent({
     expose({
       selected,
       lang,
-      renderCell
+      renderCell,
+      removeAll,
+      removeItem
     })
 
     return () => {

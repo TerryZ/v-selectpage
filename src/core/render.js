@@ -17,11 +17,8 @@ import Search from '../components/Search'
 import Control from '../components/Control'
 import List from '../components/List'
 import Pagination from '../components/Pagination'
-import FormElementSelect from '../components/FormElementSelect'
-import FormElementTag from '../components/FormElementTag'
 
 import IconMessage from '../icons/IconMessage.vue'
-import IconChevronDown from '../icons/IconChevronDown.vue'
 
 export function useRender (props, emit) {
   const {
@@ -33,7 +30,9 @@ export function useRender (props, emit) {
     isDataEmpty,
     selectItem,
     fetchData,
-    renderCell
+    renderCell,
+    removeAll,
+    removeItem
   } = useData(props, emit)
   const {
     highlightIndex,
@@ -139,6 +138,8 @@ export function useRender (props, emit) {
     lang,
 
     renderCell,
+    removeAll,
+    removeItem,
 
     renderSearch,
     renderMessage,
@@ -174,38 +175,10 @@ export function useDropdown (props) {
     })
   }
 
-  function renderDropdownTrigger (getContent) {
-    const contentRef = getContent()
-
-    const option = {
-      selected: contentRef.value?.selected,
-      disabled: props.disabled,
-      placeholder: props.placeholder,
-      lang: contentRef.value?.lang,
-      renderCell: contentRef.value?.renderCell,
-      onRemove () {
-        closeDropdown()
-      }
-    }
-
-    const items = [
-      h(props.multiple ? FormElementTag : FormElementSelect, option)
-    ]
-
-    items.push(h(IconChevronDown))
-
-    const btnOption = {
-      class: ['sp-trigger-container', { 'sp-opened': visible.value }]
-    }
-
-    return h('div', btnOption, items)
-  }
-
   return {
     visible,
     dropdownRef,
     renderDropdown,
-    renderDropdownTrigger,
     closeDropdown,
     adjustDropdown
   }
