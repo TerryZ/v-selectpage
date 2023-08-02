@@ -6,7 +6,7 @@ import { isMultiple } from './core/helper'
 import SelectPageListCore from './SelectPageListCore'
 import Trigger from './components/Trigger'
 import FormElementSelect from './components/FormElementSelect'
-import FormElementTag from './components/FormElementTag'
+import FormElementChip from './components/FormElementChip'
 
 export default defineComponent({
   name: 'SelectPageList',
@@ -22,11 +22,6 @@ export default defineComponent({
       closeDropdown,
       renderDropdown
     } = useDropdown(props)
-
-    // function clear () {
-    //   listCore.value && listCore.value.clear()
-    //   closeDropdown()
-    // }
 
     const selected = ref([])
     const listCore = ref(null)
@@ -46,7 +41,7 @@ export default defineComponent({
         }
       }
       const selectedContents = selected.value.length
-        ? () => h(isMultiple(attrs) ? FormElementTag : FormElementSelect, elementOption)
+        ? () => h(isMultiple(attrs) ? FormElementChip : FormElementSelect, elementOption)
         : undefined
 
       const triggerOption = {
@@ -63,13 +58,15 @@ export default defineComponent({
         onCloseDropdown: closeDropdown,
         onSelectionChange (data) {
           selected.value = data
+          // close dropdown when item selected in single selection mode
+          if (!isMultiple(attrs) && data.length) {
+            closeDropdown()
+          }
         }
       }
 
       const dropdownOption = {
-        onVisibleChange (val) {
-          emit('visible-change', val)
-        }
+        onVisibleChange: val => emit('visible-change', val)
       }
       return renderDropdown(
         dropdownOption,

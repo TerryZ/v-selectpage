@@ -19,7 +19,7 @@
     </div>
 
     <h4>多选模式</h4>
-    <div>
+    <div class="mb-3">
       <SelectPageList
         :data="data1"
         :total-rows="totalRows"
@@ -33,6 +33,41 @@
         @fetch-selected-data="fetchSelectedData"
         @remove="remove"
       />
+    </div>
+
+    <h4>禁用状态</h4>
+    <div class="row">
+      <div class="col-md-6">
+        <SelectPageList
+          :data="data1"
+          :total-rows="totalRows"
+          :loading="loading"
+          :disabled="true"
+          language="zh-chs"
+          class=""
+          v-model="selected"
+          @selection-change="selectionChange"
+          @fetch-data="fetchData"
+          @fetch-selected-data="fetchSelectedData"
+          @remove="remove"
+        />
+      </div>
+      <div class="col-md-6">
+        <SelectPageList
+          :data="data1"
+          :total-rows="totalRows"
+          :loading="loading"
+          :disabled="true"
+          multiple
+          language="zh-chs"
+          class=""
+          v-model="selected1"
+          @selection-change="selectionChange"
+          @fetch-data="fetchData"
+          @fetch-selected-data="fetchSelectedData"
+          @remove="remove"
+        />
+      </div>
     </div>
   </div>
 </template>

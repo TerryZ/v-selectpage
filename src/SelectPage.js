@@ -11,7 +11,7 @@ export default {
   mixins: [data, methods, util, render],
   components: {
     'v-dropdown': dropdown,
-    'sp-tag': () => import('./components/FormElementTag'),
+    'sp-tag': () => import('./components/FormElementChip'),
     'sp-select': () => import('./components/FormElementSelect'),
     'sp-page': () => import('./components/Pagination'),
     'sp-list': () => import('./components/List'),

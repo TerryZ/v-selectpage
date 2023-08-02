@@ -2,24 +2,37 @@
   display: flex
   align-items: center
   justify-content: space-between
-  padding: 6px 12px
+  padding: 6px 12px 6px 6px
   background-color: white
   border: 1px solid #ddd
   border-radius: .3rem
   font-size: 14px
   line-height: 1.42857143
   outline: 0 !important
-  color: #666
+  // color: #666
   cursor: pointer
   user-select: none
-  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+  transition: all .2s ease
   &:hover
     border: 1px solid #aaa
-    color: black
+    // color: black
+  &.sp-disabled,
+  &.sp-disabled:hover
+    border: 1px solid #eee
+    background-color: #eee
+    cursor: default
+    color: #aaa
+    .sp-select,
+    .sp-chips
+      color: #aaa
+      background-color: #eee
+    .sp-chip
+      background-color: #d6d6d6 !important
   .bi-chevron-down
     transition: transform .2s ease
     margin-left: .5rem
-    font-size: 1.2rem
+    font-size: 1rem
+    color: #666
   &.sp-opened
     box-shadow: 3px 2px 6px rgba(0, 0, 0, 0.3)
     border: 1px solid #666
@@ -30,34 +43,43 @@
       border: 1px solid #666
   .sp-placeholder
     color: #aaa
+    padding: 5px
+    line-height: 1
   .sp-trigger
     display: flex
     align-items: center
-    .sp-clear
-      margin-left: .5rem
-      line-height: 1
-      width: 1.2rem
-      height: 1.2rem
-      border-radius: 50%
-      background-color: white
-      display: inline-flex
-      align-items: center
-      justify-content: center
-      transition: background-color .2s ease
-      &:hover
-        font-weight: bold
-        background-color: #ddd
-    &.sp-tags
+    &.sp-select
+      justify-content: space-between
+      flex-grow: 1
+      .sp-select-content
+        padding: 5px
+        line-height: 1
+        color: #666
+      .sp-clear
+        line-height: 1
+        width: 20px
+        height: 20px
+        border-radius: 50%
+        background-color: white
+        display: inline-flex
+        align-items: center
+        justify-content: center
+        transition: background-color .2s ease
+        color: #666
+        &:hover
+          background-color: #ddd
+          color: black
+    &.sp-chips
       gap: .5rem
-    .sp-tag
+    .sp-chip
       border-radius: .3rem
-      background-color: #F0F3F9
-      color: #373354
+      background-color: #eee
+      color: #666
       display: inline-flex
       align-items: center
-      padding: 5px 5px
+      padding: 5px 7px
       line-height: 1
       &-remove
         display: inline-flex
         color: #aaa
-
+        margin-left: 5px

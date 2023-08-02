@@ -3,7 +3,7 @@ import { h, toRef } from 'vue'
 import IconClose from '../icons/IconClose.vue'
 
 export default {
-  name: 'SelectPageTag',
+  name: 'SelectPageChip',
   props: {
     selected: { type: Object, default: undefined },
     disabled: { type: Boolean, default: false },
@@ -14,13 +14,13 @@ export default {
     const selected = toRef(props, 'selected')
 
     return () => {
-      const tags = selected.value.map((item, index) => {
-        const tag = [h('div', { innerHTML: props.renderCell(item) })]
-        // close icon for tag
+      const chips = selected.value.map((item, index) => {
+        const chip = [h('div', { innerHTML: props.renderCell(item) })]
+        // close icon for chip
         if (!props.disabled) {
-          tag.push(
+          chip.push(
             h('div', {
-              class: 'sp-tag-remove',
+              class: 'sp-chip-remove',
               onClick: e => {
                 e.stopPropagation()
                 emit('remove', item)
@@ -28,9 +28,9 @@ export default {
             }, h(IconClose))
           )
         }
-        return h('div', { class: 'sp-tag', key: index }, tag)
+        return h('div', { class: 'sp-chip', key: index }, chip)
       })
-      return h('div', { class: 'sp-trigger sp-tags' }, tags)
+      return h('div', { class: 'sp-trigger sp-chips' }, chips)
     }
   }
 }

@@ -20,9 +20,7 @@ export default {
       if (!selected.value?.length) return
 
       const items = [
-        h('div', { class: 'sp-input' }, [
-          h('span', { innerHTML: props.renderCell(selected.value[0]) })
-        ])
+        h('div', { class: 'sp-select-content', innerHTML: props.renderCell(selected.value[0]) })
       ]
       // clear button
       if (selected.value?.length && !props.disabled) {
@@ -36,7 +34,7 @@ export default {
         }
         items.push(h('div', option, h(IconClose)))
       }
-      return h('div', { class: 'sp-trigger' }, items)
+      return h('div', { class: 'sp-trigger sp-select' }, items)
     }
   }
 }

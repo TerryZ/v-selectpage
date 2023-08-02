@@ -27,7 +27,11 @@ export default {
       items.push(h(IconChevronDown))
 
       const btnOption = {
-        class: ['sp-trigger-container', { 'sp-opened': props.dropdownVisible }]
+        class: {
+          'sp-trigger-container': true,
+          'sp-opened': props.dropdownVisible,
+          'sp-disabled': props.disabled
+        }
       }
 
       return h('div', btnOption, items)
