@@ -1,5 +1,3 @@
-import './styles/select-page.sass'
-
 export { default as SelectPageListCore } from './SelectPageListCore'
 export { default as SelectPageList } from './SelectPageList'
 // import selectPage from './SelectPage'
