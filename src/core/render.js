@@ -165,7 +165,7 @@ export function useDropdown (props) {
   function renderDropdown (customProps, trigger, contents) {
     const dropdownOption = {
       ref: dropdownRef,
-      border: true,
+      border: false,
       fullWidth: true,
       disabled: props.disabled,
       onVisibleChange (val) { visible.value = val }
