@@ -95,7 +95,7 @@ export function useData (props, emit) {
   const lang = useLanguage(props.language)
   const {
     selected,
-    haveSomeOneSelected,
+    selectedCount,
     isItemSelected,
     removeAll,
     removeItem,
@@ -148,11 +148,12 @@ export function useData (props, emit) {
   provide('rtl', props.rtl)
   provide('pageSize', props.pageSize)
   provide('debounce', props.debounce)
+  provide('multiple', props.multiple)
   provide('loading', toRef(props, 'loading'))
   provide('language', lang)
   provide('renderCell', renderCell)
   provide('isItemSelected', isItemSelected)
-  provide('haveSomeOneSelected', haveSomeOneSelected)
+  provide('selectedCount', selectedCount)
   provide('removeAll', removeAll)
   provide('removeItem', removeItem)
 
@@ -179,7 +180,7 @@ export function useData (props, emit) {
     renderCell,
     isDataEmpty,
     isItemSelected,
-    haveSomeOneSelected,
+    selectedCount,
     selectItem: checkAndSelectItem,
     removeAll,
     removeItem,
@@ -195,8 +196,9 @@ export function useInject () {
     pageSize: inject('pageSize'),
     language: inject('language'),
     debounce: inject('debounce'),
+    multiple: inject('multiple'),
     loading: inject('loading'),
-    haveSomeOneSelected: inject('haveSomeOneSelected'),
+    selectedCount: inject('selectedCount'),
     removeAll: inject('removeAll'),
     removeItem: inject('removeItem')
   }

@@ -29,7 +29,8 @@ export const languages = {
     clearAll: '清除全部已选择项目',
     maxSelected: `最多只能选择 ${LANG_MAX_SELECTED_LIMIT} 个项目`,
     placeholder: '请选择一个项目',
-    itemsSelected: `已选择 ${LANG_SELECTED_COUNT} 个项目`
+    selectedCount: `已选择 ${LANG_SELECTED_COUNT} 个项目`,
+    search: '搜索'
   },
   [EN]: { // English
     next: 'Next page',
@@ -47,7 +48,8 @@ export const languages = {
     clearAll: 'Clear all selected',
     maxSelected: `You can only select up to ${LANG_MAX_SELECTED_LIMIT} items`,
     placeholder: 'Select an option',
-    itemsSelected: `${LANG_SELECTED_COUNT} items selected`
+    selectedCount: `${LANG_SELECTED_COUNT} items selected`,
+    search: 'Search'
   },
   [JA]: { // Japanese
     next: '次へ',
@@ -65,7 +67,8 @@ export const languages = {
     clearAll: '選択した項目をクリアする',
     maxSelected: `最多で ${LANG_MAX_SELECTED_LIMIT} のプロジェクトを選ぶことしかできません`,
     placeholder: 'プロジェクトを選択してください',
-    itemsSelected: `${LANG_SELECTED_COUNT} アイテムが選択されました`
+    selectedCount: `${LANG_SELECTED_COUNT} アイテムが選択されました`,
+    search: '検索'
   },
   [AR]: { // Arabic
     next: 'التالي',
@@ -83,7 +86,8 @@ export const languages = {
     clearAll: 'إلغاء التحديد',
     maxSelected: `يمكنك فقط تحديد (${LANG_MAX_SELECTED_LIMIT}) عناصر`,
     placeholder: 'رجاء حدد الخيار',
-    itemsSelected: `تم تحديد (${LANG_SELECTED_COUNT}) عناصر`
+    selectedCount: `تم تحديد (${LANG_SELECTED_COUNT}) عناصر`,
+    search: 'يبحث'
   },
   [ES]: { // Spanish
     next: 'Siguiente página',
@@ -101,7 +105,8 @@ export const languages = {
     clearAll: 'Borrar todo lo seleccionado',
     maxSelected: `Solo puedes seleccionar hasta ${LANG_MAX_SELECTED_LIMIT} items`,
     placeholder: 'Seleccione una opción',
-    itemsSelected: `${LANG_SELECTED_COUNT} items Seleccionado`
+    selectedCount: `${LANG_SELECTED_COUNT} items Seleccionado`,
+    search: 'Buscar'
   },
   [DE]: { // German
     next: 'Nächste Seite',
@@ -119,7 +124,8 @@ export const languages = {
     clearAll: 'Alle ausgewählten löschen',
     maxSelected: `Sie können nur bis zu ${LANG_MAX_SELECTED_LIMIT} Elemente auswählen`,
     placeholder: 'Wählen',
-    itemsSelected: `${LANG_SELECTED_COUNT} Elemente ausgewählt`
+    selectedCount: `${LANG_SELECTED_COUNT} Elemente ausgewählt`,
+    search: 'Suchen'
   },
   [RO]: { // Romanian
     next: 'Pagina următoare',
@@ -137,7 +143,8 @@ export const languages = {
     clearAll: 'Șterge înregistrările selectate',
     maxSelected: `Poți selecta până la ${LANG_MAX_SELECTED_LIMIT} înregistrări`,
     placeholder: 'Selectează o înregistrare',
-    itemsSelected: `${LANG_SELECTED_COUNT} înregistrări selectate`
+    selectedCount: `${LANG_SELECTED_COUNT} înregistrări selectate`,
+    search: 'Căutare'
   },
   [RU]: { // Russian
     next: 'Вперед',
@@ -155,7 +162,8 @@ export const languages = {
     clearAll: 'Очистить выбранное',
     maxSelected: `Нельзя выбрать более ${LANG_MAX_SELECTED_LIMIT} значений`,
     placeholder: 'Выберите значение',
-    itemsSelected: `${LANG_SELECTED_COUNT} - выбрано`
+    selectedCount: `${LANG_SELECTED_COUNT} - выбрано`,
+    search: 'Поиск'
   },
   [FR]: { // French
     next: 'Page suivante',
@@ -173,7 +181,8 @@ export const languages = {
     clearAll: 'Tout déselectionner',
     maxSelected: `Vous ne pouvez pas sélectionner plus de ${LANG_MAX_SELECTED_LIMIT} élements`,
     placeholder: 'Sélectionnez une option',
-    itemsSelected: `${LANG_SELECTED_COUNT} éléments sélectionnés`
+    selectedCount: `${LANG_SELECTED_COUNT} éléments sélectionnés`,
+    search: 'Recherche'
   },
   [PT_BR]: { // Portuguese-Brazil
     next: 'Página seguinte',
@@ -191,7 +200,8 @@ export const languages = {
     clearAll: 'Apagar itens selecionados',
     maxSelected: `Máximo permitido ${LANG_MAX_SELECTED_LIMIT} itens`,
     placeholder: 'Selecione uma opção',
-    itemsSelected: `${LANG_SELECTED_COUNT} itens selecionados`
+    selectedCount: `${LANG_SELECTED_COUNT} itens selecionados`,
+    search: 'Procurar'
   },
   [PL]: { // Polish
     next: 'Następna',
@@ -209,7 +219,8 @@ export const languages = {
     clearAll: 'Usuń wszystkie zaznaczone',
     maxSelected: `Możesz zaznaczyć maksymalnie ${LANG_MAX_SELECTED_LIMIT}`,
     placeholder: 'Wybierz z listy',
-    itemsSelected: `${LANG_SELECTED_COUNT} zaznaczonych`
+    selectedCount: `${LANG_SELECTED_COUNT} zaznaczonych`,
+    search: 'Szukaj'
   },
   [NL]: { // Dutch
     next: 'Volgende pagina',
@@ -227,7 +238,8 @@ export const languages = {
     clearAll: 'Wis selectie',
     maxSelected: `Je kunt maar ${LANG_MAX_SELECTED_LIMIT} items selecteren`,
     placeholder: 'Kies een optie',
-    itemsSelected: `${LANG_SELECTED_COUNT} Items geselecteerd`
+    selectedCount: `${LANG_SELECTED_COUNT} Items geselecteerd`,
+    search: 'Zoekopdracht'
   },
   [ZH_CHT]: { // Traditional Chinese
     next: '下一頁',
@@ -245,6 +257,7 @@ export const languages = {
     clearAll: '清除全部已選擇項目',
     maxSelected: `最多只能選擇 ${LANG_MAX_SELECTED_LIMIT} 個項目`,
     placeholder: '請選擇一個項目',
-    itemsSelected: `已選擇 ${LANG_SELECTED_COUNT} 個項目`
+    selectedCount: `已選擇 ${LANG_SELECTED_COUNT} 個項目`,
+    search: '搜索'
   }
 }

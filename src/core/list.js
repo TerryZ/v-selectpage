@@ -14,9 +14,7 @@ export const listEmits = () => ['select', 'update:modelValue', 'set-highlight']
 export function useItemSelection (props, emit) {
   const selected = ref([])
 
-  const haveSomeOneSelected = computed(() => {
-    return !!selected.value.length
-  })
+  const selectedCount = computed(() => selected.value.length)
 
   const isItemSelected = row => {
     if (!selected.value.length) return false
@@ -49,7 +47,7 @@ export function useItemSelection (props, emit) {
 
   return {
     selected,
-    haveSomeOneSelected,
+    selectedCount,
     isItemSelected,
     selectItem,
     removeItem,

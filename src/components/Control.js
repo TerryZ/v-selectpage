@@ -6,12 +6,12 @@ import IconTrash from '../icons/IconTrash.vue'
 
 export default {
   setup (props, { emit }) {
-    const { haveSomeOneSelected, removeAll, language } = useInject()
+    const { selectedCount, removeAll, language } = useInject()
 
     return () => {
       const items = []
 
-      if (haveSomeOneSelected.value) {
+      if (selectedCount.value) {
         const option = {
           title: language.clearAll,
           style: {

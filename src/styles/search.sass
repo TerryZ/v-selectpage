@@ -30,7 +30,8 @@
       padding: 4px 6px
       box-sizing: border-box
       outline: none !important
-      color: #777
+      color: #333
+      font-weight: 600
       flex-grow: 1
       // will-change: border-color, box-shadow, background-color
       // transition: border-color .3s ease-in-out, box-shadow .3s ease-in-out, background-color .3s ease-in-out
@@ -38,6 +39,9 @@
         // background-color: #f5f5f5
       &.sp-search-input--rtl
         direction: rtl
+      &::placeholder
+        color: #aaa
+        font-weight: 500
     .sp-icon-loading
       opacity: .5
     .bi-search,
@@ -55,8 +59,8 @@
     display: inline-flex
     flex-grow: 0.001
     transition: all .3s ease
-    margin-left: 5px
     .bi-trash3
+      margin-left: 5px
       color: #999
       cursor: pointer
       transition: all .3s ease

@@ -4,6 +4,7 @@ import '../styles/search.sass'
 import { useInject } from '../core/data'
 import { isOperationKey } from '../core/list'
 import { useDebounce } from '../core/helper'
+import { LANG_SELECTED_COUNT } from '../core/constants'
 
 import IconSearch from '../icons/IconSearch.vue'
 import IconClose from '../icons/IconClose.vue'
@@ -15,12 +16,19 @@ export default {
   },
   emits: ['update:modelValue', 'keyboard-operation'],
   setup (props, { emit }) {
-    const { rtl, debounce, loading } = useInject()
+    const { rtl, debounce, loading, language, selectedCount, multiple } = useInject()
 
     const inFocus = ref(false)
     const searchRef = ref()
 
     const inputDebounce = useDebounce(debounce)
+
+    const placeholder = computed(() => {
+      if (!multiple || !selectedCount.value) {
+        return language.search
+      }
+      return language.selectedCount.replace(LANG_SELECTED_COUNT, selectedCount.value)
+    })
 
     return () => {
       const icon = computed(() => {
@@ -40,6 +48,7 @@ export default {
             'sp-search-input': true,
             'sp-search-input--rtl': rtl
           },
+          placeholder: placeholder.value,
           onKeydown: e => {
             e.stopPropagation()
 
