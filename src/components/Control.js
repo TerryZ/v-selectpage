@@ -12,8 +12,15 @@ export default {
       const items = []
 
       if (haveSomeOneSelected.value) {
+        const option = {
+          title: language.clearAll,
+          style: {
+            display: 'inline-flex'
+          },
+          onClick: removeAll
+        }
         items.push(
-          h('div', { title: language.clearAll, onClick: removeAll }, h(IconTrash))
+          h('div', option, h(IconTrash))
         )
       }
 
