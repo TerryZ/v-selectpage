@@ -23,8 +23,7 @@ export default {
           'sp-selected': props.isSelected,
           'sp-rtl': rtl
         },
-
-        onClick: e => emit('select'),
+        onClick: () => emit('select'),
         onMouseenter: () => emit('hover')
       }
 
@@ -33,13 +32,15 @@ export default {
       ]
 
       if (props.isSelected) {
+        const removeIconOption = {
+          class: 'sp-list-item-remove',
+          onClick: e => {
+            e.stopPropagation()
+            removeItem(props.data)
+          }
+        }
         items.push(
-          h(IconClose, {
-            onClick: e => {
-              e.stopPropagation()
-              removeItem(props.data)
-            }
-          })
+          h('div', removeIconOption, h(IconClose))
         )
       }
 
