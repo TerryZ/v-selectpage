@@ -1,5 +1,6 @@
 import { h, toRef } from 'vue'
 
+import CircleButton from '../components/CircleButton'
 import IconClose from '../icons/IconClose.vue'
 
 export default {
@@ -25,14 +26,17 @@ export default {
       // clear button
       if (selected.value?.length && !props.disabled) {
         const option = {
-          class: 'sp-clear',
+          // class: 'sp-clear',
           title: props.lang.clear,
           onClick: e => {
             e.stopPropagation()
             remove()
           }
         }
-        items.push(h('div', option, h(IconClose)))
+        // items.push(h('div', option, h(IconClose)))
+        items.push(
+          h(CircleButton, option, () => h(IconClose))
+        )
       }
       return h('div', { class: 'sp-trigger sp-select' }, items)
     }

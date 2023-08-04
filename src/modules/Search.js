@@ -6,6 +6,7 @@ import { isOperationKey } from '../core/list'
 import { useDebounce } from '../core/helper'
 import { LANG_SELECTED_COUNT } from '../core/constants'
 
+import CircleButton from '../components/CircleButton'
 import IconSearch from '../icons/IconSearch.vue'
 import IconClose from '../icons/IconClose.vue'
 import IconLoading from '../icons/IconLoading.vue'
@@ -69,14 +70,15 @@ export default {
       ]
 
       if (props.modelValue.trim()) {
+        const clearOption = {
+          onClick () {
+            emit('update:modelValue', '')
+            searchRef.value.focus()
+          }
+        }
         searchModules.push(
           // clean input content
-          h(IconClose, {
-            onClick () {
-              emit('update:modelValue', '')
-              searchRef.value.focus()
-            }
-          })
+          h(CircleButton, clearOption, () => h(IconClose))
         )
       }
 

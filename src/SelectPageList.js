@@ -4,9 +4,9 @@ import { useDropdown } from './core/render'
 import { isMultiple } from './core/helper'
 
 import SelectPageListCore from './SelectPageListCore'
-import Trigger from './components/Trigger'
-import FormElementSelect from './components/FormElementSelect'
-import FormElementChip from './components/FormElementChip'
+import Trigger from './modules/Trigger'
+import FormElementSelect from './modules/FormElementSelect'
+import FormElementChip from './modules/FormElementChip'
 
 export default defineComponent({
   name: 'SelectPageList',

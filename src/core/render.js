@@ -13,10 +13,10 @@ import {
 } from './helper'
 
 import Dropdown from 'v-dropdown'
-import Search from '../components/Search'
-import Control from '../components/Control'
-import List from '../components/List'
-import Pagination from '../components/Pagination'
+import Search from '../modules/Search'
+import Control from '../modules/Control'
+import List from '../modules/List'
+import Pagination from '../modules/Pagination'
 
 import IconMessage from '../icons/IconMessage.vue'
 

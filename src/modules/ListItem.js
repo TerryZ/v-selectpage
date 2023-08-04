@@ -1,6 +1,7 @@
 import { h } from 'vue'
 import { useInject } from '../core/data'
 
+import CircleButton from '../components/CircleButton'
 import IconClose from '../icons/IconClose.vue'
 
 export default {
@@ -33,14 +34,13 @@ export default {
 
       if (props.isSelected) {
         const removeIconOption = {
-          class: 'sp-list-item-remove',
           onClick: e => {
             e.stopPropagation()
             removeItem(props.data)
           }
         }
         items.push(
-          h('div', removeIconOption, h(IconClose))
+          h(CircleButton, removeIconOption, () => h(IconClose))
         )
       }
 
