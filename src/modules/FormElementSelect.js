@@ -26,14 +26,12 @@ export default {
       // clear button
       if (selected.value?.length && !props.disabled) {
         const option = {
-          // class: 'sp-clear',
           title: props.lang.clear,
           onClick: e => {
             e.stopPropagation()
             remove()
           }
         }
-        // items.push(h('div', option, h(IconClose)))
         items.push(
           h(CircleButton, option, () => h(IconClose))
         )

@@ -1,9 +1,10 @@
 import { h, toRef } from 'vue'
 
+import CircleButton from '../components/CircleButton'
 import IconClose from '../icons/IconClose.vue'
 
 export default {
-  name: 'SelectPageChip',
+  name: 'SelectPageChips',
   props: {
     selected: { type: Object, default: undefined },
     disabled: { type: Boolean, default: false },
@@ -15,17 +16,21 @@ export default {
 
     return () => {
       const chips = selected.value.map((item, index) => {
-        const chip = [h('div', { innerHTML: props.renderCell(item) })]
+        const chip = [
+          h('div', { class: 'sp-chip--body', innerHTML: props.renderCell(item) })
+        ]
         // close icon for chip
         if (!props.disabled) {
+          const chipOption = {
+            size: 'small',
+            hoverBgColor: '#fff',
+            onClick: e => {
+              e.stopPropagation()
+              emit('remove', item)
+            }
+          }
           chip.push(
-            h('div', {
-              class: 'sp-chip-remove',
-              onClick: e => {
-                e.stopPropagation()
-                emit('remove', item)
-              }
-            }, h(IconClose))
+            h(CircleButton, chipOption, () => h(IconClose))
           )
         }
         return h('div', { class: 'sp-chip', key: index }, chip)

@@ -47,23 +47,32 @@
   &.sp-icon-medium
     font-size: 1.3rem
 
-.sp-circle-icon
+.sp-circle-btn
   width: 20px
   height: 20px
+  font-size: 14px
   line-height: 1
   display: inline-flex
   justify-content: center
   align-items: center
   cursor: pointer
   color: #aaa
-  background-color: transparent
+  // background-color: transparent
   transition: all .3s ease
   border-radius: 50%
   &:hover
     color: black
-    background-color: #f1f1f1
-  // .sp-circle-icon.sp-circle-icon-disabled
+    // background-color: #f1f1f1
+  // .sp-circle-btn.sp-circle-btn-disabled
   &#{&}-disabled,
   &#{&}-disabled:hover
     cursor: default
     color: #eee
+  &#{&}--small
+    width: 16px
+    height: 16px
+    font-size: 12px
+  &#{&}--large
+    width: 24px
+    height: 24px
+    font-size: 16px

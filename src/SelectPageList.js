@@ -6,7 +6,7 @@ import { isMultiple } from './core/helper'
 import SelectPageListCore from './SelectPageListCore'
 import Trigger from './modules/Trigger'
 import FormElementSelect from './modules/FormElementSelect'
-import FormElementChip from './modules/FormElementChip'
+import FormElementChips from './modules/FormElementChips'
 
 export default defineComponent({
   name: 'SelectPageList',
@@ -41,7 +41,7 @@ export default defineComponent({
         }
       }
       const selectedContents = selected.value.length
-        ? () => h(isMultiple(attrs) ? FormElementChip : FormElementSelect, elementOption)
+        ? () => h(isMultiple(attrs) ? FormElementChips : FormElementSelect, elementOption)
         : undefined
 
       const triggerOption = {
