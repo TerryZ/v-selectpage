@@ -76,8 +76,8 @@ export default {
             searchRef.value.focus()
           }
         }
+        // clean input content
         searchModules.push(
-          // clean input content
           h(CircleButton, clearOption, () => h(IconClose))
         )
       }
