@@ -2,6 +2,7 @@ import { h } from 'vue'
 
 import { useInject } from '../core/data'
 
+import CircleButton from '../components/CircleButton'
 import IconTrash from '../icons/IconTrash.vue'
 
 export default {
@@ -11,18 +12,17 @@ export default {
     return () => {
       const items = []
 
-      if (selectedCount.value) {
-        const option = {
-          title: language.clearAll,
-          style: {
-            display: 'inline-flex'
-          },
-          onClick: removeAll
-        }
-        items.push(
-          h('div', option, h(IconTrash))
-        )
+      const option = {
+        title: language.clearAll,
+        size: 'large',
+        // bgColor: '#f1f1f1',
+        // hoverBgColor: '#ddd',
+        disabled: !selectedCount.value,
+        onClick: removeAll
       }
+      items.push(
+        h(CircleButton, option, h(IconTrash))
+      )
 
       return h('div', { class: 'sp-search-control' }, items)
     }

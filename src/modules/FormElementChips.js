@@ -23,7 +23,7 @@ export default {
         if (!props.disabled) {
           const chipOption = {
             size: 'small',
-            hoverBgColor: '#fff',
+            hoverBgColor: '#ccc',
             onClick: e => {
               e.stopPropagation()
               emit('remove', item)

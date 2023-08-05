@@ -1,4 +1,4 @@
-import { ref, h } from 'vue'
+import { ref, computed, h } from 'vue'
 
 export default {
   name: 'SelectPageCircleButton',
@@ -10,18 +10,21 @@ export default {
   },
   setup (props, { slots }) {
     const backgroundColor = ref('')
+
+    const classes = computed(() => ({
+      'sp-circle-btn--disabled': props.disabled,
+      'sp-circle-btn--small': props.size === 'small',
+      'sp-circle-btn--large': props.size === 'large'
+    }))
+    const styles = computed(() => ({
+      'font-size': props.fontSize,
+      'background-color': props.disabled ? 'transparent' : backgroundColor.value
+    }))
+
     return () => {
       const option = {
-        class: {
-          'sp-circle-btn': true,
-          'sp-circle-btn-disabled': props.disabled,
-          'sp-circle-btn--small': props.size === 'small',
-          'sp-circle-btn--large': props.size === 'large'
-        },
-        style: {
-          'font-size': props.fontSize,
-          'background-color': backgroundColor.value
-        },
+        class: ['sp-circle-btn', classes.value],
+        style: styles.value,
         onMouseenter () {
           backgroundColor.value = props.hoverBgColor
         },
