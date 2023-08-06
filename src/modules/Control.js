@@ -6,7 +6,7 @@ import CircleButton from '../components/CircleButton'
 import IconTrash from '../icons/IconTrash.vue'
 
 export default {
-  setup (props, { emit }) {
+  setup () {
     const { selectedCount, removeAll, language } = useInject()
 
     return () => {
@@ -21,7 +21,7 @@ export default {
         onClick: removeAll
       }
       items.push(
-        h(CircleButton, option, h(IconTrash))
+        h(CircleButton, option, () => h(IconTrash))
       )
 
       return h('div', { class: 'sp-search-control' }, items)

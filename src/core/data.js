@@ -12,7 +12,6 @@ export function selectPageProps () {
      */
     modelValue: { type: Array, default: undefined },
     data: { type: Array, default: undefined },
-    title: { type: String, default: 'SelectPage' },
     placeholder: { type: String, default: '' },
     /** multiple selection */
     multiple: { type: Boolean, default: false },
@@ -73,7 +72,6 @@ export function selectPageProps () {
      * the width of drop down menu
      */
     width: { type: Number, default: undefined },
-    disabled: { type: Boolean, default: false },
     /** debounce delay when typing, in milliseconds */
     debounce: { type: Number, default: 300 }
   }
