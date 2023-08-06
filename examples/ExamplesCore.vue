@@ -13,7 +13,7 @@
             v-text="selected.toString() || '无'"
           />
         </div>
-        <div>
+        <div class="mb-3">
           <SelectPageListCore
             :data="data1"
             :total-rows="totalRows"
@@ -26,6 +26,23 @@
             @fetch-selected-data="fetchSelectedData"
             @remove="remove"
           />
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-outline-secondary me-3"
+            @click="updateSelected([3])"
+          >
+            set model to [3]
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            @click="updateSelected([2, 3, 4])"
+          >
+            set model to [2, 3, 4]
+          </button>
         </div>
       </div>
       <div class="col-md-6">
@@ -94,8 +111,10 @@ function selectionChange (data) {
 function remove (data) {
   console.log(data)
 }
-
 function labelFormatter (row) {
   return `${row.name} (id: ${row.id})`
+}
+function updateSelected (data) {
+  selected.value = data
 }
 </script>

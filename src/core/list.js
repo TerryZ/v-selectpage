@@ -1,4 +1,4 @@
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 
 import { NOT_SELECTED, operationKeyCodes, UP, DOWN } from './constants'
 import { isEmptyArray } from './utilities'
@@ -24,26 +24,30 @@ export function useItemSelection (props, emit) {
     if (isItemSelected(row)) return
 
     if (props.multiple) {
-      selected.value.push(row)
+      setSelected([...selected.value, row])
       return
     }
-    selected.value = [row]
+    setSelected([row])
   }
   const removeAll = () => {
     emit('remove', selected.value)
-    selected.value = []
+    setSelected([])
   }
   const removeItem = function (row) {
     emit('remove', [row])
-    selected.value = selected.value.filter(val => {
-      return val[props.keyProp] !== row[props.keyProp]
-    })
+    setSelected(
+      selected.value.filter(val => {
+        return val[props.keyProp] !== row[props.keyProp]
+      })
+    )
   }
-
-  watch(selected, val => {
-    emit('update:modelValue', val.map(value => value[props.keyProp]))
-    emit('selection-change', val)
-  }, { deep: true })
+  const setSelected = (data, respondModel = true) => {
+    selected.value = data
+    if (respondModel) {
+      emit('update:modelValue', data.map(value => value[props.keyProp]))
+    }
+    emit('selection-change', data)
+  }
 
   return {
     selected,
@@ -51,7 +55,8 @@ export function useItemSelection (props, emit) {
     isItemSelected,
     selectItem,
     removeItem,
-    removeAll
+    removeAll,
+    setSelected
   }
 }
 

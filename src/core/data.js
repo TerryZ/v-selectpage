@@ -97,7 +97,8 @@ export function useData (props, emit) {
     isItemSelected,
     removeAll,
     removeItem,
-    selectItem
+    selectItem,
+    setSelected
   } = useItemSelection(props, emit)
 
   // query string for search input
@@ -137,9 +138,19 @@ export function useData (props, emit) {
     })
   }
   const fetchSelectedData = () => {
-    emit('fetch-selected-data', props.modelValue, data => {
-      if (isEmptyArray(data)) return
-      selected.value = data
+    if (!Array.isArray(props.modelValue)) return
+
+    // empty array will not emit event
+    if (!props.modelValue.length) {
+      setSelected([], false)
+      return
+    }
+
+    const keys = props.multiple ? props.modelValue : [props.modelValue[0]]
+
+    emit('fetch-selected-data', keys, data => {
+      if (!Array.isArray(data)) return
+      setSelected(data, props.modelValue.length !== data.length)
     })
   }
 
@@ -160,6 +171,8 @@ export function useData (props, emit) {
     currentPage.value = FIRST_PAGE
     fetchData()
   })
+
+  watch(() => props.modelValue, fetchSelectedData)
 
   onMounted(() => {
     fetchData()

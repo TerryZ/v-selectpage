@@ -23,12 +23,12 @@ export default defineComponent({
       renderDropdown
     } = useDropdown(props)
 
-    const selected = ref([])
+    const selectedItems = ref([])
     const listCore = ref(null)
 
     return () => {
       const elementOption = {
-        selected,
+        selected: selectedItems,
         disabled: props.disabled,
         lang: listCore?.value?.lang,
         renderCell: listCore?.value?.renderCell,
@@ -40,7 +40,7 @@ export default defineComponent({
           }
         }
       }
-      const selectedContents = selected.value.length
+      const selectedContents = selectedItems.value.length
         ? () => h(isMultiple(attrs) ? FormElementChips : FormElementSelect, elementOption)
         : undefined
 
@@ -57,7 +57,7 @@ export default defineComponent({
         onAdjustDropdown: adjustDropdown,
         onCloseDropdown: closeDropdown,
         onSelectionChange (data) {
-          selected.value = data
+          selectedItems.value = data
           // close dropdown when item selected in single selection mode
           if (!isMultiple(attrs) && data.length) {
             closeDropdown()
