@@ -1,4 +1,4 @@
-import { ref, h, defineComponent, mergeProps } from 'vue'
+import { ref, h, defineComponent, mergeProps, nextTick } from 'vue'
 
 import { useDropdown } from './core/render'
 import { isMultiple } from './core/helper'
@@ -66,7 +66,14 @@ export default defineComponent({
       }
 
       const dropdownOption = {
-        onVisibleChange: val => emit('visible-change', val)
+        onVisibleChange: val => {
+          emit('visible-change', val)
+          if (!val) return
+
+          nextTick(() => {
+            listCore.value.setSearchFocus()
+          })
+        }
       }
       return renderDropdown(
         dropdownOption,

@@ -50,9 +50,16 @@ export function useRender (props, emit) {
 
   const keyboardDebounce = useDebounce(props.debounce)
 
+  const search = ref()
+
+  const setSearchFocus = () => {
+    search.value && search.value.focus()
+  }
+
   const renderSearch = () => {
     return h('div', { class: 'sp-search' }, [
       h(Search, {
+        ref: search,
         modelValue: query.value,
         'onUpdate:modelValue' (val) {
           query.value = val
@@ -140,6 +147,7 @@ export function useRender (props, emit) {
     renderCell,
     removeAll,
     removeItem,
+    setSearchFocus,
 
     renderSearch,
     renderMessage,

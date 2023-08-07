@@ -16,6 +16,7 @@ export default defineComponent({
       renderCell,
       removeAll,
       removeItem,
+      setSearchFocus,
       renderSearch,
       renderMessage,
       renderList,
@@ -27,7 +28,8 @@ export default defineComponent({
       lang,
       renderCell,
       removeAll,
-      removeItem
+      removeItem,
+      setSearchFocus
     })
 
     return () => {

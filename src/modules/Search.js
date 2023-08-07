@@ -16,7 +16,7 @@ export default {
     modelValue: { type: String, default: '' }
   },
   emits: ['update:modelValue', 'keyboard-operation'],
-  setup (props, { emit }) {
+  setup (props, { emit, expose }) {
     const { rtl, debounce, loading, language, selectedCount, multiple } = useInject()
 
     const inFocus = ref(false)
@@ -30,6 +30,11 @@ export default {
       }
       return language.selectedCount.replace(LANG_SELECTED_COUNT, selectedCount.value)
     })
+    const focus = () => {
+      searchRef.value && searchRef.value.focus()
+    }
+
+    expose({ focus })
 
     return () => {
       const icon = computed(() => {
@@ -73,7 +78,7 @@ export default {
         const clearOption = {
           onClick () {
             emit('update:modelValue', '')
-            searchRef.value.focus()
+            focus()
           }
         }
         // clean input content
