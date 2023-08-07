@@ -31,7 +31,7 @@ export default {
       return language.selectedCount.replace(LANG_SELECTED_COUNT, selectedCount.value)
     })
     const focus = () => {
-      searchRef.value && searchRef.value.focus()
+      searchRef.value && searchRef.value.focus({ preventScroll: true })
     }
 
     expose({ focus })
