@@ -13,8 +13,6 @@ export default {
   },
   emits: ['remove'],
   setup (props, { emit }) {
-    const remove = () => emit('remove')
-
     const selected = toRef(props, 'selected')
 
     return () => {
@@ -29,7 +27,7 @@ export default {
           title: props.lang.clear,
           onClick: e => {
             e.stopPropagation()
-            remove()
+            emit('remove')
           }
         }
         items.push(
