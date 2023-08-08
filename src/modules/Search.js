@@ -5,6 +5,7 @@ import { useInject } from '../core/data'
 import { isOperationKey } from '../core/list'
 import { useDebounce } from '../core/helper'
 import { LANG_SELECTED_COUNT } from '../core/constants'
+import { setInputFocus } from '../core/utilities'
 
 import CircleButton from '../components/CircleButton'
 import IconSearch from '../icons/IconSearch.vue'
@@ -30,9 +31,7 @@ export default {
       }
       return language.selectedCount.replace(LANG_SELECTED_COUNT, selectedCount.value)
     })
-    const focus = () => {
-      searchRef.value && searchRef.value.focus({ preventScroll: true })
-    }
+    const focus = () => setInputFocus(searchRef.value)
 
     expose({ focus })
 
