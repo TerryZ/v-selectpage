@@ -26,32 +26,6 @@ export function selectPageProps () {
      * specify field to display
      */
     labelProp: { type: [String, Function], default: 'name' },
-    /**
-     * the column setting for table view , format sample:
-     *
-     * {
-     *   title: [string] - the title content text,
-     *   data: [string|function] - specify column name to load data,
-     * }
-     *
-     * @example
-     * [
-     *   {
-     *     title: 'full name',
-     *     data: function(row) {
-     *       return row.lastName + ' ' + row.firstName
-     *     }
-     *   },
-     *   { title: 'age', data: 'age'},
-     *   {
-     *     title: 'birthday',
-     *     data: function(row) {
-     *       return doSomeFormat(row.birthday)
-     *     }
-     *   }
-     * ]
-     */
-    columns: { type: Array, default: undefined },
     pageSize: { type: Number, default: DEFAULT_PAGE_SIZE },
     /** total rows count */
     totalRows: { type: Number, default: 0 },
