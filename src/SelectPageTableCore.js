@@ -1,34 +1,12 @@
-import { h } from 'vue'
+import { h, defineComponent } from 'vue'
 import { selectPageProps, selectPageEmits } from './core/data'
 import { useRender } from './core/render'
 
-export default {
+export default defineComponent({
   props: {
     ...selectPageProps(),
     /**
-     * the column setting for table view , format sample:
-     *
-     * {
-     *   title: [string] - the title content text,
-     *   data: [string|function] - specify column name to load data,
-     * }
-     *
-     * @example
-     * [
-     *   {
-     *     title: 'full name',
-     *     data: function(row) {
-     *       return row.lastName + ' ' + row.firstName
-     *     }
-     *   },
-     *   { title: 'age', data: 'age'},
-     *   {
-     *     title: 'birthday',
-     *     data: function(row) {
-     *       return doSomeFormat(row.birthday)
-     *     }
-     *   }
-     * ]
+     * table column settings
      */
     columns: { type: Array, default: undefined }
   },
@@ -37,6 +15,7 @@ export default {
     const {
       renderSearch,
       renderMessage,
+      renderTable,
       renderPagination
     } = useRender(props, emit)
 
@@ -44,8 +23,9 @@ export default {
       return h('div', 'sp-table-view', [
         renderSearch(),
         renderMessage(),
+        renderTable(),
         renderPagination()
       ])
     }
   }
-}
+})

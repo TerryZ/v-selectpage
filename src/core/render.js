@@ -16,6 +16,7 @@ import Dropdown from 'v-dropdown'
 import Search from '../modules/Search'
 import Control from '../modules/Control'
 import List from '../modules/List'
+import Table from '../modules/Table'
 import Pagination from '../modules/Pagination'
 
 import IconMessage from '../icons/IconMessage.vue'
@@ -119,6 +120,12 @@ export function useRender (props, emit) {
   }
   const renderTable = () => {
     if (isDataEmpty()) return renderNoDataMessage()
+
+    return h(Table, {
+      highlightIndex: highlightIndex.value,
+      onSelect: row => selectItem(row),
+      onSetHighlight: index => setItemHighlight(index)
+    })
   }
   const renderNoDataMessage = () => {
     return h('div', { class: 'sp-result-message' }, lang.notFound)
