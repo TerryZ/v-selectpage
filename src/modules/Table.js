@@ -1,15 +1,17 @@
 import { h } from 'vue'
 
-import { useList, useInject } from '../core/list'
+import { NOT_SELECTED } from '../core/constants'
+import { useInject } from '../core/data'
+import { listEmits, listProps } from '../core/list'
 
 export default {
   name: 'SelectPageTable',
   props: {
-    list: { type: Array, default: undefined },
-    tbColumns: { type: Array, default: undefined }
+    ...listProps(),
+    columns: { type: Array, default: undefined }
   },
+  emits: listEmits(),
   setup (props, { emit }) {
-    const { itemSelect, setItemHighlight, itemClasses } = useList(props, emit)
     const { isItemSelected, rtl } = useInject()
 
     const renderColumn = (row, col) => {
@@ -21,21 +23,26 @@ export default {
     }
 
     return () => {
-      const thCells = props.tbColumns.map(val => h('th', val.title))
-      const rows = props.list.map((val, index) => {
+      const thCells = props.columns.map(val => h('th', val.title))
+      const rows = props.list.map((row, index) => {
         // table row
         return h('tr', {
           key: index,
-          class: itemClasses(val, index),
+          class: {
+            'sp-over': props.highlightIndex === index,
+            'sp-selected': isItemSelected(row),
+            'sp-rtl': rtl
+          },
           onClick: e => {
             e.stopPropagation()
-            itemSelect(val)
+            emit('select', row)
           },
-          onMouseenter: () => setItemHighlight(isItemSelected(val) ? -1 : index)
-        }, props.tbColumns.map((col, idx) => { // table cells
+          onMouseenter: () => emit('set-highlight', index)
+        }, props.columns.map((col, idx) => {
+          // table cells
           return h('td', {
             key: idx,
-            innerHTML: renderColumn(val, col)
+            innerHTML: renderColumn(row, col)
           })
         }))
       })
@@ -44,7 +51,7 @@ export default {
         // table thead
         h('thead', h('tr', { class: { 'sp-rtl': rtl } }, thCells)),
         // table tbody
-        h('tbody', { onMouseleave: () => setItemHighlight(-1) }, rows)
+        h('tbody', { onMouseleave: () => emit('set-highlight', NOT_SELECTED) }, rows)
       ])
     }
   }
