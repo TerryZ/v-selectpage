@@ -122,6 +122,8 @@ export function useRender (props, emit) {
     if (isDataEmpty()) return renderNoDataMessage()
 
     return h(Table, {
+      list: props.data,
+      columns: props.columns,
       highlightIndex: highlightIndex.value,
       onSelect: row => selectItem(row),
       onSetHighlight: index => setItemHighlight(index)

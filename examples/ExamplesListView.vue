@@ -111,3 +111,4 @@ function remove (data) {
   console.log('remove', data)
 }
 </script>
+./example-data
