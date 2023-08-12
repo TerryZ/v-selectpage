@@ -12,10 +12,11 @@ export default {
   props: listProps(),
   emits: listEmits(),
   setup (props, { emit }) {
-    const { isItemSelected } = useInject()
+    const { isItemSelected, keyProp } = useInject()
 
     return () => {
       const items = props.list.map((item, index) => h(ListItem, {
+        key: item[keyProp],
         data: item,
         isHover: props.highlightIndex === index,
         isSelected: isItemSelected(item),

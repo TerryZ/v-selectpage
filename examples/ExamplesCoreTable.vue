@@ -84,7 +84,7 @@ const totalRows = ref(0)
 const columns = ref([
   { title: '名称', data: 'name' },
   { title: '编码', data: 'code' },
-  { title: '数量', data: 'amount' }
+  { title: '单价', data: 'price' }
 ])
 
 const loading = ref(false)

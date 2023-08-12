@@ -128,6 +128,7 @@ export function useData (props, emit) {
     })
   }
 
+  provide('keyProp', props.keyProp)
   provide('rtl', props.rtl)
   provide('pageSize', props.pageSize)
   provide('debounce', props.debounce)
@@ -175,6 +176,7 @@ export function useData (props, emit) {
 
 export function useInject () {
   return {
+    keyProp: inject('keyProp'),
     renderCell: inject('renderCell'),
     rtl: inject('rtl'),
     isItemSelected: inject('isItemSelected'),
