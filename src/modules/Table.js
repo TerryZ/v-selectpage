@@ -1,5 +1,6 @@
 import { h } from 'vue'
 
+import '../styles/table-view.sass'
 import { NOT_SELECTED } from '../core/constants'
 import { useInject } from '../core/data'
 import { listEmits, listProps } from '../core/list'

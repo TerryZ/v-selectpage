@@ -1,6 +1,6 @@
 <template>
   <div class="p-3">
-    <h1>核心模块</h1>
+    <h1 class="mb-3">核心模块</h1>
 
     <ExamplesCoreList />
     <ExamplesCoreTable />

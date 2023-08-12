@@ -3,6 +3,7 @@ import { selectPageProps, selectPageEmits } from './core/data'
 import { useRender } from './core/render'
 
 export default defineComponent({
+  name: 'SelectPageTableCore',
   props: {
     ...selectPageProps(),
     /**
@@ -20,7 +21,7 @@ export default defineComponent({
     } = useRender(props, emit)
 
     return () => {
-      return h('div', 'sp-table-view', [
+      return h('div', { class: 'sp-container sp-table-view' }, [
         renderSearch(),
         renderMessage(),
         renderTable(),

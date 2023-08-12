@@ -1,6 +1,6 @@
 <template>
   <h4>List View 列表视图</h4>
-  <div class="row">
+  <div class="row mb-5">
     <div class="col-md-6">
       <h5>单选模式</h5>
       <div class="mb-3">
