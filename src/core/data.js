@@ -118,7 +118,7 @@ export function useData (props, emit) {
     if (!Array.isArray(modelValue)) return
 
     if (!props.multiple && modelValue.length > 1) {
-      console.warn('Invalid prop: Only one key can be passed for prop "modelValue/v-model" in single selection mode({ multiple: false }).')
+      console.warn('Invalid prop: Only one key can be passed to prop "modelValue/v-model" in single selection mode({ multiple: false }).')
       return
     }
     // empty array will not emit event
