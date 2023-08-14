@@ -4,19 +4,19 @@ export const routers = [
   {
     name: 'core-list',
     path: '/core/list',
-    component: () => import('./ExamplesCore.vue')
+    component: () => import('./ExamplesCoreList.vue')
   }, {
     name: 'core-table',
     path: '/core/table',
-    component: () => import('./ExamplesCore.vue')
+    component: () => import('./ExamplesCoreTable.vue')
   }, {
     name: 'dropdown-list',
     path: '/dropdown/list',
-    component: () => import('./ExamplesCore.vue')
+    component: () => import('./ExamplesDropdownList.vue')
   }, {
     name: 'dropdown-table',
     path: '/dropdown/table',
-    component: () => import('./ExamplesCore.vue')
+    component: () => import('./ExamplesDropdownTable.vue')
   }
 ]
 
@@ -43,4 +43,9 @@ export function switchType (data, router) {
 export function switchForm (data, router) {
   form.value = data.code
   router.push({ name: `${type.value}-${data.code}` }).catch(() => {})
+}
+export function detectActive (route) {
+  const [typeCode, formCode] = route.name.split('-')
+  type.value = typeCode
+  form.value = formCode
 }

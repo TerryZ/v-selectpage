@@ -1,8 +1,8 @@
 <template>
   <div class="p-3">
-    <h1>List View 列表视图</h1>
+    <h4>List View 列表视图</h4>
 
-    <h4>单选模式</h4>
+    <h5>单选模式</h5>
     <div class="mb-3">
       <SelectPageList
         :data="data1"
@@ -18,7 +18,7 @@
       />
     </div>
 
-    <h4>多选模式</h4>
+    <h5>多选模式</h5>
     <div class="mb-3">
       <SelectPageList
         :data="data1"
@@ -35,7 +35,7 @@
       />
     </div>
 
-    <h4>禁用状态</h4>
+    <h5>禁用状态</h5>
     <div class="row">
       <div class="col-md-6">
         <SelectPageList
@@ -76,7 +76,7 @@
 import { ref } from 'vue'
 
 import { SelectPageList } from '@/'
-import { list1 } from './data'
+import { list1 } from './example-data'
 
 const data1 = ref([])
 const selected = ref([23])

@@ -72,7 +72,8 @@ export function useData (props, emit) {
     removeAll,
     removeItem,
     selectItem,
-    setSelected
+    setSelected,
+    isKeysEqualToSelected
   } = useItemSelection(props, emit)
 
   // query string for search input
@@ -112,19 +113,26 @@ export function useData (props, emit) {
     })
   }
   const fetchSelectedData = () => {
-    if (!Array.isArray(props.modelValue)) return
+    const { modelValue } = props
 
-    // empty array will not emit event
-    if (!props.modelValue.length) {
-      setSelected([], false)
+    if (!Array.isArray(modelValue)) return
+
+    if (!props.multiple && modelValue.length > 1) {
+      console.warn('Invalid prop: Only one key can be passed for prop "modelValue/v-model" in single selection mode({ multiple: false }).')
       return
     }
+    // empty array will not emit event
+    if (!modelValue.length) return
+    // each key exists in the selected models
+    if (isKeysEqualToSelected(modelValue)) return
 
-    const keys = props.multiple ? props.modelValue : [props.modelValue[0]]
-
-    emit('fetch-selected-data', keys, data => {
+    emit('fetch-selected-data', modelValue, data => {
       if (!Array.isArray(data)) return
-      setSelected(data, props.modelValue.length !== data.length)
+      /**
+       * when key length not equal to data model length, required to
+       * update `modelValue/v-model` value
+       */
+      setSelected(data, modelValue.length !== data.length)
     })
   }
 

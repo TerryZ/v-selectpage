@@ -9,8 +9,19 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+
+import { detectActive } from './store'
+
 import LayoutHeader from './LayoutHeader.vue'
 import LayoutAside from './LayoutAside.vue'
+
+const route = useRoute()
+
+onMounted(() => {
+  detectActive(route)
+})
 </script>
 
 <style lang="sass">

@@ -20,6 +20,19 @@ export function useItemSelection (props, emit) {
     if (!selected.value.length) return false
     return selected.value.some(val => val[props.keyProp] === row[props.keyProp])
   }
+  const isKeySelected = key => {
+    if (!selected.value.length) return false
+    if (typeof key === 'undefined') return false
+    return selected.value.some(entry => entry[props.keyProp] === key)
+  }
+  const isKeysEqualToSelected = keys => {
+    // ensure the uniqueness of the keys
+    const keySet = new Set(keys)
+
+    if (keySet.size !== selected.value.length) return false
+
+    return Array.from(keySet).every(isKeySelected)
+  }
   const selectItem = row => {
     if (isItemSelected(row)) return
 
@@ -41,9 +54,9 @@ export function useItemSelection (props, emit) {
       })
     )
   }
-  const setSelected = (data, respondModel = true) => {
+  const setSelected = (data, updateVModel = true) => {
     selected.value = data
-    if (respondModel) {
+    if (updateVModel) {
       emit('update:modelValue', data.map(value => value[props.keyProp]))
     }
     emit('selection-change', data)
@@ -56,7 +69,8 @@ export function useItemSelection (props, emit) {
     selectItem,
     removeItem,
     removeAll,
-    setSelected
+    setSelected,
+    isKeysEqualToSelected
   }
 }
 
