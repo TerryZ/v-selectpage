@@ -12,13 +12,28 @@ export default defineComponent({
     columns: { type: Array, default: undefined }
   },
   emits: selectPageEmits(),
-  setup (props, { emit }) {
+  setup (props, { emit, expose }) {
     const {
+      selected,
+      lang,
+      removeAll,
+      removeItem,
+      setSearchFocus,
+      renderCell,
       renderSearch,
       renderMessage,
       renderTable,
       renderPagination
     } = useRender(props, emit)
+
+    expose({
+      selected,
+      lang,
+      renderCell,
+      removeAll,
+      removeItem,
+      setSearchFocus
+    })
 
     return () => {
       return h('div', { class: 'sp-container sp-table-view' }, [

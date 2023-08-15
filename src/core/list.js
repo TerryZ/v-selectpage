@@ -8,24 +8,24 @@ export const listProps = () => ({
   highlightIndex: { type: Number, default: NOT_SELECTED }
 })
 
-export const listEmits = () => ['select', 'update:modelValue', 'set-highlight']
+export const listEmits = () => ['select', 'set-highlight']
 
-// list item manager
+/** list item manager */
 export function useItemSelection (props, emit) {
   const selected = ref([])
 
   const selectedCount = computed(() => selected.value.length)
 
-  const isItemSelected = row => {
+  function isItemSelected (row) {
     if (!selected.value.length) return false
     return selected.value.some(val => val[props.keyProp] === row[props.keyProp])
   }
-  const isKeySelected = key => {
+  function isKeySelected (key) {
     if (!selected.value.length) return false
     if (typeof key === 'undefined') return false
     return selected.value.some(entry => entry[props.keyProp] === key)
   }
-  const isKeysEqualToSelected = keys => {
+  function isKeysEqualToSelected (keys) {
     // ensure the uniqueness of the keys
     const keySet = new Set(keys)
 
@@ -33,7 +33,7 @@ export function useItemSelection (props, emit) {
 
     return Array.from(keySet).every(isKeySelected)
   }
-  const selectItem = row => {
+  function selectItem (row) {
     if (isItemSelected(row)) return
 
     if (props.multiple) {
@@ -42,11 +42,11 @@ export function useItemSelection (props, emit) {
     }
     setSelected([row])
   }
-  const removeAll = () => {
+  function removeAll () {
     emit('remove', selected.value)
     setSelected([])
   }
-  const removeItem = function (row) {
+  function removeItem (row) {
     emit('remove', [row])
     setSelected(
       selected.value.filter(val => {
@@ -54,7 +54,7 @@ export function useItemSelection (props, emit) {
       })
     )
   }
-  const setSelected = (data, updateVModel = true) => {
+  function setSelected (data, updateVModel = true) {
     selected.value = data
     if (updateVModel) {
       emit('update:modelValue', data.map(value => value[props.keyProp]))
@@ -77,33 +77,29 @@ export function useItemSelection (props, emit) {
 export function useListItemHighlight (props, emit) {
   const highlightIndex = ref(NOT_SELECTED)
 
-  const setItemHighlight = index => {
+  function setItemHighlight (index) {
     highlightIndex.value = index
   }
-
-  const moveUp = () => {
+  function moveUp () {
     if (highlightIndex.value === NOT_SELECTED) return
     if (highlightIndex.value === 0) return
     highlightIndex.value -= 1
   }
-  const moveDown = () => {
+  function moveDown () {
     if (isEmptyArray(props.data)) return
     if (highlightIndex.value === (props.data.length - 1)) return
     highlightIndex.value += 1
   }
-
-  const highlightNavigation = keyCode => {
+  function highlightNavigation (keyCode) {
     if (keyCode === UP) return moveUp()
     if (keyCode === DOWN) return moveDown()
   }
-
-  const isSomeRowHighlight = () => {
+  function isSomeRowHighlight () {
     return highlightIndex.value !== NOT_SELECTED
   }
 
   return {
     highlightIndex,
-
     setItemHighlight,
     highlightNavigation,
     isSomeRowHighlight

@@ -74,6 +74,13 @@
           >
             set model to [2, 3, 124]
           </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            @click="updateSelected1([1, 1, 1, 2, 3])"
+          >
+            set model to [1, 1, 1, 2, 3]
+          </button>
         </div>
       </div>
     </div>
