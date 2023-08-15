@@ -24,19 +24,19 @@ export default defineComponent({
     } = useDropdown(props)
 
     const selectedItems = ref([])
-    const listCore = ref(null)
+    const core = ref(null)
 
     return () => {
       const elementOption = {
         selected: selectedItems,
         disabled: props.disabled,
-        lang: listCore?.value?.lang,
-        renderCell: listCore?.value?.renderCell,
+        lang: core?.value?.lang,
+        renderCell: core?.value?.renderCell,
         onRemove (row) {
           if (isMultiple(attrs)) {
-            listCore.value.removeItem(row)
+            core.value.removeItem(row)
           } else {
-            listCore.value.removeAll()
+            core.value.removeAll()
           }
         }
       }
@@ -48,12 +48,12 @@ export default defineComponent({
         dropdownVisible: visible.value,
         disabled: props.disabled,
         placeholder: attrs.placeholder,
-        lang: listCore?.value?.lang
+        lang: core?.value?.lang
       }
       const dropdownTrigger = h(Trigger, triggerOption, selectedContents)
 
-      const listCoreOption = {
-        ref: listCore,
+      const coreOption = {
+        ref: core,
         onAdjustDropdown: adjustDropdown,
         onCloseDropdown: closeDropdown,
         onSelectionChange (data) {
@@ -71,14 +71,14 @@ export default defineComponent({
           if (!val) return
 
           nextTick(() => {
-            listCore.value.setSearchFocus()
+            core.value.setSearchFocus()
           })
         }
       }
       return renderDropdown(
         dropdownOption,
         dropdownTrigger,
-        h(SelectPageListCore, mergeProps(listCoreOption, attrs))
+        h(SelectPageListCore, mergeProps(coreOption, attrs))
       )
     }
   }
