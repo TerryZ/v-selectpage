@@ -74,7 +74,7 @@ export function useItemSelection (props, emit) {
   }
 }
 
-export function useListItemHighlight (props, emit) {
+export function useListItemHighlight (props, emit, list) {
   const highlightIndex = ref(NOT_SELECTED)
 
   function setItemHighlight (index) {
@@ -86,8 +86,8 @@ export function useListItemHighlight (props, emit) {
     highlightIndex.value -= 1
   }
   function moveDown () {
-    if (isEmptyArray(props.data)) return
-    if (highlightIndex.value === (props.data.length - 1)) return
+    if (isEmptyArray(list.value)) return
+    if (highlightIndex.value === (list.value.length - 1)) return
     highlightIndex.value += 1
   }
   function highlightNavigation (keyCode) {

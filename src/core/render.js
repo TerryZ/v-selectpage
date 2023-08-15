@@ -23,11 +23,12 @@ import IconMessage from '../icons/IconMessage.vue'
 
 export function useRender (props, emit) {
   const {
+    lang,
     selected,
     query,
     message,
     currentPage,
-    lang,
+    list,
     isDataEmpty,
     selectItem,
     fetchData,
@@ -40,7 +41,7 @@ export function useRender (props, emit) {
     setItemHighlight,
     highlightNavigation,
     isSomeRowHighlight
-  } = useListItemHighlight(props, emit)
+  } = useListItemHighlight(props, emit, list)
   const {
     paginationInfo,
     isFirstPage,
@@ -77,7 +78,7 @@ export function useRender (props, emit) {
           // press ENTER key to selected the highlight row
           if (isSelectOperation(keyCode)) {
             if (!isSomeRowHighlight()) return
-            return selectItem(props.data[highlightIndex.value])
+            return selectItem(list.value[highlightIndex.value])
           }
           // press ESCAPE key to close dropdown
           if (isEscapeOperation(keyCode)) {
@@ -112,7 +113,7 @@ export function useRender (props, emit) {
     if (isDataEmpty()) return renderNoDataMessage()
 
     return h(List, {
-      list: props.data,
+      list: list.value,
       highlightIndex: highlightIndex.value,
       onSelect: row => selectItem(row),
       onSetHighlight: index => setItemHighlight(index)
@@ -122,7 +123,7 @@ export function useRender (props, emit) {
     if (isDataEmpty()) return renderNoDataMessage()
 
     return h(Table, {
-      list: props.data,
+      list: list.value,
       columns: props.columns,
       highlightIndex: highlightIndex.value,
       onSelect: row => selectItem(row),

@@ -1,4 +1,4 @@
-import { ref, provide, watch, inject, onMounted, toRef } from 'vue'
+import { ref, provide, watch, inject, onMounted, nextTick } from 'vue'
 import { FIRST_PAGE, DEFAULT_PAGE_SIZE, UNLIMITED, LANG_MAX_SELECTED_LIMIT } from './constants'
 import { EN } from '../language'
 import { useLanguage, useDebounce } from './helper'
@@ -11,12 +11,9 @@ export function selectPageProps () {
      * binding selected item keys, it must be match 'keyProp' option value
      */
     modelValue: { type: Array, default: undefined },
-    data: { type: Array, default: undefined },
     placeholder: { type: String, default: '' },
     /** multiple selection */
     multiple: { type: Boolean, default: false },
-    /** data loading state, recommended to use it with the `fetch-data` event */
-    loading: { type: Boolean, default: false },
     language: { type: String, default: EN },
     /**
      * specify field to be key field, the value will return by v-model
@@ -82,10 +79,14 @@ export function useData (props, emit) {
   const message = ref('')
   // current page number
   const currentPage = ref(FIRST_PAGE)
+  // data list
+  const list = ref([])
+  // data loading state
+  const loading = ref(false)
 
   const messageDebounce = useDebounce()
 
-  const isDataEmpty = () => isEmptyArray(props.data)
+  const isDataEmpty = () => isEmptyArray(list.value)
   const renderCell = row => {
     if (!row || !Object.keys(row).length) return ''
     switch (typeof props.labelProp) {
@@ -106,10 +107,19 @@ export function useData (props, emit) {
     selectItem(row)
   }
   const fetchData = () => {
-    emit('fetch-data', {
+    loading.value = true
+
+    const fetchOption = {
       search: query.value,
       pageNumber: currentPage.value,
       pageSize: props.pageSize
+    }
+
+    emit('fetch-data', fetchOption, data => {
+      if (!Array.isArray(data)) return
+
+      list.value = data
+      nextTick(() => { loading.value = false })
     })
   }
   const fetchSelectedData = () => {
@@ -136,19 +146,6 @@ export function useData (props, emit) {
     })
   }
 
-  provide('keyProp', props.keyProp)
-  provide('rtl', props.rtl)
-  provide('pageSize', props.pageSize)
-  provide('debounce', props.debounce)
-  provide('multiple', props.multiple)
-  provide('loading', toRef(props, 'loading'))
-  provide('language', lang)
-  provide('renderCell', renderCell)
-  provide('isItemSelected', isItemSelected)
-  provide('selectedCount', selectedCount)
-  provide('removeAll', removeAll)
-  provide('removeItem', removeItem)
-
   watch(query, () => {
     // reset current page to first page when query keyword change
     currentPage.value = FIRST_PAGE
@@ -164,12 +161,26 @@ export function useData (props, emit) {
     }
   })
 
+  provide('keyProp', props.keyProp)
+  provide('rtl', props.rtl)
+  provide('pageSize', props.pageSize)
+  provide('debounce', props.debounce)
+  provide('multiple', props.multiple)
+  provide('loading', loading)
+  provide('language', lang)
+  provide('renderCell', renderCell)
+  provide('isItemSelected', isItemSelected)
+  provide('selectedCount', selectedCount)
+  provide('removeAll', removeAll)
+  provide('removeItem', removeItem)
+
   return {
     selected,
     query,
     message,
     currentPage,
     lang,
+    list,
 
     renderCell,
     isDataEmpty,

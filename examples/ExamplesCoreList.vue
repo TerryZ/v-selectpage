@@ -13,9 +13,7 @@
         </div>
         <div class="mb-3">
           <SelectPageListCore
-            :data="data1"
             :total-rows="totalRows"
-            :loading="loading"
             language="zh-chs"
             class="shadow"
             v-model="selected"
@@ -53,7 +51,6 @@
         </div>
         <div class="mb-3">
           <SelectPageListCore
-            :data="data1"
             :total-rows="totalRows"
             :label-prop="labelFormatter"
             :multiple="true"
@@ -69,7 +66,7 @@
         <div>
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="btn btn-outline-secondary me-3"
             @click="updateSelected1([2, 3, 124])"
           >
             set model to [2, 3, 124]
@@ -94,25 +91,24 @@ import { list1 } from './example-data'
 
 import { SelectPageListCore } from '@/'
 
-const data1 = ref([])
 const selected = ref([23])
 const selected1 = ref([])
 const totalRows = ref(0)
-const loading = ref(false)
 
 // local data list pagination
-function fetchData (data) {
-  loading.value = true
+function fetchData (data, callback) {
   const { search, pageNumber, pageSize } = data
   const start = (pageNumber - 1) * pageSize
   const end = start + pageSize - 1
 
   const list = search ? list1.filter(val => val.name.includes(search)) : list1
+  // update total rows
   totalRows.value = list.length
 
   setTimeout(() => {
-    data1.value = list.filter((val, index) => index >= start && index <= end)
-    loading.value = false
+    callback(
+      list.filter((val, index) => index >= start && index <= end)
+    )
   }, 500)
 }
 function fetchSelectedData (data, callback) {
