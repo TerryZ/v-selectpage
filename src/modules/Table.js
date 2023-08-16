@@ -29,12 +29,13 @@ export default {
         onHover: () => emit('set-highlight', index)
       }))
 
-      return h('table', { class: 'sp-table' }, [
+      const table = h('table', [
         // table thead
         h('thead', h('tr', { class: { 'sp-rtl': rtl } }, thCells)),
         // table tbody
         h('tbody', { onMouseleave: () => emit('set-highlight', NOT_SELECTED) }, rows)
       ])
+      return h('div', { class: 'sp-table' }, table)
     }
   }
 }

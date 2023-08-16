@@ -86,6 +86,7 @@ const {
 const selected = ref([23])
 const selected1 = ref([3, 5, 7])
 const columns = ref([
+  { title: 'id', data: 'id' },
   { title: '名称', data: 'name' },
   { title: '编码', data: 'code' },
   { title: '单价', data: 'price' }
