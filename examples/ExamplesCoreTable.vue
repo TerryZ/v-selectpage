@@ -13,10 +13,8 @@
         </div>
         <div class="mb-3">
           <SelectPageTableCore
-            :data="data1"
             :total-rows="totalRows"
             :columns="columns"
-            :loading="loading"
             language="zh-chs"
             class="shadow"
             v-model="selected"
@@ -54,7 +52,6 @@
         </div>
         <div>
           <SelectPageTableCore
-            :data="data1"
             :total-rows="totalRows"
             :label-prop="labelFormatter"
             :columns="columns"
@@ -75,51 +72,27 @@
 <script setup>
 import { ref } from 'vue'
 
-import { list1 } from './example-data'
+import { useSelectPageHandle } from './handles'
 
 import { SelectPageTableCore } from '@/'
 
-const data1 = ref([])
+const {
+  totalRows,
+  fetchData,
+  fetchSelectedData,
+  selectionChange,
+  labelFormatter,
+  remove
+} = useSelectPageHandle()
+
 const selected = ref([23])
 const selected1 = ref([])
-const totalRows = ref(0)
 const columns = ref([
   { title: '名称', data: 'name' },
   { title: '编码', data: 'code' },
   { title: '单价', data: 'price' }
 ])
 
-const loading = ref(false)
-
-// local data list pagination
-function fetchData (data) {
-  loading.value = true
-  const { search, pageNumber, pageSize } = data
-  const start = (pageNumber - 1) * pageSize
-  const end = start + pageSize - 1
-
-  const list = search ? list1.filter(val => val.name.includes(search)) : list1
-  totalRows.value = list.length
-
-  setTimeout(() => {
-    data1.value = list.filter((val, index) => index >= start && index <= end)
-    loading.value = false
-  }, 500)
-}
-function fetchSelectedData (data, callback) {
-  callback(
-    list1.filter(val => data.includes(val.id))
-  )
-}
-function selectionChange (data) {
-  console.log(data)
-}
-function remove (data) {
-  console.log(data)
-}
-function labelFormatter (row) {
-  return `${row.name} (id: ${row.id})`
-}
 function updateSelected (data) {
   selected.value = data
 }
