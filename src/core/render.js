@@ -148,15 +148,12 @@ export function useRender (props, emit) {
     })
   }
   const renderContainer = children => {
-    const option = {
-      class: 'sp-container'
-    }
+    const option = { class: 'sp-container' }
 
     if (props.width) {
-      option.style = {
-        width: parseWidth(props.width)
-      }
+      option.style = { width: parseWidth(props.width) }
     }
+
     return h('div', option, children)
   }
 

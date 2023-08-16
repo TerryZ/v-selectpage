@@ -16,11 +16,11 @@ export function selectPageProps () {
     multiple: { type: Boolean, default: false },
     language: { type: String, default: EN },
     /**
-     * specify field to be key field, the value will return by v-model
+     * specify property to be key field, the value will return by v-model
      */
     keyProp: { type: String, default: 'id' },
     /**
-     * specify field to display
+     * specify property to display in data row
      */
     labelProp: { type: [String, Function], default: 'name' },
     pageSize: { type: Number, default: DEFAULT_PAGE_SIZE },
@@ -106,6 +106,7 @@ export function useData (props, emit) {
     }
     selectItem(row)
   }
+  // fetch current page data
   const fetchData = () => {
     loading.value = true
 
@@ -122,6 +123,7 @@ export function useData (props, emit) {
       nextTick(() => { loading.value = false })
     })
   }
+  // fetch selected items data
   const fetchSelectedData = () => {
     const { modelValue } = props
 
@@ -151,7 +153,6 @@ export function useData (props, emit) {
     currentPage.value = FIRST_PAGE
     fetchData()
   })
-
   watch(() => props.modelValue, fetchSelectedData)
 
   onMounted(() => {

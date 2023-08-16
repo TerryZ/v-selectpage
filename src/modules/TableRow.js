@@ -25,8 +25,7 @@ export default {
     }
 
     return () => {
-      // table row
-      return h('tr', {
+      const option = {
         class: {
           'sp-over': !props.isSelected && props.isHover,
           'sp-selected': props.isSelected,
@@ -34,19 +33,19 @@ export default {
         },
         onClick: () => emit('select'),
         onMouseenter: () => emit('hover')
-      }, props.columns.map((col, idx) => {
-        const option = {
+      }
+      const cells = props.columns.map((col, idx) => {
+        const cellOption = {
           key: idx,
           innerHTML: renderColumn(col)
         }
         if (Object.hasOwn(col, 'width')) {
-          option.style = {
-            width: parseWidth(col.width)
-          }
+          cellOption.style = { width: parseWidth(col.width) }
         }
-        // table cells
-        return h('td', option)
-      }))
+        return h('td', cellOption) // table data cell
+      })
+      // table row
+      return h('tr', option, cells)
     }
   }
 }
