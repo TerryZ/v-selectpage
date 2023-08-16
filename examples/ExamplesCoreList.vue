@@ -56,6 +56,7 @@
             :multiple="true"
             :max="2"
             class="shadow"
+            width="500px"
             v-model="selected1"
             @selection-change="selectionChange"
             @fetch-data="fetchData"

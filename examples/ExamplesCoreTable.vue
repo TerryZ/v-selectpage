@@ -58,6 +58,7 @@
             :multiple="true"
             :max="2"
             class="shadow"
+            width="400px"
             v-model="selected1"
             @selection-change="selectionChange"
             @fetch-data="fetchData"
@@ -88,9 +89,9 @@ const {
 const selected = ref([23])
 const selected1 = ref([])
 const columns = ref([
+  { title: '编码', data: 'code', width: 100 },
   { title: '名称', data: 'name' },
-  { title: '编码', data: 'code' },
-  { title: '单价', data: 'price' }
+  { title: '单价', data: 'price', width: 80 }
 ])
 
 function updateSelected (data) {

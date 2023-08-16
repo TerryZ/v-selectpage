@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 
 import { selectPageProps, selectPageEmits } from './core/data'
 import { useRender } from './core/render'
@@ -20,7 +20,8 @@ export default defineComponent({
       renderSearch,
       renderMessage,
       renderList,
-      renderPagination
+      renderPagination,
+      renderContainer
     } = useRender(props, emit)
 
     expose({
@@ -32,13 +33,11 @@ export default defineComponent({
       setSearchFocus
     })
 
-    return () => {
-      return h('div', { class: 'sp-container sp-list-view' }, [
-        renderSearch(),
-        renderMessage(),
-        renderList(),
-        renderPagination()
-      ])
-    }
+    return () => renderContainer([
+      renderSearch(),
+      renderMessage(),
+      renderList(),
+      renderPagination()
+    ])
   }
 })

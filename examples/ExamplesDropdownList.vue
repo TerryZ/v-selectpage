@@ -23,6 +23,7 @@
         multiple
         language="zh-chs"
         class=""
+        width="500px"
         v-model="selected1"
         @selection-change="selectionChange"
         @fetch-data="fetchData"

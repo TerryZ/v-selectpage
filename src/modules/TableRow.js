@@ -1,6 +1,7 @@
 import { h } from 'vue'
 
 import { useInject } from '../core/data'
+import { parseWidth } from '../core/utilities'
 
 export default {
   props: {
@@ -34,11 +35,17 @@ export default {
         onClick: () => emit('select'),
         onMouseenter: () => emit('hover')
       }, props.columns.map((col, idx) => {
-        // table cells
-        return h('td', {
+        const option = {
           key: idx,
           innerHTML: renderColumn(col)
-        })
+        }
+        if (Object.hasOwn(col, 'width')) {
+          option.style = {
+            width: parseWidth(col.width)
+          }
+        }
+        // table cells
+        return h('td', option)
       }))
     }
   }

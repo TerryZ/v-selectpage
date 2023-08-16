@@ -11,3 +11,9 @@ export function isEmptyArray (array) {
   if (!Array.isArray(array)) return true
   return !array.length
 }
+
+export function parseWidth (width) {
+  if (typeof width === 'string') return width
+  if (typeof width === 'number') return `${width}px`
+  return ''
+}

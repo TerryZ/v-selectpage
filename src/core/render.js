@@ -11,6 +11,7 @@ import {
   isEscapeOperation,
   useDebounce
 } from './helper'
+import { parseWidth } from '../core/utilities'
 
 import Dropdown from 'v-dropdown'
 import Search from '../modules/Search'
@@ -146,6 +147,18 @@ export function useRender (props, emit) {
       }
     })
   }
+  const renderContainer = children => {
+    const option = {
+      class: 'sp-container'
+    }
+
+    if (props.width) {
+      option.style = {
+        width: parseWidth(props.width)
+      }
+    }
+    return h('div', option, children)
+  }
 
   return {
     selected,
@@ -163,7 +176,8 @@ export function useRender (props, emit) {
     renderMessage,
     renderList,
     renderTable,
-    renderPagination
+    renderPagination,
+    renderContainer
   }
 }
 

@@ -42,7 +42,7 @@ export function selectPageProps () {
     /**
      * the width of drop down menu
      */
-    width: { type: Number, default: undefined },
+    width: { type: [String, Number], default: undefined },
     /** debounce delay when typing, in milliseconds */
     debounce: { type: Number, default: 300 }
   }
