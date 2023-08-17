@@ -1,5 +1,10 @@
+$row-radius: .4rem
+
 .sp-table
-  padding: 0 5px
+  padding: 0 .3rem
+  min-width: 300px
+  max-height: 320px
+  overflow-y: auto
   table
     width: 100%
     border-spacing: 0
@@ -15,13 +20,19 @@
       color: #333
       text-align: left
     td
-      padding: 4px 8px
+      padding: .25rem .5rem
       color: #666
+      cursor: pointer
     tbody tr
       &.sp-over td
         background-color: #F6F8FA !important
         color: black !important
-        cursor: pointer
+        &:first-child
+          border-top-left-radius: $row-radius
+          border-bottom-left-radius: $row-radius
+        &:last-child
+          border-top-right-radius: $row-radius
+          border-bottom-right-radius: $row-radius
       &.sp-selected td
         color: #ccc
         cursor: default

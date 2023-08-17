@@ -9,6 +9,8 @@ export const operationKeyCodes = [LEFT, UP, RIGHT, DOWN, ENTER, ESCAPE]
 export const NOT_SELECTED = -1
 export const UNLIMITED = 0
 
+export const NO_PAGINATION_PAGE_SIZE = 0
+
 export const FIRST_PAGE = 1
 
 export const DEFAULT_PAGE_SIZE = 10

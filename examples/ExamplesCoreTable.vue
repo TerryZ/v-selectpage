@@ -1,7 +1,7 @@
 <template>
   <div class="p-3">
     <h4>Table View 表格视图</h4>
-    <div class="row">
+    <div class="row mb-5">
       <div class="col-md-6">
         <h5>单选模式</h5>
         <div class="mb-3">
@@ -65,6 +65,21 @@
             @remove="remove"
           />
         </div>
+      </div>
+    </div>
+
+    <div>
+      <h5>关闭分页栏</h5>
+      <div>
+        <SelectPageTableCore
+          :columns="columns"
+          :pagination="false"
+          language="zh-chs"
+          class="shadow"
+          v-model="selected"
+          @fetch-data="fetchData"
+          @fetch-selected-data="fetchSelectedData"
+        />
       </div>
     </div>
   </div>

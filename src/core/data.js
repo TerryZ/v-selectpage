@@ -1,5 +1,11 @@
 import { ref, provide, watch, inject, onMounted, nextTick } from 'vue'
-import { FIRST_PAGE, DEFAULT_PAGE_SIZE, UNLIMITED, LANG_MAX_SELECTED_LIMIT } from './constants'
+import {
+  FIRST_PAGE,
+  DEFAULT_PAGE_SIZE,
+  UNLIMITED,
+  LANG_MAX_SELECTED_LIMIT,
+  NO_PAGINATION_PAGE_SIZE
+} from './constants'
 import { EN } from '../language'
 import { useLanguage, useDebounce } from './helper'
 import { useItemSelection } from './list'
@@ -113,7 +119,7 @@ export function useData (props, emit) {
     const fetchOption = {
       search: query.value,
       pageNumber: currentPage.value,
-      pageSize: props.pageSize
+      pageSize: props.pagination ? props.pageSize : NO_PAGINATION_PAGE_SIZE
     }
 
     emit('fetch-data', fetchOption, data => {

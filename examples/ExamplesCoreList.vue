@@ -82,6 +82,22 @@
         </div>
       </div>
     </div>
+
+    <div>
+      <h5>关闭分页栏</h5>
+      <div>
+        <SelectPageListCore
+          language="zh-chs"
+          class="shadow"
+          v-model="selected"
+          :pagination="false"
+          @selection-change="selectionChange"
+          @fetch-data="fetchData"
+          @fetch-selected-data="fetchSelectedData"
+          @remove="remove"
+        />
+      </div>
+    </div>
   </div>
 </template>
 

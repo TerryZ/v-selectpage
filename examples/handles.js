@@ -6,18 +6,21 @@ export function useSelectPageHandle () {
   // local data list pagination
   function fetchData (data, callback) {
     const { search, pageNumber, pageSize } = data
+
     const start = (pageNumber - 1) * pageSize
     const end = start + pageSize - 1
 
-    const list = search ? list1.filter(val => val.name.includes(search)) : list1
+    const list = search
+      ? list1.filter(val => val.name.includes(search))
+      : list1
     // update total rows
     totalRows.value = list.length
 
-    setTimeout(() => {
-      callback(
-        list.filter((val, index) => index >= start && index <= end)
-      )
-    }, 500)
+    const result = pageSize === 0
+      ? list
+      : list.filter((val, index) => index >= start && index <= end)
+
+    setTimeout(() => callback(result), 500)
   }
   /**
    * Fetch selected item models
