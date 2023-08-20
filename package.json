@@ -25,7 +25,8 @@
     "test:unit": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "dts": "vue-tsc --declaration --emitDeclarationOnly"
+    "dts": "npx -p typescript tsc src/index.js --declaration --allowJs --emitDeclarationOnly --outDir types",
+    "dts:vue": "vue-tsc --declaration --emitDeclarationOnly"
   },
   "repository": {
     "type": "git",
