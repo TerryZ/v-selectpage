@@ -36,9 +36,11 @@ Support this project with your organization. Your logo will show up here with a 
 # [v-selectpage](https://terryz.github.io/vue/#/selectpage) &middot; [![Financial Contributors on Open Collective](https://opencollective.com/v-selectpage/all/badge.svg?label=financial+contributors)](https://opencollective.com/v-selectpage) [![circle ci](https://circleci.com/gh/TerryZ/v-selectpage.svg?style=svg)](https://circleci.com/gh/TerryZ/v-selectpage) [![code coverage](https://codecov.io/gh/TerryZ/v-selectpage/branch/master/graph/badge.svg)](https://codecov.io/gh/TerryZ/v-selectpage) [![npm version](https://img.shields.io/npm/v/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage) [![npm download](https://img.shields.io/npm/dy/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage) [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://mit-license.org/) [![language](https://img.shields.io/badge/language-Vue2-brightgreen.svg)](https://www.npmjs.com/package/v-selectpage)
 -->
 
-# [v-selectpage](https://terryz.github.io/vue/#/selectpage) &middot; [![circle ci](https://circleci.com/gh/TerryZ/v-selectpage.svg?style=svg)](https://circleci.com/gh/TerryZ/v-selectpage) [![code coverage](https://codecov.io/gh/TerryZ/v-selectpage/branch/master/graph/badge.svg)](https://codecov.io/gh/TerryZ/v-selectpage) [![npm version](https://img.shields.io/npm/v/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage)
+# [v-selectpage](https://terryz.github.io/vue/#/selectpage)
 
-A powerful selection plugin for **Vue2**, list or table view of pagination, use tags form for multiple selection, i18n and server side resources supports
+[![circle ci](https://circleci.com/gh/TerryZ/v-selectpage.svg?style=svg)](https://circleci.com/gh/TerryZ/v-selectpage) [![code coverage](https://codecov.io/gh/TerryZ/v-selectpage/branch/master/graph/badge.svg)](https://codecov.io/gh/TerryZ/v-selectpage) [![npm version](https://img.shields.io/npm/v/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage)
+
+A powerful selection plugin for **Vue3**, list or table view of pagination, use tags form for multiple selection, i18n and server side resources supports
 
 [![Financial Contributors on Open Collective](https://opencollective.com/v-selectpage/all/badge.svg?label=financial+contributors)](https://opencollective.com/v-selectpage)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
@@ -58,9 +60,9 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
 ## Features
 
-- show content by pagination
-- i18n support, provided languages:
-  - Chinese
+- Display contents with pagination
+- I18n support, provided languages:
+  - Chinese Simplified
   - English
   - Japanese
   - Arabic
@@ -71,45 +73,41 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
   - Portuguese-Brazil
   - Polish
   - Dutch
-- server side data source support
-- tag form for multiple selection
-- keyboard to quick navigate
+  - Chinese Traditional
+  - Russian
+  - Turkish
+- Tag form for multiple selection
+- Keyboard navigation
 - quick search for autocomplete
 - list view and table view to show content
-- custom row content render
-
-## Browsers support
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="48px" height="48px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="48px" height="48px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="48px" height="48px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="48px" height="48px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="48px" height="48px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
-| --------- | --------- | --------- | --------- | --------- |
-| IE9, IE10, IE11, Edge | Firefox 18+ | Chrome 49+ | Safari 10+ | Opera 36+ |
+- Customization of row/cell content rendering
+- Core module that can be used independently
 
 ## Installation
 
-<a href="https://nodei.co/npm/v-selectpage/"><img src="https://nodei.co/npm/v-selectpage.png"></a>
+[![https://nodei.co/npm/v-selectpage.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/v-selectpage.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/v-selectpage)
 
 ``` bash
-npm i v-selectpage --save
+# npm
+npm i v-selectpage
+# yarn
+yarn add v-selectpage
+# pnpm
+pnpm add v-selectpage
 ```
 
-Include and install plugin in your `main.js` file.
+Include and install plugin in your project
 
-```js
-import Vue from 'vue'
-import SelectPage from 'v-selectpage'
-Vue.use(SelectPage, { global config options })
-```
+```vue
+<template>
+  <SelectPageList />
+</template>
 
-You also can import `v-selectpage` as a local component
+<script setup>
+import { SelectPageList } from 'v-selectpage'
 
-```js
-import { SelectPage } from 'v-selectpage'
 
-export default {
-  components: {
-    'v-selectpage': SelectPage
-  }
-}
+</script>
 ```
 
 ## Usage
