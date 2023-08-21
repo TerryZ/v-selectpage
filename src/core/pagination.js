@@ -7,14 +7,14 @@ import {
   LEFT, RIGHT
 } from './constants'
 
-export function usePagination (props, currentPage, lang) {
-  const totalPage = computed(() => Math.ceil(props.totalRows / props.pageSize))
+export function usePagination (props, currentPage, totalRows, lang) {
+  const totalPage = computed(() => Math.ceil(totalRows.value / props.pageSize))
   const isFirstPage = computed(() => currentPage.value === FIRST_PAGE)
   const isLastPage = computed(() => currentPage.value === totalPage.value)
   const paginationInfo = computed(() => lang.pageInfo
     .replace(LANG_PAGE_NUMBER, currentPage.value)
     .replace(LANG_PAGE_COUNT, totalPage.value)
-    .replace(LANG_ROW_COUNT, props.totalRows)
+    .replace(LANG_ROW_COUNT, totalRows.value)
   )
 
   const getNewPageNumber = function (action) {

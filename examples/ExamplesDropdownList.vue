@@ -5,7 +5,6 @@
     <h5>单选模式</h5>
     <div class="mb-3">
       <SelectPageList
-        :total-rows="totalRows"
         language="zh-chs"
         class=""
         v-model="selected"
@@ -19,7 +18,6 @@
     <h5>多选模式</h5>
     <div class="mb-3">
       <SelectPageList
-        :total-rows="totalRows"
         multiple
         language="zh-chs"
         class=""
@@ -36,7 +34,6 @@
     <div class="row">
       <div class="col-md-6">
         <SelectPageList
-          :total-rows="totalRows"
           :disabled="true"
           language="zh-chs"
           class=""
@@ -49,7 +46,6 @@
       </div>
       <div class="col-md-6">
         <SelectPageList
-          :total-rows="totalRows"
           :disabled="true"
           multiple
           language="zh-chs"
@@ -73,7 +69,6 @@ import { useSelectPageHandle } from './handles'
 import { SelectPageList } from '@/'
 
 const {
-  totalRows,
   fetchData,
   fetchSelectedData,
   selectionChange,

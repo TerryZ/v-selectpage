@@ -29,6 +29,7 @@ export function useRender (props, emit) {
     query,
     message,
     currentPage,
+    totalRows,
     list,
     isDataEmpty,
     selectItem,
@@ -49,7 +50,7 @@ export function useRender (props, emit) {
     isLastPage,
     switchPage,
     pagingNavigation
-  } = usePagination(props, currentPage, lang)
+  } = usePagination(props, currentPage, totalRows, lang)
 
   const keyboardDebounce = useDebounce(props.debounce)
 

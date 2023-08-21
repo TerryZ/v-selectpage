@@ -13,7 +13,6 @@
         </div>
         <div class="mb-3">
           <SelectPageTableCore
-            :total-rows="totalRows"
             :columns="columns"
             language="zh-chs"
             class="shadow"
@@ -52,7 +51,6 @@
         </div>
         <div>
           <SelectPageTableCore
-            :total-rows="totalRows"
             :label-prop="labelFormatter"
             :columns="columns"
             :multiple="true"
@@ -93,7 +91,6 @@ import { useSelectPageHandle } from './handles'
 import { SelectPageTableCore } from '@/'
 
 const {
-  totalRows,
   fetchData,
   fetchSelectedData,
   selectionChange,

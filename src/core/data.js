@@ -30,8 +30,6 @@ export function selectPageProps () {
      */
     labelProp: { type: [String, Function], default: 'name' },
     pageSize: { type: Number, default: DEFAULT_PAGE_SIZE },
-    /** total rows count */
-    totalRows: { type: Number, default: 0 },
     /**
      * maximum number of selection, set 0 to unlimited
      * depend on `multiple` prop set to true
@@ -85,6 +83,8 @@ export function useData (props, emit) {
   const message = ref('')
   // current page number
   const currentPage = ref(FIRST_PAGE)
+  // total row count
+  const totalRows = ref(0)
   // data list
   const list = ref([])
   // data loading state
@@ -122,10 +122,12 @@ export function useData (props, emit) {
       pageSize: props.pagination ? props.pageSize : NO_PAGINATION_PAGE_SIZE
     }
 
-    emit('fetch-data', fetchOption, data => {
+    emit('fetch-data', fetchOption, (data, count) => {
       if (!Array.isArray(data)) return
 
       list.value = data
+      totalRows.value = typeof count === 'number' ? count : 0
+
       nextTick(() => { loading.value = false })
     })
   }
@@ -186,6 +188,7 @@ export function useData (props, emit) {
     query,
     message,
     currentPage,
+    totalRows,
     lang,
     list,
 

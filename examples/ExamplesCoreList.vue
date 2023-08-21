@@ -13,7 +13,6 @@
         </div>
         <div class="mb-3">
           <SelectPageListCore
-            :total-rows="totalRows"
             language="zh-chs"
             class="shadow"
             v-model="selected"
@@ -51,7 +50,6 @@
         </div>
         <div class="mb-3">
           <SelectPageListCore
-            :total-rows="totalRows"
             :label-prop="labelFormatter"
             :multiple="true"
             :max="2"
@@ -109,7 +107,6 @@ import { useSelectPageHandle } from './handles'
 import { SelectPageListCore } from '@/'
 
 const {
-  totalRows,
   fetchData,
   fetchSelectedData,
   selectionChange,

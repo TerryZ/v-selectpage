@@ -27,10 +27,6 @@ declare const _default: import("vue").DefineComponent<{
         type: NumberConstructor;
         default: number;
     };
-    totalRows: {
-        type: NumberConstructor;
-        default: number;
-    };
     max: {
         type: NumberConstructor;
         default: number;
@@ -83,10 +79,6 @@ declare const _default: import("vue").DefineComponent<{
         type: NumberConstructor;
         default: number;
     };
-    totalRows: {
-        type: NumberConstructor;
-        default: number;
-    };
     max: {
         type: NumberConstructor;
         default: number;
@@ -122,7 +114,6 @@ declare const _default: import("vue").DefineComponent<{
     language: string;
     modelValue: unknown[];
     labelProp: string | Function;
-    totalRows: number;
     pagination: boolean;
 }, {}>;
 export default _default;

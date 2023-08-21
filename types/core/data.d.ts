@@ -37,11 +37,6 @@ export function selectPageProps(): {
         type: NumberConstructor;
         default: number;
     };
-    /** total rows count */
-    totalRows: {
-        type: NumberConstructor;
-        default: number;
-    };
     /**
      * maximum number of selection, set 0 to unlimited
      * depend on `multiple` prop set to true
@@ -84,18 +79,16 @@ export function useData(props: any, emit: any): {
     query: import("vue").Ref<string>;
     message: import("vue").Ref<string>;
     currentPage: import("vue").Ref<number>;
+    totalRows: import("vue").Ref<number>;
     lang: {
         next: string;
-        prev: string; /**
-         * binding selected item keys, it must be match 'keyProp' option value
-         */
+        prev: string;
         first: string;
         last: string;
         pageInfo: string;
         notFound: string;
         clear: string;
         clearAll: string;
-        /** multiple selection */
         maxSelected: string;
         placeholder: string;
         selectedCount: string;

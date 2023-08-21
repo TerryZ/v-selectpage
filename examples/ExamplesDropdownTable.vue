@@ -5,7 +5,6 @@
     <h5>单选模式</h5>
     <div class="mb-3">
       <SelectPageTable
-        :total-rows="totalRows"
         :columns="columns"
         language="zh-chs"
         class=""
@@ -20,7 +19,6 @@
     <h5>多选模式</h5>
     <div class="mb-3">
       <SelectPageTable
-        :total-rows="totalRows"
         :columns="columns"
         multiple
         language="zh-chs"
@@ -37,7 +35,6 @@
     <div class="row">
       <div class="col-md-6">
         <SelectPageTable
-          :total-rows="totalRows"
           :columns="columns"
           :disabled="true"
           language="zh-chs"
@@ -51,7 +48,6 @@
       </div>
       <div class="col-md-6">
         <SelectPageTable
-          :total-rows="totalRows"
           :columns="columns"
           :disabled="true"
           multiple
@@ -76,7 +72,6 @@ import { useSelectPageHandle } from './handles'
 import { SelectPageTable } from '@/'
 
 const {
-  totalRows,
   fetchData,
   fetchSelectedData,
   selectionChange,

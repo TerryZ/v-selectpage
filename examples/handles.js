@@ -1,8 +1,6 @@
-import { ref } from 'vue'
 import { list1 } from './example-data'
 
 export function useSelectPageHandle () {
-  const totalRows = ref(0)
   // local data list pagination
   function fetchData (data, callback) {
     const { search, pageNumber, pageSize } = data
@@ -13,14 +11,12 @@ export function useSelectPageHandle () {
     const list = search
       ? list1.filter(val => val.name.includes(search))
       : list1
-    // update total rows
-    totalRows.value = list.length
 
     const result = pageSize === 0
       ? list
       : list.filter((val, index) => index >= start && index <= end)
 
-    setTimeout(() => callback(result), 500)
+    setTimeout(() => callback(result, list.length), 500)
   }
   /**
    * Fetch selected item models
@@ -43,7 +39,6 @@ export function useSelectPageHandle () {
   }
 
   return {
-    totalRows,
     fetchData,
     fetchSelectedData,
     selectionChange,
