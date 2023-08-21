@@ -79,13 +79,15 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 - Tag form for multiple selection
 - Keyboard navigation
 - quick search for autocomplete
-- list view and table view to show content
+- Provides list view and table view
 - Customization of row/cell content rendering
 - Core module that can be used independently
 
 ## Installation
 
 [![https://nodei.co/npm/v-selectpage.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/v-selectpage.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/v-selectpage)
+
+Install `v-selectpage` to your project
 
 ``` bash
 # npm
@@ -96,54 +98,54 @@ yarn add v-selectpage
 pnpm add v-selectpage
 ```
 
-Include and install plugin in your project
-
-```vue
-<template>
-  <SelectPageList />
-</template>
-
-<script setup>
-import { SelectPageList } from 'v-selectpage'
-
-
-</script>
-```
-
 ## Usage
 
 ```vue
 <template>
-  <v-selectpage :data="list" key-field="id" show-field="name" >
-  </v-selectpage>
+  <SelectPageList
+    key-prop="id"
+    label-prop="name"
+    @fetch-data="fetchData"
+  />
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      list: [
-        { id:1 ,name: 'Chicago Bulls',desc:'芝加哥公牛' },
-        { id:2 ,name: 'Cleveland Cavaliers',desc:'克里夫兰骑士' },
-        { ... }
-      ]
-    }
-  }
+<script setup>
+import { ref } from 'vue'
+import { SelectPageList } from 'v-selectpage'
+
+const list = [
+  { id: 1 ,name: 'Chicago Bulls',desc:'芝加哥公牛' },
+  { id: 2 ,name: 'Cleveland Cavaliers',desc:'克里夫兰骑士' },
+  { ... }
+]
+
+function fetchData (data, callback) {
+  // pagination information and search keyword
+  const { search, pageNumber, pageSize } = data
+
+  // fetch data list with pagination state
+  doDataRequest(data)
+    .then(resp => {
+      callback(resp)
+    })
+    .catch(() => {
+      callback([]) // clear the data list if necessary when request fails
+    })
 }
 </script>
 ```
 
 ## Plugin preview
 
-*List view for Single selection*
+List view for Single selection
 
 ![single](https://terryz.github.io/image/v-selectpage/v-selectpage-single.png)
 
-*List view for multiple selection with tags form*
+List view for multiple selection with tags form
 
 ![multiple](https://terryz.github.io/image/v-selectpage/v-selectpage-multiple.png)
 
-*Table view for single selection*
+Table view for single selection
 
 ![table](https://terryz.github.io/image/v-selectpage/v-selectpage-table.png)
 
@@ -179,4 +181,4 @@ Support this project with your organization. Your logo will show up here with a 
 
 ## Dependencies
 
-- [v-dropdown](https://github.com/TerryZ/v-dropdown) - The dropdown container layer
+- [v-dropdown](https://github.com/TerryZ/v-dropdown) - The dropdown container
