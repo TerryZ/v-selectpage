@@ -6,7 +6,7 @@
 
 [![circle ci](https://circleci.com/gh/TerryZ/v-selectpage.svg?style=svg)](https://circleci.com/gh/TerryZ/v-selectpage) [![code coverage](https://codecov.io/gh/TerryZ/v-selectpage/branch/master/graph/badge.svg)](https://codecov.io/gh/TerryZ/v-selectpage) [![npm version](https://img.shields.io/npm/v/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage)
 
-A simple and multifunctional component from vue3, list or table view of pagination, use tags form for multiple selection, i18n supports
+SelectPage for Vue, a select items components provides the list of items with pagination
 
 [![Financial Contributors on Open Collective](https://opencollective.com/v-selectpage/all/badge.svg?label=financial+contributors)](https://opencollective.com/v-selectpage)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
@@ -38,9 +38,9 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
 ### I18n support languages
 
-Chinese Simplified • English • Japanese • Arabic • Spanish • German • Romanian • French • Portuguese-Brazil • Polish • Dutch • Chinese Traditional • Russian • Turkish
+<!-- Chinese Simplified • English • Japanese • Arabic • Spanish • German • Romanian • French • Portuguese-Brazil • Polish • Dutch • Chinese Traditional • Russian • Turkish -->
 
-<!-- - Chinese Simplified
+- Chinese Simplified
 - English
 - Japanese
 - Arabic
@@ -53,7 +53,7 @@ Chinese Simplified • English • Japanese • Arabic • Spanish • German �
 - Dutch
 - Chinese Traditional
 - Russian
-- Turkish -->
+- Turkish
 
 ## Installation
 
@@ -72,6 +72,8 @@ pnpm add v-selectpage
 
 ## Usage
 
+Quick start example
+
 ```vue
 <template>
   <SelectPageList
@@ -82,10 +84,7 @@ pnpm add v-selectpage
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { SelectPageList } from 'v-selectpage'
-
-const totalRows = ref(0)
 
 function fetchData (data, callback) {
   // pagination information and search keyword
@@ -119,6 +118,39 @@ function fetchData (data, callback) {
 </script>
 ```
 
+Set default selected items
+
+```vue
+<template>
+  <SelectPageList
+    language="zh-chs"
+    v-model="selected"
+    :multiple="true"
+    @fetch-data="fetchData"
+    @fetch-selected-data="fetchSelectedData"
+  />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { SelectPageList } from 'v-selectpage'
+
+const selected = ref([2, 4, 7])
+
+// fetch current page data
+function fetchData (data, callback) {
+  ...
+}
+// fetch selected items data
+function fetchSelectedData (keys, callback) {
+  // get data models by keys
+  doDataRequest({ keys }).then(resp => {
+    callback(resp)
+  })
+}
+</script>
+```
+
 ## Plugin preview
 
 List view for Single selection
@@ -132,36 +164,6 @@ List view for multiple selection with tags form
 Table view for single selection
 
 ![table](https://terryz.github.io/image/v-selectpage/v-selectpage-table.png)
-
-## Contributors
-
-### Code Contributors
-
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-<a href="https://github.com/TerryZ/v-selectpage/graphs/contributors"><img src="https://opencollective.com/v-selectpage/contributors.svg?width=890&button=false" /></a>
-
-### Financial Contributors
-
-Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/v-selectpage/contribute)]
-
-#### Individuals
-
-<a href="https://opencollective.com/v-selectpage"><img src="https://opencollective.com/v-selectpage/individuals.svg?width=890"></a>
-
-#### Organizations
-
-Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/v-selectpage/contribute)]
-
-<a href="https://opencollective.com/v-selectpage/organization/0/website"><img src="https://opencollective.com/v-selectpage/organization/0/avatar.svg"></a>
-<a href="https://opencollective.com/v-selectpage/organization/1/website"><img src="https://opencollective.com/v-selectpage/organization/1/avatar.svg"></a>
-<a href="https://opencollective.com/v-selectpage/organization/2/website"><img src="https://opencollective.com/v-selectpage/organization/2/avatar.svg"></a>
-<a href="https://opencollective.com/v-selectpage/organization/3/website"><img src="https://opencollective.com/v-selectpage/organization/3/avatar.svg"></a>
-<a href="https://opencollective.com/v-selectpage/organization/4/website"><img src="https://opencollective.com/v-selectpage/organization/4/avatar.svg"></a>
-<a href="https://opencollective.com/v-selectpage/organization/5/website"><img src="https://opencollective.com/v-selectpage/organization/5/avatar.svg"></a>
-<a href="https://opencollective.com/v-selectpage/organization/6/website"><img src="https://opencollective.com/v-selectpage/organization/6/avatar.svg"></a>
-<a href="https://opencollective.com/v-selectpage/organization/7/website"><img src="https://opencollective.com/v-selectpage/organization/7/avatar.svg"></a>
-<a href="https://opencollective.com/v-selectpage/organization/8/website"><img src="https://opencollective.com/v-selectpage/organization/8/avatar.svg"></a>
-<a href="https://opencollective.com/v-selectpage/organization/9/website"><img src="https://opencollective.com/v-selectpage/organization/9/avatar.svg"></a>
 
 ## Dependencies
 
