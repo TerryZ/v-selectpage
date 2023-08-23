@@ -13,6 +13,8 @@ SelectPage for Vue, a select items components provides the list of items with pa
 [![npm download](https://img.shields.io/npm/dy/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://mit-license.org/)
 
+If you are using vue `2.x` version, please use [v-selectpage 2.x](https://github.com/TerryZ/v-selectpage/tree/dev-vue-2) version instead
+
 <br><br><br><br><br><br><br><br>
 
 ## Examples and Documentation
