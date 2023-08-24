@@ -1,8 +1,7 @@
 import { list1 } from './example-data'
 
 export function useSelectPageHandle () {
-  // local data list pagination
-  function fetchData (data, callback) {
+  function dataHandle (data) {
     const { search, pageNumber, pageSize } = data
 
     const start = (pageNumber - 1) * pageSize
@@ -15,8 +14,16 @@ export function useSelectPageHandle () {
     const result = pageSize === 0
       ? list
       : list.filter((val, index) => index >= start && index <= end)
+    return {
+      list: result,
+      count: list.length
+    }
+  }
+  // local data list pagination
+  function fetchData (data, callback) {
+    const result = dataHandle(data)
 
-    setTimeout(() => callback(result, list.length), 500)
+    setTimeout(() => callback(result.list, result.count), 500)
   }
   /**
    * Fetch selected item models
@@ -39,6 +46,7 @@ export function useSelectPageHandle () {
   }
 
   return {
+    dataHandle,
     fetchData,
     fetchSelectedData,
     selectionChange,
