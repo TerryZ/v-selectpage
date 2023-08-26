@@ -1,7 +1,7 @@
 import { list1 } from './example-data'
 
 export function useSelectPageHandle () {
-  function dataHandle (data) {
+  function dataListHandle (data) {
     const { search, pageNumber, pageSize } = data
 
     const start = (pageNumber - 1) * pageSize
@@ -19,9 +19,12 @@ export function useSelectPageHandle () {
       count: list.length
     }
   }
+  function selectedItemsHandle (data) {
+    return list1.filter(val => data.includes(val.id))
+  }
   // local data list pagination
   function fetchData (data, callback) {
-    const result = dataHandle(data)
+    const result = dataListHandle(data)
 
     setTimeout(() => callback(result.list, result.count), 500)
   }
@@ -31,9 +34,7 @@ export function useSelectPageHandle () {
    * @param {function} callback a function to send data models back
    */
   function fetchSelectedData (data, callback) {
-    callback(
-      list1.filter(val => data.includes(val.id))
-    )
+    callback(selectedItemsHandle(data))
   }
   function selectionChange (data) {
     console.log(data)
@@ -46,7 +47,8 @@ export function useSelectPageHandle () {
   }
 
   return {
-    dataHandle,
+    dataListHandle,
+    selectedItemsHandle,
     fetchData,
     fetchSelectedData,
     selectionChange,
