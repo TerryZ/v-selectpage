@@ -8,13 +8,13 @@ import { useSelectPageHandle } from '../../examples/handles'
 describe('v-selectpage SelectPageListCore 列表模式核心模块', () => {
   describe('默认参数场景', () => {
     const wrapper = mount(SelectPageListCore)
-    const { dataHandle } = useSelectPageHandle()
+    const { dataListHandle } = useSelectPageHandle()
 
     it('初始加载第一页列表数据', () => {
       // { search: "", pageNumber: 1, pageSize: 10 }
       const [data, callback] = wrapper.emitted()['fetch-data'].at(-1)
 
-      const result = dataHandle(data)
+      const result = dataListHandle(data)
       callback(result.list, result.count)
 
       expect(data.search).toBe('')
@@ -78,7 +78,7 @@ describe('v-selectpage SelectPageListCore 列表模式核心模块', () => {
       expect(data.pageNumber).toBe(1)
       expect(wrapper.find('.sp-search-container .bi-x-lg').exists()).toBe(true)
 
-      const result = dataHandle(data)
+      const result = dataListHandle(data)
       callback(result.list, result.count)
 
       vi.useRealTimers()
@@ -128,6 +128,48 @@ describe('v-selectpage SelectPageListCore 列表模式核心模块', () => {
       const [model] = wrapper.emitted()['update:modelValue'].at(-1)
       expect(data).toHaveLength(0)
       expect(model).toHaveLength(0)
+    })
+  })
+
+  describe('通过 key 设置默认选中的项目', () => {
+    const wrapper = mount(SelectPageListCore, {
+      props: {
+        modelValue: [2]
+      }
+    })
+    const { dataListHandle, selectedItemsHandle } = useSelectPageHandle()
+
+    it('初始化列表与设置默认选择项目', () => {
+      const [data, callback] = wrapper.emitted()['fetch-data'].at(-1)
+      const [selected, selectedCallback] = wrapper.emitted()['fetch-selected-data'].at(-1)
+      const result = dataListHandle(data)
+      const selectedResult = selectedItemsHandle(selected)
+
+      callback(result.list, result.count)
+      selectedCallback(selectedResult)
+
+      expect(selected).toEqual([2])
+    })
+    it('id 为 2 的项目应被选中', () => {
+      expect(
+        wrapper.findAll('.sp-list-item').at(1).classes('sp-selected')
+      ).toBeTruthy()
+    })
+    it('修改 modelValue 值，对应 id 的项目应被选中，且原项目移除选择状态', async () => {
+      await wrapper.setProps({ modelValue: [3] })
+
+      const [selected, selectedCallback] = wrapper.emitted()['fetch-selected-data'].at(-1)
+      const selectedResult = selectedItemsHandle(selected)
+      selectedCallback(selectedResult)
+
+      await nextTick()
+
+      expect(
+        wrapper.findAll('.sp-list-item').at(2).classes('sp-selected')
+      ).toBeTruthy()
+      expect(
+        wrapper.findAll('.sp-list-item').at(1).classes('sp-selected')
+      ).toBeFalsy()
     })
   })
 })
