@@ -131,10 +131,14 @@ describe('v-selectpage SelectPageListCore 列表模式核心模块', () => {
     })
   })
 
-  describe('通过 key 设置默认选中的项目', () => {
+  describe('通过设置默认选中项目与模式选项修改', () => {
     const wrapper = mount(SelectPageListCore, {
       props: {
-        modelValue: [2]
+        modelValue: [2],
+        multiple: true,
+        max: 2,
+        pageSize: 5,
+        labelProp: 'code'
       }
     })
     const { dataListHandle, selectedItemsHandle } = useSelectPageHandle()
@@ -149,6 +153,15 @@ describe('v-selectpage SelectPageListCore 列表模式核心模块', () => {
       selectedCallback(selectedResult)
 
       expect(selected).toEqual([2])
+    })
+    it('列表中的第 1 项目文本内容应为 `编码-code-1`', () => {
+      expect(wrapper.findAll('.sp-list-item').at(0).text()).toBe('编码-code-1')
+    })
+    it('列表中应有 5 个项目', () => {
+      expect(wrapper.findAll('.sp-list-item')).toHaveLength(5)
+    })
+    it('分页栏中显示信息应为 `Page 1 of 21 (101 records)`', () => {
+      expect(wrapper.find('.sp-page-info').text()).toBe('Page 1 of 21 (101 records)')
     })
     it('id 为 2 的项目应被选中', () => {
       expect(
@@ -170,6 +183,51 @@ describe('v-selectpage SelectPageListCore 列表模式核心模块', () => {
       expect(
         wrapper.findAll('.sp-list-item').at(1).classes('sp-selected')
       ).toBeFalsy()
+    })
+    it('多选模式下设置 max 为 2 时，选中第 3 个项目时，应不成功且有相应提示', async () => {
+      await wrapper.setProps({ modelValue: [1, 2] })
+
+      const [selected, selectedCallback] = wrapper.emitted()['fetch-selected-data'].at(-1)
+      const selectedResult = selectedItemsHandle(selected)
+      selectedCallback(selectedResult)
+
+      await nextTick()
+
+      await wrapper.findAll('.sp-list-item').at(2).trigger('click')
+      expect(wrapper.find('.sp-message').exists()).toBeTruthy()
+      expect(wrapper.find('.sp-message').text()).toBe(
+        'You can only select up to 2 items'
+      )
+    })
+  })
+
+  describe('设置模块与 ui 样式', () => {
+    const wrapper = mount(SelectPageListCore, {
+      props: {
+        pagination: false,
+        rtl: true,
+        width: 500
+      }
+    })
+    const { dataListHandle } = useSelectPageHandle()
+
+    const [data, callback] = wrapper.emitted()['fetch-data'].at(-1)
+    const result = dataListHandle(data)
+
+    callback(result.list, result.count)
+
+    it('应不显示分页栏', () => {
+      expect(wrapper.find('.sp-pagination').exists()).toBeFalsy()
+    })
+    it('列表项目应用文字从右向左的书写方向', () => {
+      expect(wrapper.find('.sp-list-item').classes('sp-rtl')).toBeTruthy()
+    })
+    it('列表容器宽度应为 `500px`', () => {
+      expect(wrapper.find('.sp-container').element.style.width).toBe('500px')
+    })
+    it('width 设置为 `30rem`，列表容器宽度应为指定的内容', async () => {
+      await wrapper.setProps({ width: '30rem' })
+      expect(wrapper.find('.sp-container').element.style.width).toBe('30rem')
     })
   })
 })
