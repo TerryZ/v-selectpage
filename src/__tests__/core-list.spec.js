@@ -206,9 +206,11 @@ describe('v-selectpage SelectPageListCore 列表模式核心模块', () => {
       props: {
         pagination: false,
         rtl: true,
-        width: 500
+        width: 500,
+        language: 'zh-chs'
       }
     })
+
     const { dataListHandle } = useSelectPageHandle()
 
     const [data, callback] = wrapper.emitted()['fetch-data'].at(-1)
@@ -228,6 +230,9 @@ describe('v-selectpage SelectPageListCore 列表模式核心模块', () => {
     it('width 设置为 `30rem`，列表容器宽度应为指定的内容', async () => {
       await wrapper.setProps({ width: '30rem' })
       expect(wrapper.find('.sp-container').element.style.width).toBe('30rem')
+    })
+    it('设置语言为简体中文，搜索栏中显示的提示文字应为 `搜索`', () => {
+      expect(wrapper.find('.sp-search-input').attributes('placeholder')).toBe('搜索')
     })
   })
 })
