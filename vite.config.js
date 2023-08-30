@@ -33,6 +33,7 @@ export default defineConfig({
     environment: 'jsdom',
     reporters: 'verbose',
     coverage: {
+      provider: 'v8',
       reporter: ['text', 'json', 'html']
     }
   },
