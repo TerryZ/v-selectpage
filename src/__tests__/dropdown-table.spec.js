@@ -68,4 +68,35 @@ describe('v-selectpage - SelectPageTable 表格视图选择器模式', () => {
   test('触发器元素内的文本应为 `Select an option`', () => {
     expect(wrapper.find('.sp-placeholder').text()).toBe('Select an option')
   })
+  test('在搜索框中按下方向下键 2 次，列表中的第 2 个项目，应处于高亮状态', async () => {
+    await core.find('.sp-search-input').trigger('keydown.down')
+    await core.find('.sp-search-input').trigger('keydown.down')
+
+    expect(
+      core.findAll('.sp-table tbody tr').at(1).classes('sp-over')
+    ).toBeTruthy()
+  })
+  test('按下方向上键，列表中的第 1 个项目，应处于高亮状态', async () => {
+    await core.find('.sp-search-input').trigger('keydown.up')
+
+    expect(
+      core.findAll('.sp-table tbody tr').at(0).classes('sp-over')
+    ).toBeTruthy()
+  })
+  test('在存在高亮行的情况下，在搜索框中按回车键，当前高亮行将被选中', async () => {
+    await core.find('.sp-search-input').trigger('keydown.enter')
+    expect(
+      core.findAll('.sp-table tbody tr').at(0).classes('sp-selected')
+    ).toBeTruthy()
+  })
+  test('在搜索框中按 esc 键，应收起下拉容器', async () => {
+    await core.find('.sp-search-input').trigger('keydown.esc')
+    expect(wrapper.find('.sp-trigger-container').classes('sp-opened')).toBeFalsy()
+    expect(Object.hasOwn(core.element.parentElement.style, 'visibility')).toBeFalsy()
+    expect(core.element.parentElement.style.display).toBe('none')
+  })
+  test('收起下拉容器时响应 `visible-change` 事件，输出值为 false', () => {
+    const [visible] = wrapper.emitted()['visible-change'].at(-1)
+    expect(visible).toBe(false)
+  })
 })

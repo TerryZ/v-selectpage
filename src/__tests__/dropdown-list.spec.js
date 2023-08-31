@@ -32,6 +32,11 @@ describe('v-selectpage - SelectPageList 列表视图选择器模式', () => {
     expect(core.element.parentElement.style.visibility).toBe('visible')
     expect(Object.hasOwn(core.element.parentElement.style, 'display')).toBeFalsy()
   })
+  test('展开时响应 `visible-change` 事件，输出值为 true', () => {
+    expect(wrapper.emitted()['visible-change'].length).toBeGreaterThan(0)
+    const [visible] = wrapper.emitted()['visible-change'].at(-1)
+    expect(visible).toBe(true)
+  })
   test('选中列表中的第 1 个项目，触发器中应显示 `列表项目-item-1`', async () => {
     await core.findAll('.sp-list-item').at(0).trigger('click')
     expect(wrapper.find('.sp-select-content').text()).toBe('列表项目-item-1')
