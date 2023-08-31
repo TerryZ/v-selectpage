@@ -1,6 +1,5 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { nextTick } from 'vue'
 import { SelectPageTableCore } from '@/index'
 import { useSelectPageHandle } from '../../examples/handles'
 
