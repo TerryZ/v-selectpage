@@ -1,6 +1,6 @@
 import { list1 } from './example-data'
 
-export function useSelectPageHandle () {
+export function useSelectPageHandle (dataList = list1) {
   function dataListHandle (data) {
     const { search, pageNumber, pageSize } = data
 
@@ -8,8 +8,8 @@ export function useSelectPageHandle () {
     const end = start + pageSize - 1
 
     const list = search
-      ? list1.filter(val => val.name.includes(search))
-      : list1
+      ? dataList.filter(val => val.name.includes(search))
+      : dataList
 
     const result = pageSize === 0
       ? list
@@ -20,7 +20,7 @@ export function useSelectPageHandle () {
     }
   }
   function selectedItemsHandle (data) {
-    return list1.filter(val => data.includes(val.id))
+    return dataList.filter(val => data.includes(val.id))
   }
   // local data list pagination
   function fetchData (data, callback) {

@@ -32,7 +32,7 @@
     </div>
 
     <h5>禁用状态</h5>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-md-6">
         <SelectPageTable
           :columns="columns"
@@ -61,6 +61,26 @@
         />
       </div>
     </div>
+
+    <h5>Demo</h5>
+    <div class="row">
+      <div class="col-md-6">
+        <SelectPageTable
+          :columns="nbaTeamColumns"
+          @fetch-data="fetchDemoData"
+          @fetch-selected-data="fetchDemoSelectedData"
+        />
+      </div>
+      <div class="col-md-6">
+        <SelectPageTable
+          multiple
+          :columns="nbaTeamColumns"
+          @fetch-data="fetchDemoData"
+          @fetch-selected-data="fetchDemoSelectedData"
+        />
+      </div>
+    </div>
+    <div style="height: 500px;" />
   </div>
 </template>
 
@@ -68,6 +88,7 @@
 import { ref } from 'vue'
 
 import { useSelectPageHandle } from './handles'
+import { nbaTeams } from './example-data'
 
 import { SelectPageTable } from '@/'
 
@@ -77,6 +98,10 @@ const {
   selectionChange,
   remove
 } = useSelectPageHandle()
+const {
+  fetchData: fetchDemoData,
+  fetchSelectedData: fetchDemoSelectedData
+} = useSelectPageHandle(nbaTeams)
 
 const selected = ref([23])
 const selected1 = ref([3, 5, 7])
@@ -85,5 +110,10 @@ const columns = ref([
   { title: '名称', data: 'name' },
   { title: '编码', data: 'code' },
   { title: '单价', data: 'price' }
+])
+const nbaTeamColumns = ref([
+  { title: 'Id', data: 'id' },
+  { title: 'Team name', data: 'name' },
+  { title: 'Description', data: 'desc' }
 ])
 </script>

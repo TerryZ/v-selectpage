@@ -31,7 +31,7 @@
     </div>
 
     <h5>禁用状态</h5>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-md-6">
         <SelectPageList
           :disabled="true"
@@ -58,6 +58,24 @@
         />
       </div>
     </div>
+
+    <h5>Demo</h5>
+    <div class="row">
+      <div class="col-md-6">
+        <SelectPageList
+          @fetch-data="fetchDemoData"
+          @fetch-selected-data="fetchDemoSelectedData"
+        />
+      </div>
+      <div class="col-md-6">
+        <SelectPageList
+          multiple
+          @fetch-data="fetchDemoData"
+          @fetch-selected-data="fetchDemoSelectedData"
+        />
+      </div>
+    </div>
+    <div style="height: 500px;" />
   </div>
 </template>
 
@@ -65,6 +83,7 @@
 import { ref } from 'vue'
 
 import { useSelectPageHandle } from './handles'
+import { nbaTeams } from './example-data'
 
 import { SelectPageList } from '@/'
 
@@ -74,6 +93,10 @@ const {
   selectionChange,
   remove
 } = useSelectPageHandle()
+const {
+  fetchData: fetchDemoData,
+  fetchSelectedData: fetchDemoSelectedData
+} = useSelectPageHandle(nbaTeams)
 
 const selected = ref([23])
 const selected1 = ref([3, 5, 7])
