@@ -9,7 +9,7 @@ import {
 export const [
   ZH_CHS, EN, JA, AR, ES, DE, RO, RU, FR, PT_BR, PL, NL, ZH_CHT, TR
 ] = [
-  'zh-chs', 'en', 'ja', 'ar', 'es', 'es', 'de', 'ro', 'ru', 'fr', 'pt-br', 'pl', 'nl', 'zh-cht', 'tr'
+  'zh-chs', 'en', 'ja', 'ar', 'es', 'de', 'ro', 'ru', 'fr', 'pt-br', 'pl', 'nl', 'zh-cht', 'tr'
 ]
 
 export const languages = {

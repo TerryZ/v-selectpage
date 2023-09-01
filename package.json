@@ -1,6 +1,6 @@
 {
   "name": "v-selectpage",
-  "description": "SelectPage for Vue, list or table view of pagination, use tags for multiple selection, i18n and server side resources supports",
+  "description": "SelectPage for Vue, a select items components provides the list of items with pagination",
   "version": "3.0.0-beta.1",
   "author": "TerryZ <terry5@foxmail.com>",
   "type": "module",
@@ -37,9 +37,8 @@
     "javascript",
     "vue",
     "selector",
-    "tableview",
+    "table-view",
     "i18n",
-    "server-side",
     "pagination",
     "tags",
     "multiple"
