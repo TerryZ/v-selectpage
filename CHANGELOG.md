@@ -6,12 +6,12 @@ Please refer to [CHANGELOG-CN](CHANGELOG-CN.md) for Chinese changelog
 
 ### Features
 
-- Refactored `v-selectpage` using the Vue 3 **Composition API**
-- Transitioned the toolchain from `webpack` to `vite`
-- Replaced the unit testing library from `mocha` with `vitest`
-- Added `SelectPageListCore` and `SelectPageTableCore` core modules that can be used independently
-- Introduced a `visible-change` event in the dropdown list modules `SelectPageList` and `SelectPageTable` to respond to the opening/closing of the dropdown layer
-- Modified the data loading approach to respond through the `fetch-data` and `fetch-selected-data` events, enhancing data processing flexibility
-- Added `Traditional Chinese`, `Russian`, `Turkish`, and `Dutch` languages
-- Changed the event for item selection change from `values` to `selection-change`
-- Added a `remove` event to respond to item removal operations
+- The `v-selectpage` component has been refactored using Vue 3 **composition API**
+- The build tool has been switched from `Webpack` to `Vite`
+- The unit testing library has been switched from `Mocha` to `Vitest`
+- Two new core modules, `SelectPageListCore` and `SelectPageTableCore`, have been added. These modules can be used independently
+- The `visible-change` event has been added to the dropdown list modules `SelectPageList` and `SelectPageTable`. This event is fired when the dropdown layer is opened or closed
+- Data loading has been changed to use the `fetch-data` and `fetch-selected-data` events to improve flexibility in data processing
+- Four new languages have been added: `Traditional Chinese`, `Russian`, `Turkish`, and `Dutch`
+- The event for changing the selected items has been changed from `values` to `selection-change`
+- A new `remove` event has been added to respond to item removal operations
