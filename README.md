@@ -1,12 +1,12 @@
 <a href="https://terryz.github.io/vue/#/selectpage" target="_blank">
-  <img src="https://github.com/TerryZ/TerryZ.github.io/blob/master/image/v-selectpage/v3/selectpage-list-multiple.png" alt="SelectPage" align="right" valign="top" >
+  <img src="https://terryz.github.io/image/v-selectpage/v3/selectpage-list-multiple.png" alt="SelectPage" align="right" valign="top" >
 </a>
 
 # [v-selectpage](https://terryz.github.io/vue/#/selectpage)
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/TerryZ/v-selectpage/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/TerryZ/v-selectpage/tree/master) [![code coverage](https://codecov.io/gh/TerryZ/v-selectpage/branch/master/graph/badge.svg)](https://codecov.io/gh/TerryZ/v-selectpage) [![npm version](https://img.shields.io/npm/v/v-selectpage.svg)](https://www.npmjs.com/package/v-selectpage)
 
-SelectPage for Vue, a select items components provides the list of items with pagination
+SelectPage for Vue3, a select items components provides the list of items with pagination
 
 [![Financial Contributors on Open Collective](https://opencollective.com/v-selectpage/all/badge.svg?label=financial+contributors)](https://opencollective.com/v-selectpage)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
@@ -156,15 +156,15 @@ function fetchSelectedData (keys, callback) {
 
 List view for Single selection
 
-![single](https://github.com/TerryZ/TerryZ.github.io/blob/master/image/v-selectpage/v3/selectpage-list-single.png)
+![single](https://terryz.github.io/image/v-selectpage/v3/selectpage-list-single.png)
 
 List view for multiple selection with tags form
 
-![multiple](https://github.com/TerryZ/TerryZ.github.io/blob/master/image/v-selectpage/v3/selectpage-list-multiple.png)
+![multiple](https://terryz.github.io/image/v-selectpage/v3/selectpage-list-multiple.png)
 
 Table view for single selection
 
-![table](https://github.com/TerryZ/TerryZ.github.io/blob/master/image/v-selectpage/v3/selectpage-table-single.png)
+![table](https://terryz.github.io/image/v-selectpage/v3/selectpage-table-single.png)
 
 ## Dependencies
 
