@@ -20,7 +20,7 @@ If you are using vue `2.x` version, please use [v-selectpage 2.x](https://github
 
 Documentation and examples please visit below sites
 
-- [github-pages](https://terryz.github.io/docs-vue3/page/)
+- [github-pages](https://terryz.github.io/docs-vue3/selectpage/)
 
 The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
