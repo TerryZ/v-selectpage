@@ -18,17 +18,16 @@ If you are using vue `2.x` version, please use [v-selectpage 2.x](https://github
 
 ## Examples and Documentation
 
-Live Examples on [CodePen](https://codepen.io/terry05/pen/wXNKOK), more examples and documentation please visit below sites
+Documentation and examples please visit below sites
 
-- [English site](https://terryz.github.io/vue/#/selectpage)
-- [国内站点](https://terryz.gitee.io/vue/#/selectpage)
+- [github-pages](https://terryz.github.io/docs-vue3/page/)
 
 The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 
 ## Features
 
 - Display contents with pagination
-- [I18n support](#i18n-support-languages)
+- I18n support
 - Select single / multiple options
 - Tags form for multiple selection
 - Keyboard navigation
@@ -37,7 +36,7 @@ The jQuery version: [SelectPage](https://github.com/TerryZ/SelectPage)
 - Customization of row / cell content rendering
 - Core module that can be used independently
 
-### I18n support languages
+I18n support languages
 
 <!-- Chinese Simplified • English • Japanese • Arabic • Spanish • German • Romanian • French • Portuguese-Brazil • Polish • Dutch • Chinese Traditional • Russian • Turkish -->
 
