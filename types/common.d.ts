@@ -2,7 +2,7 @@ import { AllowedComponentProps, ComponentCustomProps, VNodeProps } from 'vue'
 
 export declare interface ComponentProps extends AllowedComponentProps, ComponentCustomProps, VNodeProps {}
 
-type SelectPageKey = string | number
+export declare type SelectPageKey = string | number
 
 export declare interface BaseProps extends ComponentProps {
   /**
@@ -84,3 +84,65 @@ export declare interface BaseProps extends ComponentProps {
    */
   debounce?: number
 }
+export declare interface DropdownProps extends BaseProps {
+  /**
+   * Component disabled states, only work on `Selector mode`
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
+   * Add custom class to trigger container, work on `Selector mode`
+   */
+  customTriggerClass?: string
+  /**
+   * Add custom class to dropdown container, work on `Selector mode`
+   */
+  customContainerClass?: string
+}
+
+export declare interface PageParameters {
+  /** search keyword */
+  search: string
+  /** current page number */
+  pageNumber: number
+  /** the number of records per page */
+  pageSize: number
+}
+export declare type FetchDataCallback = (
+  // data list
+  dataList: Record<string, unknown>[],
+  // total number of records
+  resultCount: number
+) => void
+export declare type FetchSelectedDataCallback = (
+  dataList: Record<string, unknown>[]
+) => void
+
+export declare type EmitUpdateModelValue = (
+  event: "update:modelValue",
+  keys: SelectPageKey[]
+) => void
+export declare type EmitFetchData = (
+  event: "fetch-data",
+  data: PageParameters,
+  callback: FetchDataCallback
+) => void
+export declare type EmitFetchSelectedData = (
+  event: "fetch-selected-data",
+  keys: SelectPageKey[],
+  callback: FetchSelectedDataCallback
+) => void
+export declare type EmitSelectionChange = (event: "selection-change", items: Record<string, unknown>[]) => void
+export declare type EmitRemove = (event: 'remove', items: Record<string, unknown>[]) => void
+export declare type EmitAdjustDropdown = (event: 'adjust-dropdown') => void
+export declare type EmitCloseDropdown = (event: 'close-dropdown') => void
+export declare type EmitVisibleChange = (event: 'visible-change', visible: boolean) => void
+
+export declare type BaseEmits = EmitUpdateModelValue
+  & EmitFetchData
+  & EmitFetchSelectedData
+  & EmitSelectionChange
+  & EmitRemove
+export declare type CoreEmits = BaseEmits & EmitAdjustDropdown & EmitCloseDropdown
+export declare type DropdownEmits = BaseEmits & EmitVisibleChange
