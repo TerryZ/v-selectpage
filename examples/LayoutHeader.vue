@@ -23,14 +23,14 @@
       >
         <ul class="navbar-nav">
           <li
-            class="nav-item px-3"
-            :class="itemClasses(item)"
+            class="nav-item px-3 fw-bold"
             v-for="item in types"
             :key="item.code"
             @click="switchType(item, router)"
           >
             <a
               class="nav-link"
+              :class="itemClasses(item)"
               v-bind="itemAttributes(item)"
               v-text="item.name"
             />
@@ -58,8 +58,8 @@ function itemAttributes (item) {
 }
 function itemClasses (item) {
   if (item.code === type.value) {
-    return 'active bg-body-secondary rounded-4'
+    return 'active text-black'
   }
-  return ''
+  return 'text-secondary text-opacity-50'
 }
 </script>
