@@ -8,6 +8,8 @@
         language="zh-chs"
         class=""
         v-model="selected"
+        custom-trigger-class="border border-3 rounded-3"
+        custom-container-class="border border-3 rounded-3"
         @selection-change="selectionChange"
         @fetch-data="fetchData"
         @fetch-selected-data="fetchSelectedData"

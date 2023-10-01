@@ -52,6 +52,16 @@ export function selectPageProps () {
   }
 }
 
+export function dropdownProps () {
+  return {
+    disabled: { type: Boolean, default: false },
+    /** Add custom class to trigger container, work on dropdown selection mode */
+    customTriggerClass: { type: String, default: '' },
+    /** Add custom class to dropdown container, work on dropdown selection mode */
+    customContainerClass: { type: String, default: '' }
+  }
+}
+
 export function selectPageEmits () {
   return [
     'update:modelValue',

@@ -1,5 +1,6 @@
 import { ref, h, defineComponent, mergeProps, nextTick } from 'vue'
 
+import { dropdownProps } from './core/data'
 import { useDropdown } from './core/render'
 import { isMultiple } from './core/helper'
 
@@ -12,7 +13,7 @@ export default defineComponent({
   name: 'SelectPageList',
   inheritAttrs: false,
   props: {
-    disabled: { type: Boolean, default: false }
+    ...dropdownProps()
   },
   emits: ['visible-change'],
   setup (props, { emit, attrs }) {
