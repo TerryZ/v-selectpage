@@ -6,7 +6,12 @@ import {
 import { useSelectPageHandle } from '../../examples/handles'
 
 describe('v-selectpage - SelectPageList 列表视图选择器模式', () => {
-  const wrapper = mount(SelectPageList)
+  const wrapper = mount(SelectPageList, {
+    props: {
+      customTriggerClass: 'custom-trigger',
+      customContainerClass: 'custom-container'
+    }
+  })
   const core = wrapper.getComponent(SelectPageListCore)
 
   const { dataListHandle } = useSelectPageHandle()
@@ -14,6 +19,12 @@ describe('v-selectpage - SelectPageList 列表视图选择器模式', () => {
   const result = dataListHandle(data)
   callback(result.list, result.count)
 
+  test('设置 `customTriggerClass` prop，触发对象容器应添加相应样式类', () => {
+    expect(wrapper.classes('custom-trigger')).toBeTruthy()
+  })
+  test('设置 `customContainerClass` prop，下拉容器应添加相应样式类', () => {
+    expect(core.element.parentElement.classList.contains('custom-container')).toBeTruthy()
+  })
   test('应存在触发器元素', () => {
     expect(wrapper.find('.sp-trigger-container').exists()).toBeTruthy()
   })
