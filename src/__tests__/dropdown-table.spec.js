@@ -14,7 +14,9 @@ describe('v-selectpage - SelectPageTable 表格视图选择器模式', () => {
         { title: '单价', data: 'price', width: 80 }
       ],
       multiple: true,
-      modelValue: [2, 3, 5]
+      modelValue: [2, 3, 5],
+      customTriggerClass: 'custom-trigger',
+      customContainerClass: 'custom-container'
     }
   })
   const core = wrapper.getComponent(SelectPageTableCore)
@@ -27,6 +29,12 @@ describe('v-selectpage - SelectPageTable 表格视图选择器模式', () => {
   callback(result.list, result.count)
   selectedCallback(selectedResult)
 
+  test('设置 `customTriggerClass` prop，触发对象容器应添加相应样式类', () => {
+    expect(wrapper.classes('custom-trigger')).toBeTruthy()
+  })
+  test('设置 `customContainerClass` prop，下拉容器应添加相应样式类', () => {
+    expect(core.element.parentElement.classList.contains('custom-container')).toBeTruthy()
+  })
   test('3 个项目被默认选中，触发器中应有两个标签元素', () => {
     expect(wrapper.findAll('.sp-chip')).toHaveLength(3)
   })
