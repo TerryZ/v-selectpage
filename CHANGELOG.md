@@ -2,6 +2,18 @@
 
 Please refer to [CHANGELOG-CN](CHANGELOG-CN.md) for Chinese changelog
 
+## [3.0.0-beta.2](https://github.com/TerryZ/v-selectpage/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2023-10-05)
+
+### Features
+
+- Upgrade `v-dropdown` to `v3.0.0`
+- Added `customTriggerClass` prop, used to add custom class to trigger objects
+- Added `customContainerClass` prop for adding custom class to dropdown container
+
+### Bug Fixes
+
+- Update `.d.ts` document
+
 ## [3.0.0-beta.1](https://github.com/TerryZ/v-selectpage) (2023-09-01)
 
 ### Features

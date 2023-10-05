@@ -2,6 +2,18 @@
 
 英文 changelog 内容请访问 [CHANGELOG](CHANGELOG.md)
 
+## [3.0.0-beta.2](https://github.com/TerryZ/v-selectpage/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2023-10-05)
+
+### 新特性
+
+- 更新 `v-dropdown` 至 `v3.0.0`
+- 新增 `customTriggerClass` prop，用于为触发对象添加自定义样式
+- 新增 `customContainerClass` prop，用于为下拉容器添加自定义样式
+
+### 问题修复
+
+- 更新 `.d.ts` 文档
+
 ## [3.0.0-beta.1](https://github.com/TerryZ/v-selectpage) (2023-09-01)
 
 ### 新特性
