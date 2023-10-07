@@ -132,7 +132,7 @@ Set default selected items
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { SelectPageList } from 'v-selectpage'
 import type {
