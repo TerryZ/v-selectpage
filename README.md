@@ -83,10 +83,11 @@ Quick start example
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { SelectPageList } from 'v-selectpage'
+import type { PageParameters, FetchDataCallback } from 'v-selectpage'
 
-function fetchData (data, callback) {
+function fetchData (data: PageParameters, callback: FetchDataCallback) {
   // pagination information and search keyword
   const { search, pageNumber, pageSize } = data
 
@@ -134,15 +135,19 @@ Set default selected items
 <script setup>
 import { ref } from 'vue'
 import { SelectPageList } from 'v-selectpage'
+import type {
+  SelectPageKey, FetchSelectedDataCallback,
+  PageParameters, FetchDataCallback
+} from 'v-selectpage'
 
-const selected = ref([2, 4, 7])
+const selected = ref<SelectPageKey[]>([2, 4, 7])
 
 // fetch current page data
-function fetchData (data, callback) {
+function fetchData (data: PageParameters, callback: FetchDataCallback) {
   ...
 }
 // fetch selected items data
-function fetchSelectedData (keys, callback) {
+function fetchSelectedData (keys: SelectPageKey[], callback: FetchSelectedDataCallback) {
   // get data models by keys
   doDataRequest({ keys }).then(resp => {
     callback(resp)
