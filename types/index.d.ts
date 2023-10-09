@@ -1,5 +1,5 @@
-export * from './list'
-export * from './table'
+export { SelectPageList, SelectPageListCore } from './list'
+export { SelectPageTable, SelectPageTableCore, SelectPageTableColumn } from './table'
 
 export {
   SelectPageKey, PageParameters,

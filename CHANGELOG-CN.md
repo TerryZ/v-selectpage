@@ -2,6 +2,12 @@
 
 英文 changelog 内容请访问 [CHANGELOG](CHANGELOG.md)
 
+## [3.0.0](https://github.com/TerryZ/v-selectpage/compare/v3.0.0-beta.2...v3.0.0) (2023-10-09)
+
+### 问题修复
+
+- 更新 `.d.ts` 文档
+
 ## [3.0.0-beta.2](https://github.com/TerryZ/v-selectpage/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2023-10-05)
 
 ### 新特性

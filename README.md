@@ -123,10 +123,11 @@ Set default selected items
 
 ```vue
 <template>
-  <SelectPageList
+  <SelectPageTable
     language="zh-chs"
     v-model="selected"
     :multiple="true"
+    :columns="columns"
     @fetch-data="fetchData"
     @fetch-selected-data="fetchSelectedData"
   />
@@ -134,13 +135,18 @@ Set default selected items
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SelectPageList } from 'v-selectpage'
+import { SelectPageTable } from 'v-selectpage'
 import type {
   SelectPageKey, FetchSelectedDataCallback,
-  PageParameters, FetchDataCallback
+  PageParameters, FetchDataCallback, SelectPageTableColumn
 } from 'v-selectpage'
 
 const selected = ref<SelectPageKey[]>([2, 4, 7])
+const columns: SelectPageTableColumn[] = [
+  { title: 'Id', data: 'id' },
+  { title: 'Team name', data: row => `${row.abbr} - ${row.name}`, width: 250 },
+  { title: 'Description', data: 'desc' }
+]
 
 // fetch current page data
 function fetchData (data: PageParameters, callback: FetchDataCallback) {
