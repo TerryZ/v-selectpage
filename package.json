@@ -1,7 +1,7 @@
 {
   "name": "v-selectpage",
   "description": "SelectPage for Vue, a select items components provides the list of items with pagination",
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0-beta.2",
   "author": "TerryZ <terry5@foxmail.com>",
   "type": "module",
   "files": [
@@ -12,7 +12,10 @@
   "module": "./dist/v-selectpage.js",
   "exports": {
     ".": {
-      "import": "./dist/v-selectpage.js",
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./dist/v-selectpage.js"
+      },
       "require": "./dist/v-selectpage.umd.cjs"
     }
   },
@@ -51,24 +54,24 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.5.0",
-    "@vitejs/plugin-vue": "^4.3.4",
+    "@rushstack/eslint-patch": "^1.5.1",
+    "@vitejs/plugin-vue": "^4.4.0",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vitest/coverage-v8": "^0.34.6",
     "@vue/eslint-config-standard": "^8.0.1",
     "@vue/test-utils": "^2.4.1",
     "autoprefixer": "^10.4.16",
     "bootstrap": "^5.3.2",
-    "eslint": "^8.50.0",
+    "eslint": "^8.51.0",
     "eslint-plugin-vue": "^9.17.0",
     "jsdom": "^22.1.0",
     "postcss": "^8.4.31",
-    "sass": "^1.68.0",
+    "sass": "^1.69.0",
     "typescript": "^5.2.2",
-    "vite": "^4.4.9",
+    "vite": "^4.4.11",
     "vite-plugin-css-injected-by-js": "^3.3.0",
     "vitest": "^0.34.6",
     "vue-router": "^4.2.5",
-    "vue-tsc": "^1.8.15"
+    "vue-tsc": "^1.8.18"
   }
 }
