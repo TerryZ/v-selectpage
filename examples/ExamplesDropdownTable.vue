@@ -8,12 +8,43 @@
         :columns="columns"
         language="zh-chs"
         class=""
+        ref="spt"
         v-model="selected"
         @selection-change="selectionChange"
         @fetch-data="fetchData"
         @fetch-selected-data="fetchSelectedData"
         @remove="remove"
       />
+    </div>
+    <div class="mb-3">
+      <button
+        type="button"
+        class="btn btn-outline-secondary me-3"
+        @click="updateSelected([3])"
+      >
+        set model to [3]
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary me-3"
+        @click="updateSelected([2, 3, 4])"
+      >
+        set model to [2, 3, 4]
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary me-3"
+        @click="updateSelected([])"
+      >
+        set model to []
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        @click="removeAll"
+      >
+        remove all(api)
+      </button>
     </div>
 
     <h5>多选模式</h5>
@@ -103,6 +134,7 @@ const {
   fetchSelectedData: fetchDemoSelectedData
 } = useSelectPageHandle(nbaTeams)
 
+const spt = ref()
 const selected = ref([23])
 const selected1 = ref([3, 5, 7])
 const columns = ref([
@@ -116,4 +148,11 @@ const nbaTeamColumns = ref([
   { title: 'Team name', data: 'name' },
   { title: 'Description', data: 'desc' }
 ])
+
+function updateSelected (data) {
+  selected.value = data
+}
+function removeAll () {
+  spt.value.removeAll()
+}
 </script>

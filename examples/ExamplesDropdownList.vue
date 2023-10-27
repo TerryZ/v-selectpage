@@ -7,6 +7,7 @@
       <SelectPageList
         language="zh-chs"
         class=""
+        ref="spl"
         v-model="selected"
         custom-trigger-class="border border-3 rounded-3"
         custom-container-class="border border-3 rounded-3"
@@ -15,6 +16,36 @@
         @fetch-selected-data="fetchSelectedData"
         @remove="remove"
       />
+    </div>
+    <div class="mb-3">
+      <button
+        type="button"
+        class="btn btn-outline-secondary me-3"
+        @click="updateSelected([3])"
+      >
+        set model to [3]
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary me-3"
+        @click="updateSelected([2, 3, 4])"
+      >
+        set model to [2, 3, 4]
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary me-3"
+        @click="updateSelected([])"
+      >
+        set model to []
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        @click="removeAll"
+      >
+        remove all(api)
+      </button>
     </div>
 
     <h5>多选模式</h5>
@@ -102,4 +133,13 @@ const {
 
 const selected = ref([23])
 const selected1 = ref([3, 5, 7])
+
+const spl = ref()
+
+function updateSelected (data) {
+  selected.value = data
+}
+function removeAll () {
+  spl.value.removeAll()
+}
 </script>

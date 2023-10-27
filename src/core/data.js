@@ -152,7 +152,10 @@ export function useData (props, emit) {
       return
     }
     // empty array will not emit event
-    if (!modelValue.length) return
+    if (!modelValue.length) {
+      setSelected([], false)
+      return
+    }
     // each key exists in the selected models
     if (isKeysEqualToSelected(modelValue)) return
 
