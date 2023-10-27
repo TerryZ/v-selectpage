@@ -2,6 +2,16 @@
 
 英文 changelog 内容请访问 [CHANGELOG](CHANGELOG.md)
 
+## [3.0.1](https://github.com/TerryZ/v-selectpage/compare/v3.0.0...v3.0.1) (2023-10-27)
+
+### 问题修复
+
+- v-model 设置为空数组时不会清除已选中项目 [#68](https://github.com/TerryZ/v-selectpage/issues/68)
+
+### 新特性
+
+- `SelectPageList` 与 `SelectPageTable` 添加 `removeItem` 与 `removeAll` 函数
+
 ## [3.0.0](https://github.com/TerryZ/v-selectpage/compare/v3.0.0-beta.2...v3.0.0) (2023-10-09)
 
 ### 问题修复

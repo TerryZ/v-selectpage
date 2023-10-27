@@ -2,6 +2,16 @@
 
 Please refer to [CHANGELOG-CN](CHANGELOG-CN.md) for Chinese changelog
 
+## [3.0.1](https://github.com/TerryZ/v-selectpage/compare/v3.0.0...v3.0.1) (2023-10-27)
+
+### Bug Fixes
+
+- Selected items will not be cleared when `v-model` set value to an empty array [#68](https://github.com/TerryZ/v-selectpage/issues/68)
+
+### Features
+
+- Added `removeItem` and `removeAll` methods to `SelectPageList` , `SelectPageTable` components
+
 ## [3.0.0](https://github.com/TerryZ/v-selectpage/compare/v3.0.0-beta.2...v3.0.0) (2023-10-09)
 
 ### Bug Fixes
