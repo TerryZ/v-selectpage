@@ -1,5 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import {
   SelectPageList, SelectPageListCore
 } from '@/index'
@@ -14,7 +15,7 @@ describe('v-selectpage - SelectPageList 列表视图选择器模式', () => {
   })
   const core = wrapper.getComponent(SelectPageListCore)
 
-  const { dataListHandle } = useSelectPageHandle()
+  const { dataListHandle, selectedItemsHandle } = useSelectPageHandle()
   const [data, callback] = core.emitted()['fetch-data'].at(-1)
   const result = dataListHandle(data)
   callback(result.list, result.count)
@@ -67,5 +68,29 @@ describe('v-selectpage - SelectPageList 列表视图选择器模式', () => {
     expect(
       wrapper.find('.sp-select').find('.sp-circle-btn').exists()
     ).toBeFalsy()
+  })
+  test('设置 v-model 为空数组，选中的项目应被清除', async () => {
+    await wrapper.setProps({ disabled: false, modelValue: [] })
+
+    expect(core.findAll('.sp-list-item.sp-selected')).toHaveLength(0)
+    expect(wrapper.find('.sp-placeholder').text()).toBe('Select an option')
+  })
+  test('调用组件的 removeAll api 应清除所有选中的项目', async () => {
+    await wrapper.setProps({ modelValue: [2] })
+
+    const [selected, selectedCallback] = core.emitted()['fetch-selected-data'].at(-1)
+    const selectedResult = selectedItemsHandle(selected)
+    selectedCallback(selectedResult)
+
+    await nextTick()
+
+    expect(wrapper.find('.sp-select-content').text()).toBe('列表项目-item-2')
+    expect(core.findAll('.sp-list-item.sp-selected')).toHaveLength(1)
+
+    // 相当于使用 ref 声明了组件的引用，并调用 removeAll 函数
+    await wrapper.vm.removeAll()
+
+    expect(core.findAll('.sp-list-item.sp-selected')).toHaveLength(0)
+    expect(wrapper.find('.sp-placeholder').text()).toBe('Select an option')
   })
 })

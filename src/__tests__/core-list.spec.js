@@ -199,6 +199,11 @@ describe('v-selectpage SelectPageListCore 列表模式核心模块', () => {
         'You can only select up to 2 items'
       )
     })
+    it('设置 v-model 为空数组时，应清除所有已选中的项目', async () => {
+      await wrapper.setProps({ modelValue: [] })
+
+      expect(wrapper.findAll('.sp-list-item.sp-selected')).toHaveLength(0)
+    })
   })
 
   describe('设置模块与 ui 样式', () => {
